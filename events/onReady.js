@@ -1,7 +1,7 @@
 //response.host, response.port, response.version
 const config = require("../config.json");
 
-module.exports = async (client, Keyv, util, prefix) =>{
+module.exports = async (client, Keyv, util) =>{
   let author = await client.users.cache.get(config.authorID).username;
   const guildsCount = client.guilds.cache.size;
   const usersCount = client.users.cache.size;

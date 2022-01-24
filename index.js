@@ -27,7 +27,7 @@ let database;
 const website = require('./website.js');
 website();
 
-let prefix = '-';
+let prefix = [];
 let checkPrefix ;
 
 const commandFiles = readdirSync(join(__dirname, "commands")).filter(file => file.endsWith(".js"));
@@ -40,7 +40,7 @@ client.on("error", console.error);
 
 client.on('ready', () => {
   const onReady = require('./events/onReady.js');
-  onReady(client, Keyv, util, prefix);
+  onReady(client, Keyv, util);
 });
 
 client.on('guildMemberAdd', async member => {
@@ -200,17 +200,17 @@ client.on('message', async message => {
       }
     }
     //-----------------------------------------------------------------------------
-    
+    prefix[message.guild.id] = "-";
     checkPrefix = await database.get("botPrefix");
     if(checkPrefix){
-      prefix = checkPrefix;
+      prefix[message.guild.id] = checkPrefix;
     }
 
     let args = message.content.split(/ +/);
     //==========Counting Section===================================================
-    counting(Discord, client, message, args, database, prefix, e);
+    counting(Discord, client, message, args, database, prefix[message.guild.id], e);
     //==========Level/Points Section===============================================
-    points(Discord, message, args, client, prefix, database, levelBarBuilder, e);
+    points(Discord, message, args, client, prefix[message.guild.id], database, levelBarBuilder, e);
     //==========Keeping the verification Channel Clean From Bots' Messages=========
     const verificationChannelID = await database.get("verificationChannelID");
     const ticketChannelID = await database.get('ticketChannelID');
@@ -221,10 +221,10 @@ client.on('message', async message => {
       return;
     }
     //===============================================================================
-    autoResponder(Discord, client, prefix, message, args, database, personFinder, messageEmojiFinder, message.content.toLowerCase(), e);
+    autoResponder(Discord, client, prefix[message.guild.id], message, args, database, personFinder, messageEmojiFinder, message.content.toLowerCase(), e);
     //===========Tickets Logging====================================================
-    if(message.content.startsWith(prefix)){
-      let t = await message.content.slice(prefix.length);
+    if(message.content.startsWith(prefix[message.guild.id])){
+      let t = await message.content.slice(prefix[message.guild.id].length);
       for(let i=1; i<=args.length; i++){
         t = await t.replace("\n", " \n ").replace(":\n", ": \n").replace("\n:", "\n :").replace(":\n:", ": \n :");
       }
@@ -232,7 +232,7 @@ client.on('message', async message => {
       //==========Custom Commands====================================================
       customCommands(Discord, client, message, args, database, messageEmojiFinder);
       //==========Commands Finder====================================================
-      commandsFinder(Discord, client, prefix, message, args, database, personFinder, messageEmojiFinder, verificationChannelID, react, e);
+      commandsFinder(Discord, client, prefix[message.guild.id], message, args, database, personFinder, messageEmojiFinder, verificationChannelID, react, e);
       //=============================================================================
     }
     else{
