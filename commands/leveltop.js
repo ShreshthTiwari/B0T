@@ -30,10 +30,14 @@ module.exports = {
     let index = 0;
     for(let i=0; i<=membersIDTempMap.length-1; i++){
       let level = await database.get(`${membersIDTempMap[i]} lvl`);
+      let points;
       if((!level) || isNaN(level) || (level < 1)){
         level = 1;
       }
-      if(level > 1){
+      if(level <= 1){
+        points = await database.get(`${membersIDTempMap[i]} points`) * 1.0;
+      }
+      if(level > 1 || points > 1){
         levelsMap[index] = level;
         membersIDMap[index++] = membersIDTempMap[i];
         await database.set(`${membersIDMap[i]} lvl`, level);
@@ -91,22 +95,15 @@ module.exports = {
     if(stop > membersIDMap.length-1){
       stop = membersIDMap.length-1;
     }
-    let coinsMap = [];
-    for(let i=start; i<=stop; i++){
-      coinsMap[i] = await database.get(`${membersIDMap[i]} coins`);
-      if((!coinsMap[i]) || isNaN(coinsMap[i])){
-        coinsMap[i] = 0;
-        await database.set(`${membersIDMap[i]} coins`, coinsMap[i]);
-      }
-    }
     let topLevelsMap = [];
     let coinText = "coin";
     for(let i=start; i<=stop; i++){
       coinText = "coin";
-      if(coinsMap[i] > 1){
+      let coins = await database.get(`${membersIDMap[i]} coins`);
+      if(coins > 1){
         coinText += "s";
       }
-      topLevelsMap[i] = `> ${i+1}. <@${membersIDMap[i]}> » Level ${levelsMap[i]}. [${coinsMap[i].toFixed(3)} ${coinText}]`;
+      topLevelsMap[i] = `> ${i+1}. <@${membersIDMap[i]}> » Level ${levelsMap[i]}. [${coins.toFixed(3)} ${coinText}]`;
     }
     topLevelsList = topLevelsMap.join("\n");
     if((!topLevelsList) || topLevelsList == ""){
