@@ -19,14 +19,6 @@ module.exports = async (client, Keyv, util) =>{
   if(ticketsCount > 1) ticketText = ticketText + 's';
 
   let index = 0;
-  
-  let val1 = Math.floor((Math.random() * 300));
-  let val2 = Math.floor((Math.random() * 300));
-  if(val1 < val2){
-    val1 = val1 - val2;
-    val2 = val1 + val2;
-    val1 = val2 - val1;
-  }
 
   const activitiesList = [
     `Over ${guildsCount} ${guildText}`,
@@ -35,24 +27,13 @@ module.exports = async (client, Keyv, util) =>{
     `Over ${ticketsCount} ${ticketText}`,
     `For prefix?`,
     `${author}`,
-    "Some Memes.",
-    "The World's End.",
-    "Doraemon In Youtube.",
-    "Anime.",
-    "You.",
-    "A Movie.",
-    `Maths.`,
-    `${val1} + ${val2} = ${(val1+val2)}`,
-    `${val1} - ${val2} = ${(val1-val2)}`,
-    `${val1} * ${val2} = ${(val1*val2)}`,
-    `${val1} ÷ ${val2} = ${(val1/val2).toFixed(2)}`,
     `With ${author}`
   ];  
   
   console.log(`-------------------------------------\n${client.user.tag} is online!\n-------------------------------------`);
   
   setInterval(async () => {
-    if(index>=12)
+    if(index>=6)
       await client.user.setActivity(activitiesList[index], {type: "PLAYING"})
         .catch(console.error);
     else
