@@ -65,8 +65,9 @@ client.on("guildCreate", async guild => {
 });
 
 client.on("guildDelete", async guild => {
+  database = databaseBuilder(Keyv, guild.id);
   let onGuildLeave = require("./events/onGuildLeave.js");
-  onGuildLeave(Discord, client, guild);
+  onGuildLeave(Discord, client, guild, database);
 });
 
 client.on('messageUpdate', async (oldMessage, newMessage) => {
