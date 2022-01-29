@@ -105,9 +105,10 @@ module.exports = async (Discord, client, Keyv, util) =>{
                   let playing = rawData[3];
                   let total = rawData[4];
                   let description = edit(rawData[5]);
-                  await playingStatusChannel.setName(`Playing » ${playing}/${total}`);
+                  await playingStatusChannel.setName(`Playing » ${playing}/${total}`).catch(error => {});
                   if(minecraftServerStatusChannel){
-                    embed.setAuthor(`${guild.name}`, guild.iconURL())
+                    embed = new Discord.MessageEmbed()
+                      .setAuthor(`${guild.name}`, guild.iconURL())
                       .addFields({
                         name: "> IP",
                         value: `\`\`\`\n${IP}\n\`\`\``
@@ -129,39 +130,41 @@ module.exports = async (Discord, client, Keyv, util) =>{
                       })
                       .setThumbnail("https://cdn.discordapp.com/emojis/913429376215961610.gif?size=4096");
                     if(statusMessage){
-                      await statusMessage.edit(embed);
+                      await statusMessage.edit(embed).catch(error => {});
                     }
                     else{
-                      await minecraftServerStatusChannel.send(embed);
+                      await minecraftServerStatusChannel.send(embed).catch(error => {});
                     }
                   }
                 }else{
-                  await playingStatusChannel.setName(`OFFLINE`); 
+                  await playingStatusChannel.setName(`OFFLINE`).catch(error => {}); 
                   if(minecraftServerStatusChannel){
-                    embed.setAuthor(`🔴${guild.name}`, guild.iconURL())
+                    embed = new Discord.MessageEmbed()
+                      .setAuthor(`🔴${guild.name}`, guild.iconURL())
                       .setTitle("OFFLINE")
                       .setColor(0xff4747)
                       .setThumbnail("https://cdn.discordapp.com/emojis/913434792677228544.gif?size=4096");
                     if(statusMessage){
-                      await statusMessage.edit(embed);
+                      await statusMessage.edit(embed).catch(error => {});
                     }
                     else{
-                      await minecraftServerStatusChannel.send(embed);
+                      await minecraftServerStatusChannel.send(embed).catch(error => {});
                     }
                   }
                 }
               }catch{
-                await playingStatusChannel.setName(`OFFLINE`);  
+                await playingStatusChannel.setName(`OFFLINE`).catch(error => {});  
                 if(minecraftServerStatusChannel){
-                  embed.setAuthor(`🔴${guild.name}`, guild.iconURL())
+                  embed = new Discord.MessageEmbed()
+                    .setAuthor(`🔴${guild.name}`, guild.iconURL())
                     .setTitle("OFFLINE")
                     .setColor(0xff4747)
                     .setThumbnail("https://cdn.discordapp.com/emojis/913434792677228544.gif?size=4096");
                   if(statusMessage){
-                    await statusMessage.edit(embed);
+                    await statusMessage.edit(embed).catch(error => {});
                   }
                   else{
-                    await minecraftServerStatusChannel.send(embed);
+                    await minecraftServerStatusChannel.send(embed).catch(error => {});
                   }
                 }
               }
