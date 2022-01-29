@@ -1,3 +1,4 @@
 .vscode
 .vscode/sftp.json
 node_modules
+databases/database.sqlite
