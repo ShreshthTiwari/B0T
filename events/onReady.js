@@ -1,12 +1,14 @@
 //response.host, response.port, response.version
 const config = require("../config.json");
 
-module.exports = async (client, Keyv, util) =>{
+module.exports = async (Discord, client, Keyv, util) =>{
+  let embed = new Discord.MessageEmbed()
+    .setColor(0x2f3136);
   let author = await client.users.cache.get(config.authorID).username;
-  const guildsCount = client.guilds.cache.size;
-  const usersCount = client.users.cache.size;
-  const channelsCount = client.channels.cache.size;
-  const ticketsCount = client.channels.cache.filter(ch => ch.name.startsWith("ticket")).size;
+  const guildsCount = await client.guilds.cache.size;
+  const usersCount = await client.users.cache.size;
+  const channelsCount = await client.channels.cache.size;
+  const ticketsCount = await client.channels.cache.filter(ch => ch.name.startsWith("ticket")).size;
 
   let guildText = "server";
   let userText = "user";
@@ -60,21 +62,110 @@ module.exports = async (client, Keyv, util) =>{
         let playingStatusChannelID = await database.get('playingStatusChannelID');
         if(playingStatusChannelID){
           let playingStatusChannel = guild.channels.cache.get(playingStatusChannelID);
-          let numericIP = await database.get("numericIP");
-          let port = await database.get("port") * 1;
-  
-          if(!port) port = 25565;
-  
-          if(numericIP && port){
-            util.status(numericIP, { port: port, enableSRV: true, timeout: 5000, protocolVersion: 47 })
-              .then(async (response) => {
-                if(response)
-                  await playingStatusChannel.setName(`Playing » ${response.onlinePlayers}/${response.maxPlayers}`);
-                else
-                  await playingStatusChannel.setName(`OFFLINE`);  
-              })
-              .catch((error) => {
-              });
+          if(playingStatusChannel){
+            let IP = await database.get("IP");
+            let numericIP = await database.get("numericIP");
+            let port = await database.get("port") * 1;
+    
+            if(!port) port = 25565;
+    
+            if(numericIP && port){
+              if(!IP){
+                IP = numericIP;
+              }
+              let minecraftServerStatusChannelID = await database.get("minecraftServerStatusChannelID");
+              let minecraftServerStatusChannel = null;
+              let statusMessage = null;
+              if(minecraftServerStatusChannelID){
+                minecraftServerStatusChannel = await guild.channels.cache.get(minecraftServerStatusChannelID);
+                let messages = await minecraftServerStatusChannel.messages.fetch({limit: 10});
+                statusMessage = messages.filter(m => m.author.id === client.user.id).last();
+              }
+
+              try{
+                const rawData = await util.status(numericIP, { port: port}).then(response => {
+                  return [response, response.port, response.version, response.onlinePlayers, response.maxPlayers, response.description.descriptionText, response.favicon];
+                });
+                if(rawData){
+                  function edit(data){
+                    let rawData = data.split("");
+                    let finalData = [];
+                    let index = 0;
+                    for(let i=0; i<=rawData.length-1; i++){
+                      if(rawData[i] == '§'){
+                        i++;
+                      }else{
+                        finalData[index] = rawData[i];
+                        index++;
+                      }
+                    }
+                    return finalData.join("");
+                  }
+                  let version = edit(rawData[2]);
+                  let playing = rawData[3];
+                  let total = rawData[4];
+                  let description = edit(rawData[5]);
+                  await playingStatusChannel.setName(`Playing » ${playing}/${total}`);
+                  if(minecraftServerStatusChannel){
+                    embed.setAuthor(`${guild.name}`, guild.iconURL())
+                      .addFields({
+                        name: "> IP",
+                        value: `\`\`\`\n${IP}\n\`\`\``
+                      },
+                      {
+                        name: "> PORT",
+                        value: `\`\`\`\n${port}\n\`\`\``
+                      },
+                      {
+                        name: "> VERSION",
+                        value: `\`\`\`\n${version}\n\`\`\``
+                      },
+                      {
+                        name: "> PLAYING",
+                        value: `\`\`\`\n${playing}/${total}\n\`\`\``
+                      },{
+                        name: "> MOTD",
+                        value: `\`\`\`\n${description}\n\`\`\``
+                      })
+                      .setThumbnail("https://cdn.discordapp.com/emojis/913429376215961610.gif?size=4096");
+                    if(statusMessage){
+                      await statusMessage.edit(embed);
+                    }
+                    else{
+                      await minecraftServerStatusChannel.send(embed);
+                    }
+                  }
+                }else{
+                  await playingStatusChannel.setName(`OFFLINE`); 
+                  if(minecraftServerStatusChannel){
+                    embed.setAuthor(`🔴${guild.name}`, guild.iconURL())
+                      .setTitle("OFFLINE")
+                      .setColor(0xff4747)
+                      .setThumbnail("https://cdn.discordapp.com/emojis/913434792677228544.gif?size=4096");
+                    if(statusMessage){
+                      await statusMessage.edit(embed);
+                    }
+                    else{
+                      await minecraftServerStatusChannel.send(embed);
+                    }
+                  }
+                }
+              }catch{
+                await playingStatusChannel.setName(`OFFLINE`);  
+                if(minecraftServerStatusChannel){
+                  embed.setAuthor(`🔴${guild.name}`, guild.iconURL())
+                    .setTitle("OFFLINE")
+                    .setColor(0xff4747)
+                    .setThumbnail("https://cdn.discordapp.com/emojis/913434792677228544.gif?size=4096");
+                  if(statusMessage){
+                    await statusMessage.edit(embed);
+                  }
+                  else{
+                    await minecraftServerStatusChannel.send(embed);
+                  }
+                }
+              }
+            }
           }
         }
         //---------------STATS CHANNELS UPDATER-------------------

@@ -41,6 +41,7 @@ async run (Discord, client, prefix, message, args, database, personFinder, messa
       > ${arrow} ${prefix}set memberCountChannel \`<channel>\`
       > ${arrow} ${prefix}set memeChannel \`<channel>\`
       > ${arrow} ${prefix}set minecraftAnnouncementChannel \`<channel>\`
+      > ${arrow} ${prefix}set minecraftServerStatusChannel \`<channel>\`
       > ${arrow} ${prefix}set moderationLogsChannel \`<channel>\`
       > ${arrow} ${prefix}set modMailsChannel \`<channel>\`
       > ${arrow} ${prefix}set normalTicketsCountChannel \`<channel>\`
@@ -273,6 +274,10 @@ async run (Discord, client, prefix, message, args, database, personFinder, messa
         else if(args[0] == "moderationLogsChannel"){
           await database.set(`${args[0]}ID`, channelID);
           text = "moderation logs";
+        }
+        else if(args[0] == "minecraftServerStatusChannel"){
+          await database.set(`${args[0]}ID`, channelID);
+          text = "minecraft server status";
         }
         else{
           embed.setDescription(`${cross} Invalid sub-command.`)

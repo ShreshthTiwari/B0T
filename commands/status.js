@@ -11,16 +11,16 @@ module.exports = {
       .setColor(0x2f3136);
     let IP = await database.get("IP");
     const numericIP = await database.get("numericIP");
-    let Port = Number(await database.get("port"));  
-    if((!Port) || isNaN(Port)){
-      Port = 25565;
+    let port = Number(await database.get("port"));  
+    if((!port) || isNaN(port)){
+      port = 25565;
     }
-    if(numericIP && Port){
+    if(numericIP && port){
       if(!IP){
         IP = numericIP;
       }
       try{
-        const rawData = await util.status(numericIP, { port: Port}).then(response => {
+        const rawData = await util.status(numericIP, { port: port}).then(response => {
           return [response, response.port, response.version, response.onlinePlayers, response.maxPlayers, response.description.descriptionText, response.favicon];
         });
         if(rawData){
@@ -49,7 +49,7 @@ module.exports = {
             },
             {
               name: "> PORT",
-              value: `\`\`\`\n${Port}\n\`\`\``
+              value: `\`\`\`\n${port}\n\`\`\``
             },
             {
               name: "> VERSION",

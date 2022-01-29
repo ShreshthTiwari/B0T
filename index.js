@@ -40,7 +40,7 @@ client.on("error", console.error);
 
 client.on('ready', () => {
   const onReady = require('./events/onReady.js');
-  onReady(client, Keyv, util);
+  onReady(Discord, client, Keyv, util);
 });
 
 client.on('guildMemberAdd', async member => {
