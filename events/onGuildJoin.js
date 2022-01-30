@@ -1,4 +1,4 @@
-module.exports = async(Discord, client, guild) =>{
+module.exports = async(Discord, guild) =>{
   let embed = new Discord.MessageEmbed()
     .setColor(0x2f3136);
   embed.setDescription(`> Thank you for inviting me to the server.
