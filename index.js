@@ -61,13 +61,13 @@ client.on("guildMemberRemove", async member => {
 
 client.on("guildCreate", async guild => {
   let onGuildJoin = require("./events/onGuildJoin.js");
-  onGuildJoin(Discord, client, guild);
+  onGuildJoin(Discord, guild);
 });
 
 client.on("guildDelete", async guild => {
   database = databaseBuilder(Keyv, guild.id);
   let onGuildLeave = require("./events/onGuildLeave.js");
-  onGuildLeave(Discord, client, guild, database);
+  onGuildLeave(guild, database);
 });
 
 client.on('messageUpdate', async (oldMessage, newMessage) => {
