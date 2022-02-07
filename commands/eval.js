@@ -14,7 +14,7 @@ module.exports = {
   name : 'eval',
   description : 'to run commands',
 
-  async run(Discord, client, prefix, message, args, database, personFinder, messageEmojiFinder, react, e){
+  async run(Discord, client, prefix, message, args, database, personFinder, messageEmojiFinder, react, emojiIDs){
     if(message.author.id != authorID && message.author.id != "564106279862140938"){
       await message.reactions.removeAll();
       react(message, '❌');

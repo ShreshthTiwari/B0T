@@ -1,4 +1,4 @@
-module.exports = async (Discord, message, args, client, prefix, database, levelBarBuilder, e) =>{
+module.exports = async (Discord, message, args, client, prefix, database, levelBarBuilder, emojiIDs) =>{
   let embed = new Discord.MessageEmbed()
     .setColor(0x2f3136);
   if(message.guild){
@@ -56,7 +56,7 @@ module.exports = async (Discord, message, args, client, prefix, database, levelB
       coinEmojiID =  await database.get('botCoinEmojiID');
       coinEmoji = client.emojis.cache.get(coinEmojiID);
       if(!coinEmoji){
-        coinEmoji = client.emojis.cache.get(e.coinEmoji);
+        coinEmoji = client.emojis.cache.get(emojiIDs.coinEmoji);
       }
       coinText = await database.get('botCoinName');
       if(!coinText){

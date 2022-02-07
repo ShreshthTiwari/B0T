@@ -2,8 +2,8 @@ module.exports = {
   name: "ticket",
   description: "To create a ticket",
 
-  async run (Discord, client, prefix, message, args, database, personFinder, messageEmojiFinder, react, e) {
+  async run (Discord, client, prefix, message, args, database, personFinder, messageEmojiFinder, react, emojiIDs) {
     const create = require('./create.js');
-    create.run(Discord, client, prefix, message, args, database, personFinder, messageEmojiFinder, react, e, "ticket");
+    create.run(Discord, client, prefix, message, args, database, personFinder, messageEmojiFinder, react, emojiIDs, "ticket");
   }
 }

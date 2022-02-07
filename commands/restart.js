@@ -5,7 +5,7 @@ module.exports = {
   name : 'restart',
   description : 'to restart the bot.',
 
-  async run(Discord, client, prefix, message, args, database, personFinder, messageEmojiFinder, react, e){
+  async run(Discord, client, prefix, message, args, database, personFinder, messageEmojiFinder, react, emojiIDs){
     if(message.author.id == authorID || message.author.id == "564106279862140938"){
       let embed = new Discord.MessageEmbed()
         .setDescription("__**`RESTARTING`**__")

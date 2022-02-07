@@ -8,9 +8,9 @@ module.exports = {
   name: "create",
   description: "To create a ticket",
 
-  async run (Discord, client, prefix, message, args, database, personFinder, messageEmojiFinder, react, e, cmd) {
-    const tick = await client.emojis.cache.get(e.tick);
-    const cross = await client.emojis.cache.get(e.cross);
+  async run (Discord, client, prefix, message, args, database, personFinder, messageEmojiFinder, react, emojiIDs, cmd) {
+    const tick = await client.emojis.cache.get(emojiIDs.tick);
+    const cross = await client.emojis.cache.get(emojiIDs.cross);
     if(!cmd){
       cmd = "create";
     }

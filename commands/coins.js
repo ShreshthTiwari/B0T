@@ -2,16 +2,16 @@ module.exports = {
   name : 'coins',
   description : 'to get coins info',
 
-  async run(Discord, client, prefix, message, args, database, personFinder, messageEmojiFinder, react, e){
-    const tick = await client.emojis.cache.get(e.tick);
-    const cross = await client.emojis.cache.get(e.cross);
+  async run(Discord, client, prefix, message, args, database, personFinder, messageEmojiFinder, react, emojiIDs){
+    const tick = await client.emojis.cache.get(emojiIDs.tick);
+    const cross = await client.emojis.cache.get(emojiIDs.cross);
     let embed = new Discord.MessageEmbed()
       .setColor(0x98dbfa);
     const coinEmojiID =  await database.get('botCoinEmojiID');
     let coinEmoji = client.emojis.cache.get(coinEmojiID);
     let coinText = await database.get('botCoinName');
     if(!coinEmoji){
-      coinEmoji = client.emojis.cache.get(e.coinEmoji);
+      coinEmoji = client.emojis.cache.get(emojiIDs.coinEmoji);
     }
     if(!coinText){
       coinText = "Bot Coin";

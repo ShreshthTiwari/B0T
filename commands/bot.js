@@ -19,12 +19,12 @@ module.exports = {
   name : 'bot',
   description : 'for work on the bot',
 
-  async run(Discord, client, prefix, message, args, database, personFinder, messageEmojiFinder, react, e){
+  async run(Discord, client, prefix, message, args, database, personFinder, messageEmojiFinder, react, emojiIDs){
     let author = await client.users.cache.get(config.authorID).tag;
     let authorImg = await client.users.cache.get(config.authorID).displayAvatarURL({dynamic: true});
-    const tick = await client.emojis.cache.get(e.tick);
-    const cross = await client.emojis.cache.get(e.cross);
-    const arrow = await client.emojis.cache.get(e.arrow);
+    const tick = await client.emojis.cache.get(emojiIDs.tick);
+    const cross = await client.emojis.cache.get(emojiIDs.cross);
+    const arrow = await client.emojis.cache.get(emojiIDs.arrow);
     let embed = new Discord.MessageEmbed()
       .setAuthor(message.guild.name, message.guild.iconURL())
       .setThumbnail(client.user.displayAvatarURL())

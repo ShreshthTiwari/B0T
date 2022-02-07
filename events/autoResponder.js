@@ -1,6 +1,6 @@
 let ms = require("ms");
 
-module.exports = async(Discord, client, prefix, message, args, database, personFinder, messageEmojiFinder, content, e) =>{
+module.exports = async(Discord, client, prefix, message, args, database, personFinder, messageEmojiFinder, content, emojiIDs) =>{
   const verificationChannelID = await database.get("verificationChannelID");
   const ticketChannelID = await database.get('ticketChannelID');
   if(message.channel.id == verificationChannelID || message.channel.id == ticketChannelID){
@@ -32,7 +32,7 @@ module.exports = async(Discord, client, prefix, message, args, database, personF
     const fid = await database.get('fEmojiID');
     let f = client.emojis.cache.get(fid);
     if(!f){
-      f = client.emojis.cache.get(e.f);
+      f = client.emojis.cache.get(emojiIDs.f);
     }
     await message.react(f);
   }

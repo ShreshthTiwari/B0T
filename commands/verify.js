@@ -5,8 +5,8 @@ module.exports = {
   name : 'verify',
   description : 'for verification',
 
-  async run(Discord, client, prefix, message, args, database, personFinder, messageEmojiFinder, react, e){
-    const cross = await client.emojis.cache.get(e.cross);
+  async run(Discord, client, prefix, message, args, database, personFinder, messageEmojiFinder, react, emojiIDs){
+    const cross = await client.emojis.cache.get(emojiIDs.cross);
     let embed = new Discord.MessageEmbed()
     .setColor(0x98dbfa);
     let verificationText;

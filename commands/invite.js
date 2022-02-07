@@ -2,8 +2,8 @@ module.exports = {
   name : 'invite',
   description : 'discord invite link',
 
-  async run(Discord, client, prefix, message, args, database, personFinder, messageEmojiFinder, react, e){
-    const cross = await client.emojis.cache.get(e.cross);
+  async run(Discord, client, prefix, message, args, database, personFinder, messageEmojiFinder, react, emojiIDs){
+    const cross = await client.emojis.cache.get(emojiIDs.cross);
     let embed = new Discord.MessageEmbed()
       .setColor(0x2f3136);
     let invite = await database.get(`customCommand_invite`);

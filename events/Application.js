@@ -11,11 +11,11 @@ let canApply;
 let prefix = '-';
 let Guild;
 
-module.exports = (Discord, client, Keyv, fs, path, messageEmojiFinder, react, e) =>{
+module.exports = (Discord, client, Keyv, fs, path, messageEmojiFinder, react, emojiIDs) =>{
   client.on('message', async message => {
-    const tick = client.emojis.cache.get(e.tick);
-    const cross = client.emojis.cache.get(e.cross);
-    const arrow = await client.emojis.cache.get(e.arrow);
+    const tick = client.emojis.cache.get(emojiIDs.tick);
+    const cross = client.emojis.cache.get(emojiIDs.cross);
+    const arrow = await client.emojis.cache.get(emojiIDs.arrow);
     if(message.guild){
       database = new Keyv('sqlite://./databases/database.sqlite', {
         table: `${message.guild.id}`

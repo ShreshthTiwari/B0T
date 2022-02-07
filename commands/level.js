@@ -4,9 +4,9 @@ module.exports = {
   name : 'level',
   description : 'to check your level',
 
-  async run(Discord, client, prefix, message, args, database, personFinder, messageEmojiFinder, react, e, helpText){
-    const tick = await client.emojis.cache.get(e.tick);
-    const cross = await client.emojis.cache.get(e.cross);
+  async run(Discord, client, prefix, message, args, database, personFinder, messageEmojiFinder, react, emojiIDs, helpText){
+    const tick = await client.emojis.cache.get(emojiIDs.tick);
+    const cross = await client.emojis.cache.get(emojiIDs.cross);
     if(!helpText){
       helpText = "level";
     }
@@ -15,7 +15,7 @@ module.exports = {
     const coinEmojiID =  await database.get('botCoinEmojiID');
     let coinEmoji = client.emojis.cache.get(coinEmojiID);
     if(!coinEmoji){
-      coinEmoji = client.emojis.cache.get(e.coinEmoji);
+      coinEmoji = client.emojis.cache.get(emojiIDs.coinEmoji);
     }
     let coinText = await database.get('botCoinName');
     let coins;

@@ -4,10 +4,10 @@ module.exports = {
   name : 'help',
   description : 'commands list',
 
-  async run(Discord, client, prefix, message, args, database, personFinder, messageEmojiFinder, react, e){
-    const tick = await client.emojis.cache.get(e.tick);
-    const cross = await client.emojis.cache.get(e.cross);
-    const arrow = await client.emojis.cache.get(e.arrow);
+  async run(Discord, client, prefix, message, args, database, personFinder, messageEmojiFinder, react, emojiIDs){
+    const tick = await client.emojis.cache.get(emojiIDs.tick);
+    const cross = await client.emojis.cache.get(emojiIDs.cross);
+    const arrow = await client.emojis.cache.get(emojiIDs.arrow);
     let author = await client.users.cache.get(config.authorID).tag;
     let authorImg = await client.users.cache.get(config.authorID).displayAvatarURL({dynamic: true});
     let embed = new Discord.MessageEmbed()

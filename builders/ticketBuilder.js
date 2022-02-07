@@ -1,8 +1,8 @@
-const e = require("../emojiIDs.json");
+const emojiIDs = require("../emojiIDs.json");
 
 module.exports = async(Discord, client, message, database, fs, path, date, ticketReason, person, staffRoleID) => {
-  const tick = await client.emojis.cache.get(e.tick);
-  const cross = await client.emojis.cache.get(e.cross);
+  const tick = await client.emojis.cache.get(emojiIDs.tick);
+  const cross = await client.emojis.cache.get(emojiIDs.cross);
   let embed = new Discord.MessageEmbed()
     .setColor(0x98dbfa);
   async function ticketCreator(ticketTypeSelector, ticketType, ticketTitle, ticketTypeText){

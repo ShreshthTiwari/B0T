@@ -4,9 +4,7 @@ const client  = new Discord.Client();
 client.commands = new Discord.Collection();
 
 const util = require('minecraft-server-util');
-
 const Canvas = require('canvas');
-
 const Keyv = require('keyv');
 
 const fs = require("fs");
@@ -16,9 +14,13 @@ const { join } = require ('path');
 const path = require('path');
 
 const databaseBuilder = require('./builders/databaseBuilder.js');
-const react = require('./editors/react.js');
 let database;
 
+const react = require('./editors/react.js');
+
+const emojiIDs = require("./emojiIDs.json");
+
+const messageEmojiFinder = require("./editors/messageEmojiFinder.js");
 
 let prefix = [];
 let checkPrefix ;
@@ -75,17 +77,12 @@ client.on("messageDelete", async (deletedMessage) => {
   onMessageDelete(Discord, client, deletedMessage, database);
 });
 
-const e = require("./emojiIDs.json");
-
-const messageEmojiFinder = require("./editors/messageEmojiFinder.js");
-
-const Application = require('./events/Application.js');
-Application(Discord, client, Keyv, fs, path, messageEmojiFinder, react, e);
-
-//=================================================================================
 client.on('message', async message => {
   let onMessageCreate = require("./events/onMessageCreate.js");
-  onMessageCreate(Discord, client, message, Keyv, databaseBuilder, prefix, checkPrefix, fs, path, e, messageEmojiFinder);
+  onMessageCreate(Discord, client, message, Keyv, databaseBuilder, react, prefix, checkPrefix, fs, path, emojiIDs, messageEmojiFinder);
 });
+
+const Application = require('./events/Application.js');
+Application(Discord, client, Keyv, fs, path, messageEmojiFinder, react, emojiIDs);
 
 client.login();

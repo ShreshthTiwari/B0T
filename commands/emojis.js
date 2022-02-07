@@ -2,7 +2,7 @@ module.exports = {
   name : 'emojis',
   description : 'list of emojis bot has access to',
 
-  async run(Discord, client, prefix, message, args, database, personFinder, messageEmojiFinder, react, e){
+  async run(Discord, client, prefix, message, args, database, personFinder, messageEmojiFinder, react, emojiIDs){
     let embed = new Discord.MessageEmbed()
       .setColor(0x98dbfa);
     if(!message.member.hasPermission("ADMINISTRATOR")){
@@ -22,10 +22,10 @@ module.exports = {
       if(guild){
         let emojiNamesMap = guild.emojis.cache
           .sort((a, b) => b.position - a.position)
-          .map(e => e.name);
+          .map(emojiIDs => emojiIDs.name);
         let emojisMap = guild.emojis.cache
           .sort((a, b) => b.position - a.position)
-          .map(e => e.id);
+          .map(emojiIDs => emojiIDs.id);
         for(let j=0; j<=emojisMap.length-1; j++){
           emojiNames[indexEmojiNames] = emojiNamesMap[j];
           emojis[indexEmojis] = emojisMap[j];

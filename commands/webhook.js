@@ -2,10 +2,10 @@ module.exports = {
     name : 'webhook',
     description : 'webhook messages',
   
-    async run(Discord, client, prefix, message, args, database, personFinder, messageEmojiFinder, react, e, helpText){
-      const tick = await client.emojis.cache.get(e.tick);
-      const cross = await client.emojis.cache.get(e.cross);
-      const arrow = await client.emojis.cache.get(e.arrow);
+    async run(Discord, client, prefix, message, args, database, personFinder, messageEmojiFinder, react, emojiIDs, helpText){
+      const tick = await client.emojis.cache.get(emojiIDs.tick);
+      const cross = await client.emojis.cache.get(emojiIDs.cross);
+      const arrow = await client.emojis.cache.get(emojiIDs.arrow);
       messageEmojiFinder = require("../editors/messageEmojiFinder.js");
       if(!helpText){
         helpText = "webhook";

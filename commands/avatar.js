@@ -2,9 +2,9 @@ module.exports = {
   name : 'avatar',
   description : 'to get avatar of a user',
 
-  async run(Discord, client, prefix, message, args, database, personFinder, messageEmojiFinder, react, e){
-    const tick = await client.emojis.cache.get(e.tick);
-    const cross = await client.emojis.cache.get(e.cross);
+  async run(Discord, client, prefix, message, args, database, personFinder, messageEmojiFinder, react, emojiIDs){
+    const tick = await client.emojis.cache.get(emojiIDs.tick);
+    const cross = await client.emojis.cache.get(emojiIDs.cross);
     let embed = new Discord.MessageEmbed()
       .setColor(0x95fd91);
     if(!args[0]){

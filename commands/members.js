@@ -2,7 +2,7 @@ module.exports = {
   name : 'members',
   description : 'member count of the server',
 
-  async run(Discord, client, prefix, message, args, database, personFinder, messageEmojiFinder, react, e){
+  async run(Discord, client, prefix, message, args, database, personFinder, messageEmojiFinder, react, emojiIDs){
     let embed = new Discord.MessageEmbed()
       .setColor(0x98dbfa);
     if(!message.member.hasPermission("ADMINISTRATOR")){

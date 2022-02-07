@@ -13,7 +13,7 @@ const autoResponder = require('../events/autoResponder.js');
 const ticketLogging = require('../events/ticketsLogging.js');
 const commandsFinder = require('../events/commandsFinder.js');
 
-module.exports = async (Discord, client, message, Keyv, databaseBuilder, prefix, checkPrefix, fs, path, e, messageEmojiFinder) => {
+module.exports = async (Discord, client, message, Keyv, databaseBuilder, react, prefix, checkPrefix, fs, path, emojiIDs, messageEmojiFinder) => {
   let embed = new Discord.MessageEmbed()
     .setColor(0x98dbfa);
   if(message.guild){
@@ -65,9 +65,9 @@ module.exports = async (Discord, client, message, Keyv, databaseBuilder, prefix,
 
     let args = message.content.split(/ +/);
     //==========Counting Section===================================================
-    counting(Discord, client, message, args, database, prefix[message.guild.id], e);
+    counting(Discord, client, message, args, database, prefix[message.guild.id], emojiIDs);
     //==========Level/Points Section===============================================
-    points(Discord, message, args, client, prefix[message.guild.id], database, levelBarBuilder, e);
+    points(Discord, message, args, client, prefix[message.guild.id], database, levelBarBuilder, emojiIDs);
     //==========Keeping the verification Channel Clean From Bots' Messages=========
     const verificationChannelID = await database.get("verificationChannelID");
     const ticketChannelID = await database.get('ticketChannelID');
@@ -78,7 +78,7 @@ module.exports = async (Discord, client, message, Keyv, databaseBuilder, prefix,
       return;
     }
     //===============================================================================
-    autoResponder(Discord, client, prefix[message.guild.id], message, args, database, personFinder, messageEmojiFinder, message.content.toLowerCase(), e);
+    autoResponder(Discord, client, prefix[message.guild.id], message, args, database, personFinder, messageEmojiFinder, message.content.toLowerCase(), emojiIDs);
     //===========Tickets Logging====================================================
     if(message.content.startsWith(prefix[message.guild.id])){
       let t = await message.content.slice(prefix[message.guild.id].length);
@@ -89,7 +89,7 @@ module.exports = async (Discord, client, message, Keyv, databaseBuilder, prefix,
       //==========Custom Commands====================================================
       customCommands(Discord, client, message, args, database, messageEmojiFinder);
       //==========Commands Finder====================================================
-      commandsFinder(Discord, client, prefix[message.guild.id], message, args, database, personFinder, messageEmojiFinder, verificationChannelID, react, e);
+      commandsFinder(Discord, client, prefix[message.guild.id], message, args, database, personFinder, messageEmojiFinder, verificationChannelID, react, emojiIDs);
       //=============================================================================
     }
     else{
@@ -104,7 +104,7 @@ module.exports = async (Discord, client, message, Keyv, databaseBuilder, prefix,
         }
       }
       //===========Chat Filter=======================================================
-      chatFilter(Discord, client, message, message.content.toLowerCase(), database, e);
+      chatFilter(Discord, client, message, message.content.toLowerCase(), database, emojiIDs);
       //===========Auto Responder=====================================================
       ticketLogging(message, database, fs, path, dateBuilder);
       //==============================================================================

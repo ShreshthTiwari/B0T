@@ -4,10 +4,10 @@ module.exports = (client, message, args) => {
       let emojiName = args[i].slice(1, -1);
       let emoji;
       if(message.guild){
-        emoji = message.guild.emojis.cache.find(e => e.name == emojiName);
+        emoji = message.guild.emojis.cache.find(emojiIDs => emojiIDs.name == emojiName);
       }
       if(!emoji)
-        emoji = client.emojis.cache.find(e => e.name == emojiName);
+        emoji = client.emojis.cache.find(emojiIDs => emojiIDs.name == emojiName);
       if(emoji){
         if(emoji.animated){
           args[i] = `<a:${emoji.name}:${emoji.id}>`;

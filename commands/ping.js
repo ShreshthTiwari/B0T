@@ -2,13 +2,13 @@ module.exports = {
   name : 'ping',
   description : 'ping command',
 
-  async run(Discord, client, prefix, message, args, database, personFinder, messageEmojiFinder, react, e){
+  async run(Discord, client, prefix, message, args, database, personFinder, messageEmojiFinder, react, emojiIDs){
     let embed = new Discord.MessageEmbed()
       .setColor(0x2f3136)
       .setAuthor(client.user.username, message.guild.iconURL());
     let latency = Math.round(Date.now() - message.createdTimestamp);
     let apiLatency = Math.round(client.ws.ping);
-    let loadingEmoji = client.emojis.cache.get(e.loadingEmoji);
+    let loadingEmoji = client.emojis.cache.get(emojiIDs.loadingEmoji);
     let time;
     time = Date.now();
     let dbLatency;

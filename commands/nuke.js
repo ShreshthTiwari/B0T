@@ -2,7 +2,7 @@ module.exports = {
     name : 'nuke',
     description : 'to nuke a channel',
   
-    async run(Discord, client, prefix, message, args, database, personFinder, messageEmojiFinder, react, e){
+    async run(Discord, client, prefix, message, args, database, personFinder, messageEmojiFinder, react, emojiIDs){
       let channel = message.mentions.channels.first();
       if(!channel){
         channel = message.channel;

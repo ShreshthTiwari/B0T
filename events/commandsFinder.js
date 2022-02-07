@@ -1,8 +1,8 @@
-const e = require("../emojiIDs.json");
+const emojiIDs = require("../emojiIDs.json");
 
-module.exports = async(Discord, client, prefix, message, args, database, personFinder, messageEmojiFinder, verificationChannelID, react, e) => {
-  const tick = await client.emojis.cache.get(e.tick);
-  const cross = await client.emojis.cache.get(e.cross);
+module.exports = async(Discord, client, prefix, message, args, database, personFinder, messageEmojiFinder, verificationChannelID, react, emojiIDs) => {
+  const tick = await client.emojis.cache.get(emojiIDs.tick);
+  const cross = await client.emojis.cache.get(emojiIDs.cross);
   let embed = new Discord.MessageEmbed()
   .setColor(0xff4747);
   let command = args.shift().toLowerCase();
@@ -80,7 +80,7 @@ module.exports = async(Discord, client, prefix, message, args, database, personF
   if(client.commands.has(command)){
     let returnValue;
     do{
-      returnValue = await client.commands.get(command).run(Discord, client, prefix, message, args, database, personFinder, messageEmojiFinder, react, e);
+      returnValue = await client.commands.get(command).run(Discord, client, prefix, message, args, database, personFinder, messageEmojiFinder, react, emojiIDs);
     } while(returnValue == "return");
   }
 }

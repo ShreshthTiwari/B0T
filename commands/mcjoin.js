@@ -13,7 +13,7 @@ module.exports = {
   name : 'mcjoin',
   description : 'to join a MC server',
 
-  async run(Discord, client, prefix, message, args, database, personFinder, messageEmojiFinder, react, e){
+  async run(Discord, client, prefix, message, args, database, personFinder, messageEmojiFinder, react, emojiIDs){
     let embed = new Discord.MessageEmbed()
       .setColor(0x95fd91);
         if(!message.member.hasPermission("ADMINISTRATOR")){
@@ -21,9 +21,9 @@ module.exports = {
       react(message, '❌');
       return;
     }
-    const tick = await client.emojis.cache.get(e.tick);
-    const cross = await client.emojis.cache.get(e.cross);
-    const arrow = await client.emojis.cache.get(e.arrow);
+    const tick = await client.emojis.cache.get(emojiIDs.tick);
+    const cross = await client.emojis.cache.get(emojiIDs.cross);
+    const arrow = await client.emojis.cache.get(emojiIDs.arrow);
     let IP = await database.get("IP");
     const numericIP = await database.get("numericIP");
     let Port = Number(await database.get("port"));

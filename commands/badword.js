@@ -2,13 +2,13 @@ module.exports = {
   name: "badword",
   description: "to add or remove badwords",
 
-  async run (Discord, client, prefix, message, args, database, personFinder, messageEmojiFinder, react, e, helpText){
+  async run (Discord, client, prefix, message, args, database, personFinder, messageEmojiFinder, react, emojiIDs, helpText){
     if(!helpText){
       helpText = "badword";
     }
-    const tick = await client.emojis.cache.get(e.tick);
-    const cross = await client.emojis.cache.get(e.cross);
-    const arrow = await client.emojis.cache.get(e.arrow);
+    const tick = await client.emojis.cache.get(emojiIDs.tick);
+    const cross = await client.emojis.cache.get(emojiIDs.cross);
+    const arrow = await client.emojis.cache.get(emojiIDs.arrow);
     let embed = new Discord.MessageEmbed()
     .setColor(0x98dbfa);
     if(!message.member.hasPermission("ADMINISTRATOR")){

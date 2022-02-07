@@ -1,6 +1,6 @@
-module.exports = async(Discord, client, message, args, database, prefix, e) =>{
-  const tick = await client.emojis.cache.get(e.tick);
-  const cross = await client.emojis.cache.get(e.cross);
+module.exports = async(Discord, client, message, args, database, prefix, emojiIDs) =>{
+  const tick = await client.emojis.cache.get(emojiIDs.tick);
+  const cross = await client.emojis.cache.get(emojiIDs.cross);
   if(message.guild){
     const countingChannelID = await database.get("countingChannelID");
     if(!countingChannelID){

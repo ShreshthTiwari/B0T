@@ -6,11 +6,11 @@ module.exports = {
   name : 'meme',
   description : 'for memes xD',
   
-  async run(Discord, client, prefix, message, args, database, personFinder, messageEmojiFinder, react, e){
+  async run(Discord, client, prefix, message, args, database, personFinder, messageEmojiFinder, react, emojiIDs){
     gMemeURL[message.guild.id] = url;
     let memesTopic = await database.get("memesTopic");
-    const tick = await client.emojis.cache.get(e.tick);
-    const cross = await client.emojis.cache.get(e.cross);
+    const tick = await client.emojis.cache.get(emojiIDs.tick);
+    const cross = await client.emojis.cache.get(emojiIDs.cross);
     let embed = new Discord.MessageEmbed()
       .setColor(0x2f3136);
     const memeChannelID = await database.get("memeChannelID");

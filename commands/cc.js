@@ -1,10 +1,10 @@
 module.exports = {
   name: "cc",
   description: "create custom commands",
-  async run (Discord, client, prefix, message, args, database, personFinder, messageEmojiFinder, react, e, helptext){
-    const tick = await client.emojis.cache.get(e.tick);
-    const cross = await client.emojis.cache.get(e.cross);
-    const arrow = await client.emojis.cache.get(e.arrow);
+  async run (Discord, client, prefix, message, args, database, personFinder, messageEmojiFinder, react, emojiIDs, helptext){
+    const tick = await client.emojis.cache.get(emojiIDs.tick);
+    const cross = await client.emojis.cache.get(emojiIDs.cross);
+    const arrow = await client.emojis.cache.get(emojiIDs.arrow);
     if(!helptext){
       helptext = "cc";
     }

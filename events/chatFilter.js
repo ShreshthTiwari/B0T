@@ -1,6 +1,6 @@
-module.exports = async(Discord, client, message, content, database, e) =>{
-  const tick = await client.emojis.cache.get(e.tick);
-  const cross = await client.emojis.cache.get(e.cross);
+module.exports = async(Discord, client, message, content, database, emojiIDs) =>{
+  const tick = await client.emojis.cache.get(emojiIDs.tick);
+  const cross = await client.emojis.cache.get(emojiIDs.cross);
   if(!message.member.hasPermission("ADMINISTRATOR")){
     let chatFilterLogsChannelID = await database.get("chatFilterLogsChannelID");
     if(!chatFilterLogsChannelID){

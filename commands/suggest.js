@@ -2,9 +2,9 @@ module.exports = {
   name: "suggest",
   description: "suggest something",
 
-  async run (Discord, client, prefix, message, args, database, personFinder, messageEmojiFinder, react, e, cmd){
-    const tick = await client.emojis.cache.get(e.tick);
-    const cross = await client.emojis.cache.get(e.cross);
+  async run (Discord, client, prefix, message, args, database, personFinder, messageEmojiFinder, react, emojiIDs, cmd){
+    const tick = await client.emojis.cache.get(emojiIDs.tick);
+    const cross = await client.emojis.cache.get(emojiIDs.cross);
     if(!cmd){
       cmd = "suggest";
     }
@@ -18,17 +18,17 @@ module.exports = {
     let upID = await database.get('upEmojiID');
     let up = client.emojis.cache.get(upID);
     if(!up){
-      up = client.emojis.cache.get(e.up);
+      up = client.emojis.cache.get(emojiIDs.up);
     }
     let updownID = await database.get('updownEmojiID');
     let updown = client.emojis.cache.get(updownID);
     if(!updown){
-     updown = client.emojis.cache.get(e.updown); 
+     updown = client.emojis.cache.get(emojiIDs.updown); 
     }
     let downID = await database.get('downEmojiID');
     let down = client.emojis.cache.get(downID);
     if(!down){
-      down = client.emojis.cache.get(e.down);
+      down = client.emojis.cache.get(emojiIDs.down);
     }
     if(!(up || updown || down)){
       embed.setDescription(`${cross} Invalid suggestion emojis.`)
