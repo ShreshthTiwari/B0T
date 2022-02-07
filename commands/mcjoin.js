@@ -1,5 +1,5 @@
 //set the ports[i] to 0 on returning or exiting
-
+/*
 const mineflayer = require('mineflayer');
 const { mineflayer: mineflayerViewer } = require('prismarine-viewer');
 let bot;
@@ -390,3 +390,4 @@ module.exports = {
     }
   }
 }
+*/
