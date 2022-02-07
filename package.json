@@ -4,6 +4,7 @@
   "description": "By ShreshthTiwari#6014",
   "main": "index.js",
   "dependencies": {
+    "@keyv/sqlite": "^2.0.2",
     "axios": "^0.24.0",
     "canvas": "^2.8.0",
     "check-disk-space": "^3.0.1",
@@ -13,14 +14,13 @@
     "dotenv": "^8.6.0",
     "fs": "^0.0.1-security",
     "https": "^1.0.0",
+    "keyv": "^4.1.0",
     "minecraft-server-util": "^3.7.2",
-    "mineflayer": "^3.11.2",
     "ms": "^2.1.3",
     "node-os-utils": "^1.3.5",
     "nodemon": "^2.0.15",
     "os": "^0.1.2",
     "os-utils": "^0.0.14",
-    "prismarine-viewer": "^1.21.0",
     "ytdl-core": "^4.9.1"
   },
   "scripts": {
