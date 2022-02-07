@@ -58,9 +58,9 @@ module.exports = async (Discord, client, message, Keyv, databaseBuilder, react, 
     }
     //-----------------------------------------------------------------------------
     prefix[message.guild.id] = "-";
-    checkPrefix[message.guild.id] = await database.get("botPrefix");
+    checkPrefix = await database.get("botPrefix");
     if(checkPrefix){
-      prefix[message.guild.id] = checkPrefix[message.guild.id];
+      prefix[message.guild.id] = checkPrefix;
     }
 
     let args = message.content.split(/ +/);
