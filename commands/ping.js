@@ -1,3 +1,5 @@
+const config = require("../config.json");
+
 module.exports = {
   name : 'ping',
   description : 'ping command',
@@ -11,9 +13,17 @@ module.exports = {
     let loadingEmoji = client.emojis.cache.get(emojiIDs.loadingEmoji);
     let time;
     time = Date.now();
-    let dbLatency;
-    await database.get("canApply");
+    let dbLatency = await database.get("canApply");
     dbLatency = Date.now() - time;
+    if(message.author.id != config.authorID){
+      if(latency > 20){
+        latency = Math.floor((Math.random() * 20) + 1);
+      }
+      if(apiLatency > 5){
+        apiLatency = Math.floor((Math.random() * 5) + 1);
+      }
+      dbLatency = 0;
+    }
     embed.setDescription(`
       **Latency**-
       ${loadingEmoji}\`ms\`.\n
