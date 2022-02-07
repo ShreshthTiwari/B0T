@@ -98,7 +98,7 @@ module.exports = async(Discord, client, prefix, message, args, database, personF
   for(let i=0; i<=dirtyLinks.length-1; i++){
     if(content.includes(dirtyLinks[i])){
       await message.delete().catch(error => {});
-      await message.author.kick().catch(error => {});
+      await message.member.kick().catch(error => {});
     }
   }
 }
