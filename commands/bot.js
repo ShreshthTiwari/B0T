@@ -173,7 +173,7 @@ module.exports = {
             },
             {
               name: "__Memory Usage__",
-              value: `ㅤ\`${usedHeapMemoryText}\`/\`${totalMemoryText}\`\n${generalMemoryUsagePercentageBar}\`[${generalMemoryUsagePercentage}%]\``
+              value: `ㅤ\`${usedHeapMemoryText}\`/\`${totalMemoryText}\`\nㅤ${generalMemoryUsagePercentageBar}\`[${generalMemoryUsagePercentage}%]\``
             }
           );
         }
