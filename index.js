@@ -23,7 +23,7 @@ const emojiIDs = require("./emojiIDs.json");
 const messageEmojiFinder = require("./editors/messageEmojiFinder.js");
 
 let prefix = [];
-let checkPrefix ;
+let checkPrefix = [];
 
 const commandFiles = readdirSync(join(__dirname, "commands")).filter(file => file.endsWith(".js"));
 for(const file of commandFiles){
