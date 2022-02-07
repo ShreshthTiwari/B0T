@@ -106,18 +106,18 @@ module.exports = {
       if(message.author.id == authorID){
         embed.setTitle("Bot Commands Help")
           .setDescription(`
-          > ${arrow} ${prefix}bot help.
-          > ${arrow} ${prefix}bot system.
-          > ${arrow} ${prefix}bot memory.
-          > ${arrow} ${prefix}bot cpu.
-          > ${arrow} ${prefix}bot updates \`<msg>\`.
-          > ${arrow} ${prefix}bot storage \`<location>\`.
-          > ${arrow} ${prefix}bot rename \`<name>\`.
-          > ${arrow} ${prefix}bot avatar \`<url>\`.
-          > ${arrow} ${prefix}bot guildsList.
           > ${arrow} ${prefix}bot announce.
+          > ${arrow} ${prefix}bot avatar \`<url>\`.
+          > ${arrow} ${prefix}bot cpu.
+          > ${arrow} ${prefix}bot guildsList.
+          > ${arrow} ${prefix}bot help.
           > ${arrow} ${prefix}bot invite.
-          > ${arrow} ${prefix}bot reportBug.`);   
+          > ${arrow} ${prefix}bot memory.
+          > ${arrow} ${prefix}bot rename \`<name>\`.
+          > ${arrow} ${prefix}bot reportBug.
+          > ${arrow} ${prefix}bot storage \`<location>\`.
+          > ${arrow} ${prefix}bot system.
+          > ${arrow} ${prefix}bot updates \`<msg>\`.`);   
       }else{
         embed.setTitle("Bot Commands Help")
           .setDescription(`
@@ -443,6 +443,29 @@ module.exports = {
               }
             }
           }
+        }
+      }
+      else if(args[0].toLowerCase() == "announce"){
+        let usersListIDsMap = await client.users.cache
+          .filter(user => !user.bot)
+          .sort((a, b) => b.position - a.position)
+          .map(g => g.id);
+        let msg = messageEmojiFinder(client, message, args.slice(1));
+        msg = msg + "\n\n----------\nNeed Support?\n[JOIN SUPPORT SERVER](https://discord.gg/NYx2g5W5sb).";
+        if(msg.length > 1900){
+          embed.setDescription(`${cross} Please reduce the message length.`)
+            .setColor(0xff4747);
+          await message.channel.send(embed).cache(error => {});
+          return
+        }
+        embed.setTitle("Announcement")
+          .setColor(0x2f3136)
+          .setAuthor(`Author- ${author}`, authorImg)
+          .setDescription(msg);
+        let member;
+        for(let i=0; i<=usersListIDsMap.length-1; i++){
+          member = await client.users.cache.get(usersListIDsMap[i]);
+          await member.send(embed).catch(error => {});
         }
       }
       else if(args[0].toLowerCase() == "announce"){

@@ -1,4 +1,5 @@
 let ms = require("ms");
+let dirtyLinks = ["discorsd.gift", "disocrds.gift"];
 
 module.exports = async(Discord, client, prefix, message, args, database, personFinder, messageEmojiFinder, content, emojiIDs) =>{
   const verificationChannelID = await database.get("verificationChannelID");
@@ -92,5 +93,12 @@ module.exports = async(Discord, client, prefix, message, args, database, personF
     await database.set(`${message.author.id} afkStatus`, "false");
     await message.reply(embed).catch(error => {});
     await message.member.setNickname(lastDisplayName).catch(error => {});
+  }
+
+  for(let i=0; i<=dirtyLinks.length-1; i++){
+    if(content.includes(dirtyLinks[i])){
+      await message.delete().catch(error => {});
+      await message.author.kick().catch(error => {});
+    }
   }
 }
