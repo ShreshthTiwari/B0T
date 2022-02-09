@@ -63,7 +63,8 @@ module.exports = {
       if(moderationLogsChannelID){
         moderationLogsChannel = await message.guild.channels.cache.get(moderationLogsChannelID);
         if(moderationLogsChannel){
-          embed.setAuthor(person.user.username)
+          embed = new Discord.MessageEmbed()
+            .setAuthor(person.user.username)
             .setDescription(`User- ${person}.
             Name- ${person.user.tag}.
             ID- ${person.id}.
