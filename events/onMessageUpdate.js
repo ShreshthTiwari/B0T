@@ -31,8 +31,6 @@ module.exports = async (Discord, client, oldMessage, newMessage, database) => {
         **[Jump To Message](${newMessage.url})**`)
         .setColor(0x95fd91);
       await chatLogsChannel.send(embed).catch(error => {});
-      embed = new Discord.MessageEmbed()
-        .setColor(0x98dbfa);
     }
   }
 }

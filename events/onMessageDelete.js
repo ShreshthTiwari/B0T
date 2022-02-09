@@ -24,8 +24,6 @@ module.exports = async (Discord, client, deletedMessage, database) => {
         **Content**-\n${content}`)
         .setColor(0x95fd91);
       await chatLogsChannel.send(embed).catch(error => {});
-      embed = new Discord.MessageEmbed()
-        .setColor(0x98dbfa);
     }
   }
 }
