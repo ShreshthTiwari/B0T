@@ -417,13 +417,19 @@ module.exports = (Discord, client, Keyv, fs, path, messageEmojiFinder, react, em
                         "Question 15- " + questions[15] + '\nAnswer 15- ' + authorApplication.answer15 + '\n\n' + 
                         "Question 16- " + questions[16] + '\nAnswer 16- ' + authorApplication.answer16 + '\n\n', { flag: 'wx' }, function (err) {
                           if (err){
-                            message.author.send(`${cross} Error while storing your application.\nPlease report it to the bot dev.\n\`${prefix}bot reportBug <msg>\`.`).catch(error => {});
+                            embed.setDescription(`${cross} Error while storing your application.\nPlease report it to the bot dev.\n\`${prefix}bot reportBug <msg>\`.`)
+                            .setColor(0xff4747); 
+                            message.reply(embed).catch(error => {});
                             success = false;
                             return;
                           }  
                         });
                       }catch(error){
-                        message.author.send(`${cross} Error while storing your application.\nPlease report it to the bot dev.\n\`${prefix}bot reportBug <msg>\`.`).catch(error => {});
+                        embed.setDescription(`${cross} Error while storing your application.\nPlease report it to the bot dev.\n\`${prefix}bot reportBug <msg>\`.`)
+                        .setColor(0xff4747); 
+                        message.reply(embed).catch(error => {});
+                        success = false;
+                        return;
                       }
                       if(success){
                         logchannel.send({
