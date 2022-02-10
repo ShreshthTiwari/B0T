@@ -18,7 +18,16 @@ module.exports = async(Discord, client, message, args, database, messageEmojiFin
           input.length= 500;
         }
         let reply = await chatBot.chat(input);
-        reply = reply.replace("Udit", author).replace("Pro", message.author.username).replace(" An",message.author.username).replace("Aryan",message.author.username);
+        reply = reply.replace("Udit", author)
+          .replace("Pro ", message.author.username)
+          .replace("Pro,", message.author.username)
+          .replace("Pro.", message.author.username)
+          .replace("Pro!", message.author.username)
+          .replace("An ",message.author.username)
+          .replace("An,",message.author.username)
+          .replace("An.",message.author.username)
+          .replace("An!",message.author.username)
+          .replace("Aryan",message.author.username);
         message.channel.stopTyping();
         await message.channel.send(reply).catch(error => {});
       }
