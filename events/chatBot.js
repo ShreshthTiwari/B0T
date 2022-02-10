@@ -1,7 +1,9 @@
 const ChatBot = require('discord-chatbot');
 const chatBot = new ChatBot({name: "B0T", gender: "Male"});
+const config = require("../config.json");
 
 module.exports = async(Discord, client, message, args, database, messageEmojiFinder) =>{
+  let author = await client.users.cache.get(config.authorID).username || "ShreshthTiwari";
   let chatBotChannelID = await database.get("chatBotChannelID");
   if(chatBotChannelID){
     let chatBotChannel = message.guild.channels.cache.get(chatBotChannelID);
@@ -16,7 +18,7 @@ module.exports = async(Discord, client, message, args, database, messageEmojiFin
           input.length= 500;
         }
         let reply = await chatBot.chat(input);
-        reply = reply.replace("Udit", "ShreshthTiwari").replace("Pro", message.author.username);
+        reply = reply.replace("Udit", author).replace("Pro", message.author.username).replace(" An",message.author.username).replace("Aryan",message.author.username);
         message.channel.stopTyping();
         await message.channel.send(reply).catch(error => {});
       }
