@@ -11,7 +11,7 @@ module.exports = async(Discord, client, message, args, database, prefix, emojiID
       return;
     }
     if(message.author.bot){
-	  if((message.channel.id == countingChannel.id) && isNaN(message.content)){
+	  if((message.channel.id == countingChannel.id) && (message.author.id == client.user.id || (!message.content) || isNaN(message.content))){
 	    await message.delete().catch(error => {});
 	  }
 	  return;
