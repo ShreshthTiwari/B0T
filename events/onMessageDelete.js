@@ -17,7 +17,7 @@ module.exports = async (Discord, client, deletedMessage, database) => {
       embed = new Discord.MessageEmbed()
         .setTitle("Message Deleted")
         .setDescription(`**User**- ${deletedMessage.author}.
-        **Name**- \`${deletedMessage.author.username}\`.
+        **Name**- \`${deletedMessage.author.tag}\`.
         **ID**- \`${deletedMessage.author.id}\`.
         **Channel**- ${deletedMessage.channel}.
         **Message ID**- \`${deletedMessage.id}\`.

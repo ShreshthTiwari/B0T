@@ -43,7 +43,7 @@ module.exports = async (Discord, client, message, Keyv, databaseBuilder, react, 
           embed = new Discord.MessageEmbed()
           .setTitle("New Message")
             .setDescription(`**User**- ${message.author}.
-            **Name**- \`${message.author.username}\`.
+            **Name**- \`${message.author.tag}\`.
             **ID**- \`${message.author.id}\`.
             **Channel**- ${message.channel}.
             **Message ID**- \`${message.id}\`.

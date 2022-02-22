@@ -11,11 +11,11 @@ module.exports = async(Discord, client, message, args, database, prefix, emojiID
       return;
     }
     if(message.author.bot){
-      if((message.channel.id == countingChannel.id) && (message.author.id == client.user.id || (!message.content) || isNaN(message.content))){
-        await message.delete().catch(error => {});
-      }
-      return;
-    }
+	  if((message.channel.id == countingChannel.id) && (message.author.id == client.user.id || (!message.content) || isNaN(message.content))){
+	    await message.delete().catch(error => {});
+	  }
+	  return;
+	}
     if(message.member.hasPermission("ADMINISTRATOR")){
       let embed = new Discord.MessageEmbed()
         .setAuthor(message.guild.name, message.guild.iconURL())

@@ -8,18 +8,21 @@ module.exports = async(Discord, member, Canvas, path, database, type) => {
   let msg;
   let embed = new Discord.MessageEmbed();
   let msgColor;
+  let wimg;
   if(type == "Welcome"){
-    sendingChannelID = await database.get("playerJoinLogsChannelID");
+    sendingChannelID = await database.get("memberWelcomeChannelID");
     jl = "Joined";
-    msg = await database.get("playerJoinMessage");
-    msgColor = await database.get("playerJoinMessageColor"); 
+    msg = await database.get("memberJoinMessage");
+    msgColor = await database.get("memberJoinMessageColor"); 
     embed.setColor("GREEN");
+    wimg = await database.get("memberWelcomeImage");
   }else if(type == "Good Bye"){
-    sendingChannelID = await database.get("playerLeaveLogsChannelID");
+    sendingChannelID = await database.get("memberDepartureChannelID");
     jl = "Left";
-    msg = await database.get("playerLeaveMessage"); 
-    msgColor = await database.get("playerLeaveMessageColor");
+    msg = await database.get("memberLeaveMessage"); 
+    msgColor = await database.get("memberLeaveMessageColor");
     embed.setColor("RED");
+    wimg = await database.get("memberDepartureImage");
   }else{
     return;
   }
@@ -42,7 +45,6 @@ module.exports = async(Discord, member, Canvas, path, database, type) => {
     return;
   }
   let background;
-  let wimg = await database.get("welcomeImage");
   if(wimg){
     try{
       background = await Canvas.loadImage(wimg);

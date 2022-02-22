@@ -66,7 +66,7 @@ client.on("guildDelete", async guild => {
 });
 
 client.on('messageUpdate', async (oldMessage, newMessage) => {
-  database = databaseBuilder(Keyv, oldMessage.guild.id);
+  database = databaseBuilder(Keyv, newMessage.guild.id);
   let onMessageUpdate = require("./events/onMessageUpdate.js");
   onMessageUpdate(Discord, client, oldMessage, newMessage, database);
 });
