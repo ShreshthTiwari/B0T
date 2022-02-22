@@ -1,5 +1,4 @@
 module.exports = async(Discord, member, Canvas, path, database) =>{
-
   let memberLeaveLogsChannelID = await database.get("memberLeaveLogsChannelID");
   if(memberLeaveLogsChannelID){
     let memberLeaveLogsChannel = await database.get("memberLeaveLogsChannelID");
