@@ -22,9 +22,9 @@ module.exports = async(member, database) => {
     }
   }
   if(bannedUsersCountChannelID){
-    let bannedUsersCountChannel = await guild.channels.cache.get(bannedUsersCountChannelID);
+    let bannedUsersCountChannel = await member.guild.channels.cache.get(bannedUsersCountChannelID);
     if(bannedUsersCountChannel){
-      let bans = await guild.fetchBans();
+      let bans = await member.guild.fetchBans();
       await bannedUsersCountChannel.setName(`Banned Users: ${bans.size}`);
     }
   }
