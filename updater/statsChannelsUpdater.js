@@ -1,8 +1,8 @@
 module.exports = async(guild, database) => {
-  let normalTicketsCountChannelID = await database.get("normalTicketsCountChannelID");
-  let bugTicketsCountChannelID = await database.get("bugTicketsCountChannelID");
-  let reportTicketsCountChannelID = await database.get("reportTicketsCountChannelID");
-  let totalTicketsCountChannelID = await database.get("totalTicketsCountChannelID");
+  const normalTicketsCountChannelID = await database.get("normalTicketsCountChannelID");
+  const bugTicketsCountChannelID = await database.get("bugTicketsCountChannelID");
+  const reportTicketsCountChannelID = await database.get("reportTicketsCountChannelID");
+  const totalTicketsCountChannelID = await database.get("totalTicketsCountChannelID");
   if(normalTicketsCountChannelID){
     let normalTicketsCountChannel = await guild.channels.cache.get(normalTicketsCountChannelID);
     if(normalTicketsCountChannel){

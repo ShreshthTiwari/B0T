@@ -110,6 +110,7 @@ async run (Discord, client, prefix, message, args, database, personFinder, messa
     }
     else if(args[1].toLowerCase() == "stat" || args[1].toLowerCase() == "stats"){
       embed.setDescription(`**Set Help Stats**
+      > ${arrow} ${prefix}set bannedUsersCountChannel \`<channel>\`
       > ${arrow} ${prefix}set botsCountChannel \`<channel>\`
       > ${arrow} ${prefix}set bugTicketsCountChannel \`<channel>\`
       > ${arrow} ${prefix}set memberCountChannel \`<channel>\`
@@ -154,7 +155,7 @@ async run (Discord, client, prefix, message, args, database, personFinder, messa
           return;
         }
       }
-      if(args[0] == "totalMemberCountChannel" || args[0] == "memberCountChannel" || args[0] == "botsCountChannel" || args[0] == "playingStatusChannel" || args[0] == "normalTicketsCountChannel" || args[0] == "bugTicketsCountChannel" || args[0] == "reportTicketsCountChannel" || args[0] == "totalTicketsCountChannel"){
+      if(args[0] == "totalMemberCountChannel" || args[0] == "memberCountChannel" || args[0] == "botsCountChannel" || args[0] == "playingStatusChannel" || args[0] == "normalTicketsCountChannel" || args[0] == "bugTicketsCountChannel" || args[0] == "reportTicketsCountChannel" || args[0] == "totalTicketsCountChannel" || args[0] == "bannedUsersCountChannel"){
         if(channel.type != "voice"){
           embed.setDescription(`${cross} ${channel} is not a voice channel.`)
             .setColor(0xff4747);
@@ -273,6 +274,10 @@ async run (Discord, client, prefix, message, args, database, personFinder, messa
       else if(args[0] == "normalTicketsCountChannel"){
         await database.set(`${args[0]}ID`, channelID);
         text = "normal tickets count";
+      }
+      else if(args[0] == "bannedUsersCountChannel"){
+        await database.set(`${args[0]}ID`, channelID);
+        text = "banned users count";
       }
       else if(args[0] == "reportTicketsCountChannel"){
         await database.set(`${args[0]}ID`, channelID);
