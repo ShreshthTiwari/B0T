@@ -74,12 +74,14 @@ module.exports = async (Discord, client, Keyv, util) =>{
                 IP = numericIP;
               }
               let minecraftServerStatusChannelID = await database.get("minecraftServerStatusChannelID");
-              let minecraftServerStatusChannel;
-              let statusMessage;
+              let minecraftServerStatusChannel = null;
+              let statusMessage = null;
               if(minecraftServerStatusChannelID){
                 minecraftServerStatusChannel = await guild.channels.cache.get(minecraftServerStatusChannelID);
-                let messages = await minecraftServerStatusChannel.messages.fetch({limit: 10});
-                statusMessage = messages.filter(m => m.author.id === client.user.id).last();
+                if(minecraftServerStatusChannel){
+                  let messages = await minecraftServerStatusChannel.messages.fetch({limit: 10});
+                  statusMessage = messages.filter(m => m.author.id === client.user.id).last();
+                }
               }
 
               try{
