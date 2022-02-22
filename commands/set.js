@@ -27,16 +27,13 @@ async run (Discord, client, prefix, message, args, database, personFinder, messa
       ${arrow} ${prefix}set help roles
       ${arrow} ${prefix}set help stats`);
     }
-    else if(args[1].toLowerCase() == "log" || args[1].toLowerCase() == "logs"){
-      embed.setDescription(`**Set Help Logs**
-      > ${arrow} ${prefix}set applicationLogsChannel \`<channel>\`
-      > ${arrow} ${prefix}set chatFilterLogsChannel \`<channel>\`
-      > ${arrow} ${prefix}set chatLogsChannel \`<channel>\`
-      > ${arrow} ${prefix}set moderationLogsChannel \`<channel>\`
-      > ${arrow} ${prefix}set playerJoinLogsChannel \`<channel>\`
-      > ${arrow} ${prefix}set playerLeaveLogsChannel \`<channel>\`
-      > ${arrow} ${prefix}set transcriptsChannel \`<channel>\`
-      > ${arrow} ${prefix}set verificationLogsChannel \`<channel>\``);
+    else if(args[1].toLowerCase() == "appquestions" || args[1].toLowerCase() == "appquestions"){
+      embed.setDescription(`**Set Help appQuestions**
+      > ${arrow} ${prefix}set defaultAppQuestions
+      > ${arrow} ${prefix}set emptyAppQuestions
+      > ${arrow} ${prefix}set appQuestion\`<number>\` \`<question>\`
+      \`Note- "<number>" should be between 1 to 16.\`
+      **Eg**- \`\`\`${prefix}set appQuestion1 What is your name?\n.\n.\n.\n${prefix}set appQuestion7 Tell us about yourself.\n.\n.\n.\n${prefix}set appQuestion16 Anything else we need to know?\`\`\``);
     }
     else if(args[1].toLowerCase() == "channel" || args[1].toLowerCase() == "channels"){
       embed.setDescription(`**Set Help Channels**
@@ -50,20 +47,11 @@ async run (Discord, client, prefix, message, args, database, personFinder, messa
       > ${arrow} ${prefix}set minecraftAnnouncementChannel \`<channel>\`
       > ${arrow} ${prefix}set minecraftServerStatusChannel \`<channel>\`
       > ${arrow} ${prefix}set modMailsChannel \`<channel>\`
+      > ${arrow} ${prefix}set memberWelcomeChannel \`<channel>\`
+      > ${arrow} ${prefix}set memberDepartureChannel \`<channel>\`
       > ${arrow} ${prefix}set suggestionChannel \`<channel>\`
       > ${arrow} ${prefix}set ticketChannel \`<channel>\`
       > ${arrow} ${prefix}set verificationChannel \`<channel>\``);
-    }
-    else if(args[1].toLowerCase() == "stat" || args[1].toLowerCase() == "stats"){
-      embed.setDescription(`**Set Help Stats**
-      > ${arrow} ${prefix}set botsCountChannel \`<channel>\`
-      > ${arrow} ${prefix}set bugTicketsCountChannel \`<channel>\`
-      > ${arrow} ${prefix}set memberCountChannel \`<channel>\`
-      > ${arrow} ${prefix}set normalTicketsCountChannel \`<channel>\`
-      > ${arrow} ${prefix}set playingStatusChannel \`<channel>\`
-      > ${arrow} ${prefix}set reportTicketsCountChannel \`<channel>\`
-      > ${arrow} ${prefix}set totalMemberCountChannel \`<channel>\`
-      > ${arrow} ${prefix}set totalTicketsCountChannel \`<channel>\``);
     }
     else if(args[1].toLowerCase() == "category" || args[1].toLowerCase() == "categories"){
       embed.setDescription(`**Set Help Categories**
@@ -72,16 +60,6 @@ async run (Discord, client, prefix, message, args, database, personFinder, messa
       > ${arrow} ${prefix}set reportTicketCategoryID \`<categoryID>\`
       > ${arrow} ${prefix}set priorityTicketCategoryID \`<categoryID>\``);
     }
-    else if(args[1].toLowerCase() == "role" || args[1].toLowerCase() == "roles"){
-      embed.setDescription(`**Set Help Roles**
-      > ${arrow} ${prefix}set discordAnnouncementPingRole \`<role>\`
-      > ${arrow} ${prefix}set extraVerifiedRole \`<role>\`
-      > ${arrow} ${prefix}set minecraftAnnouncementPingRole \`<role>\`
-      > ${arrow} ${prefix}set mutedRole \`<role>\`
-      > ${arrow} ${prefix}set staffRole \`<role>\`
-      > ${arrow} ${prefix}set verifiedRole \`<role>\`
-      > ${arrow} ${prefix}set priorityTicketRole \`<role>\``);  
-    }
     else if(args[1].toLowerCase() == "emoji" || args[1].toLowerCase() == "emojis"){
       embed.setDescription(`**Set Help Emojis**
       > ${arrow} ${prefix}set botCoinEmojiID \`<ID>\`
@@ -89,6 +67,17 @@ async run (Discord, client, prefix, message, args, database, personFinder, messa
       > ${arrow} ${prefix}set fEmojiID \`<ID>\`
       > ${arrow} ${prefix}set updownEmojiID \`<ID>\`
       > ${arrow} ${prefix}set upEmojiID \`<ID>\``);
+    }
+    else if(args[1].toLowerCase() == "log" || args[1].toLowerCase() == "logs"){
+      embed.setDescription(`**Set Help Logs**
+      > ${arrow} ${prefix}set applicationLogsChannel \`<channel>\`
+      > ${arrow} ${prefix}set chatFilterLogsChannel \`<channel>\`
+      > ${arrow} ${prefix}set chatLogsChannel \`<channel>\`
+      > ${arrow} ${prefix}set moderationLogsChannel \`<channel>\`
+      > ${arrow} ${prefix}set memberJoinLogsChannel \`<channel>\`
+      > ${arrow} ${prefix}set memberLeaveLogsChannel \`<channel>\`
+      > ${arrow} ${prefix}set transcriptsChannel \`<channel>\`
+      > ${arrow} ${prefix}set verificationLogsChannel \`<channel>\``);
     }
     else if(args[1].toLowerCase() == "misc"){
       embed.setDescription(`**Set Help Misc**
@@ -101,20 +90,34 @@ async run (Discord, client, prefix, message, args, database, personFinder, messa
       > ${arrow} ${prefix}set moderateNewUserNames <true/false>
       > ${arrow} ${prefix}set numericIP \`<numericIP>\`
       > ${arrow} ${prefix}set port \`<port>\`
-      > ${arrow} ${prefix}set playerJoinMessage \`<msg>\`
-      > ${arrow} ${prefix}set playerJoinMessageColor \`<color>\`
-      > ${arrow} ${prefix}set playerLeaveMessage \`<msg>\`
-      > ${arrow} ${prefix}set playerLeaveMessageColor \`<color>\`
+      > ${arrow} ${prefix}set memberJoinMessage \`<msg>\`
+      > ${arrow} ${prefix}set memberJoinMessageColor \`<color>\`
+      > ${arrow} ${prefix}set memberLeaveMessage \`<msg>\`
+      > ${arrow} ${prefix}set memberLeaveMessageColor \`<color>\`
       [For player join/leave messages, you can use the placeholders- \`{user}\` \`{username}\` \`{userid}\` \`{usertag}\` \`{guild}\` \`{guildid}\`]
-      > ${arrow} ${prefix}set welcomeImage \`<url>\``);
+      > ${arrow} ${prefix}set memberWelcomeImage \`<url>\`
+      > ${arrow} ${prefix}set memberDepartureImage \`<url>\``);
     }
-    else if(args[1].toLowerCase() == "appquestions" || args[1].toLowerCase() == "appquestions"){
-      embed.setDescription(`**Set Help appQuestions**
-      > ${arrow} ${prefix}set defaultAppQuestions
-      > ${arrow} ${prefix}set emptyAppQuestions
-      > ${arrow} ${prefix}set appQuestion\`<number>\` \`<question>\`
-      \`Note- "<number>" should be between 1 to 16.\`
-      **Eg**- \`\`\`${prefix}set appQuestion1 What is your name?\n.\n.\n.\n${prefix}set appQuestion7 Tell us about yourself.\n.\n.\n.\n${prefix}set appQuestion16 Anything else we need to know?\`\`\``);
+    else if(args[1].toLowerCase() == "role" || args[1].toLowerCase() == "roles"){
+      embed.setDescription(`**Set Help Roles**
+      > ${arrow} ${prefix}set discordAnnouncementPingRole \`<role>\`
+      > ${arrow} ${prefix}set extraVerifiedRole \`<role>\`
+      > ${arrow} ${prefix}set minecraftAnnouncementPingRole \`<role>\`
+      > ${arrow} ${prefix}set mutedRole \`<role>\`
+      > ${arrow} ${prefix}set staffRole \`<role>\`
+      > ${arrow} ${prefix}set verifiedRole \`<role>\`
+      > ${arrow} ${prefix}set priorityTicketRole \`<role>\``);  
+    }
+    else if(args[1].toLowerCase() == "stat" || args[1].toLowerCase() == "stats"){
+      embed.setDescription(`**Set Help Stats**
+      > ${arrow} ${prefix}set botsCountChannel \`<channel>\`
+      > ${arrow} ${prefix}set bugTicketsCountChannel \`<channel>\`
+      > ${arrow} ${prefix}set memberCountChannel \`<channel>\`
+      > ${arrow} ${prefix}set normalTicketsCountChannel \`<channel>\`
+      > ${arrow} ${prefix}set playingStatusChannel \`<channel>\`
+      > ${arrow} ${prefix}set reportTicketsCountChannel \`<channel>\`
+      > ${arrow} ${prefix}set totalMemberCountChannel \`<channel>\`
+      > ${arrow} ${prefix}set totalTicketsCountChannel \`<channel>\``);
     }
     else{
       embed.setDescription(`${cross} Invalid sub-command.`)
@@ -211,13 +214,21 @@ async run (Discord, client, prefix, message, args, database, personFinder, messa
         await database.set(`${args[0]}ID`, channelID);
         text = "bots count";
       }
-      else if(args[0] == "playerJoinLogsChannel"){
+      else if(args[0] == "memberJoinLogsChannel"){
         await database.set(`${args[0]}ID`, channelID);
-        text = "player join logs";
+        text = "member join logs";
       }
-      else if(args[0] == "playerLeaveLogsChannel"){
+      else if(args[0] == "memberLeaveLogsChannel"){
         await database.set(`${args[0]}ID`, channelID);
-        text = "player leave logs";
+        text = "member leave logs";
+      }
+      else if(args[0] == "memberWelcomeChannel"){
+        await database.set(`${args[0]}ID`, channelID);
+        text = "member welcome";
+      }
+      else if(args[0] == "memberDepartureChannel"){
+        await database.set(`${args[0]}ID`, channelID);
+        text = "member departure";
       }
       else if(args[0] == "discordAnnouncementChannel"){
         await database.set(`${args[0]}ID`, channelID);
@@ -543,7 +554,7 @@ async run (Discord, client, prefix, message, args, database, personFinder, messa
           }
         }
         else{
-          if(args[0] == "IP" || args[0] == "numericIP" || args[0] == "port" || args[0] == "canApply" || args[0] == "welcomeImage" || args[0] == "leaveImage" || args[0] == "botPrefix" || args[0] == "botCoinName" || args[0] == "memesTopic" || args[0] == "moderateNewUserNames" || args[0] == "playerJoinMessageColor" || args[0] == "playerLeaveMessageColor"){
+          if(args[0] == "IP" || args[0] == "numericIP" || args[0] == "port" || args[0] == "canApply" || args[0] == "memberWelcomeImage" || args[0] == "memberDepartureImage" || args[0] == "botPrefix" || args[0] == "botCoinName" || args[0] == "memesTopic" || args[0] == "moderateNewUserNames" || args[0] == "memberJoinMessageColor" || args[0] == "memberLeaveMessageColor"){
             if((args[0] == "canApply" || args[0] == "moderateNewUserNames") && (!(args[1].toLowerCase() === "true" || args[1].toLowerCase() === "false"))){
               embed.setDescription(`${cross} It can only be \`true\` or \`false\`.`)
                 .setColor(0xff4747);
@@ -570,7 +581,7 @@ async run (Discord, client, prefix, message, args, database, personFinder, messa
             .setColor(0x95fd91);
             await message.channel.send(embed).catch(error => {});
           }
-          else if(args[0] == "playerJoinMessage" || args[0] == "playerLeaveMessage"){
+          else if(args[0] == "memberJoinMessage" || args[0] == "memberLeaveMessage"){
             let msg = messageEmojiFinder(client, message, args.slice(1));
             await database.set(args[0], msg);
             embed.setDescription(`${tick} Set \`${args[0]}\` as\n ${msg}.`)
