@@ -37,6 +37,7 @@ module.exports = async(Discord, Keyv, member, Canvas, path, database) =>{
         .setDescription(`**User**- ${message.author}.
         **Name**- \`${message.author.tag}\`.
         **ID**- \`${message.author.id}\`.`)
+        .setThumbnail(person.displayAvatarURL())
         .setColor(0x95fd91);
       await memberJoinLogsChannel.send(embed).catch(error => {});
     }
