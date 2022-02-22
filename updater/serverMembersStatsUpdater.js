@@ -24,8 +24,7 @@ module.exports = async(member, database) => {
   if(bannedUsersCountChannelID){
     let bannedUsersCountChannel = await member.guild.channels.cache.get(bannedUsersCountChannelID);
     if(bannedUsersCountChannel){
-      let bans = await member.guild.fetchBans();
-      await bannedUsersCountChannel.setName(`Banned Users: ${bans.size}`);
+      await bannedUsersCountChannel.setName(`Banned Users: ${member.guild.fetchBans().size}`);
     }
   }
 }
