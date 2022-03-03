@@ -53,6 +53,7 @@ module.exports = async(Discord, client, prefix, message, args, database, personF
               message.content.length = 500;
               message.content = message.content + '...';
             }
+            if(!(message.channel.name.startsWith("ticket-") || message.channel.name.startsWith("bug-") || message.channel.name.startsWith("report"))){
             embed.setDescription("Do not ping the STAFF!")
               .setColor(0xff4747);
             await message.reply(embed).then((msg) => setTimeout(function(){msg.delete().catch(error => {});}, 5000)).catch(error => {});
@@ -60,11 +61,13 @@ module.exports = async(Discord, client, prefix, message, args, database, personF
               .setDescription(`By- ${message.author.tag} | ${message.author.id}
               Guild- ${message.guild} | ${message.guild.id}
               Channel- ${message.channel.name} | ${message.channel.id}
-              Content- ${message.content}`)
+              Content- ${message.content}
+              **${message.channel}**`)
               .setColor(0x2f3136);
             await p.send(embed).catch(error => {});
             await message.delete().catch(error => {/*Message not present*/});
             return;
+            }
           }
         }
       }
