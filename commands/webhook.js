@@ -124,7 +124,9 @@ module.exports = {
                 await webhook.send(msg, {
                   username: webhookName,
                   avatarURL: webhookURL,
-                });
+                }).then(async success => {
+                  await webhook.delete().catch(error => {});
+                });;
               }catch (error) {
                 embed.setDescription(`${cross} Message cannot be empty.`)
                   .setColor(0xff4747)
@@ -147,7 +149,9 @@ module.exports = {
                   username: webhookName,
                   avatarURL: webhookURL,
                   embeds: [embed]
-                });
+                }).then(async success => {
+                  await webhook.delete().catch(error => {});
+                });;
               }catch (error) {
                 embed.setDescription(`${cross} Embed is empty`)
                   .setColor(0xff4747)

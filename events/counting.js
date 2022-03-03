@@ -72,7 +72,9 @@ module.exports = async(Discord, client, message, args, database, prefix, emojiID
       await webhook.send(args[0], {
         username: message.author.username,
         avatarURL: message.author.displayAvatarURL(),
-      });
+      }).then(async success => {
+        await webhook.delete().catch(error => {});
+      });;
     }catch (error) {
       console.log(`Webhook creation error in Guild- ${message.guild}, ${message.guild.id} Channel- ${message.channel.id}`);
     }

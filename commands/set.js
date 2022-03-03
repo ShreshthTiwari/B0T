@@ -117,8 +117,13 @@ async run (Discord, client, prefix, message, args, database, personFinder, messa
       > ${arrow} ${prefix}set normalTicketsCountChannel \`<channel>\`
       > ${arrow} ${prefix}set playingStatusChannel \`<channel>\`
       > ${arrow} ${prefix}set reportTicketsCountChannel \`<channel>\`
+      > ${arrow} ${prefix}set totalChannelsCountChannel \`<channel>\`
       > ${arrow} ${prefix}set totalMemberCountChannel \`<channel>\`
-      > ${arrow} ${prefix}set totalTicketsCountChannel \`<channel>\``);
+      > ${arrow} ${prefix}set totalNewsChannelsCountChannel \`<channel>\`
+      > ${arrow} ${prefix}set totalRolesCountChannel \`<channel>\`
+      > ${arrow} ${prefix}set totalTextChannelsCountChannel \`<channel>\`
+      > ${arrow} ${prefix}set totalTicketsCountChannel \`<channel>\`
+      > ${arrow} ${prefix}set totalVoiceChannelsCountChannel \`<channel>\``);
     }
     else{
       embed.setDescription(`${cross} Invalid sub-command.`)
@@ -155,7 +160,7 @@ async run (Discord, client, prefix, message, args, database, personFinder, messa
           return;
         }
       }
-      if(args[0] == "totalMemberCountChannel" || args[0] == "memberCountChannel" || args[0] == "botsCountChannel" || args[0] == "playingStatusChannel" || args[0] == "normalTicketsCountChannel" || args[0] == "bugTicketsCountChannel" || args[0] == "reportTicketsCountChannel" || args[0] == "totalTicketsCountChannel" || args[0] == "bannedUsersCountChannel"){
+      if(args[0] == "totalMemberCountChannel" || args[0] == "memberCountChannel" || args[0] == "botsCountChannel" || args[0] == "playingStatusChannel" || args[0] == "normalTicketsCountChannel" || args[0] == "bugTicketsCountChannel" || args[0] == "reportTicketsCountChannel" || args[0] == "totalTicketsCountChannel" || args[0] == "bannedUsersCountChannel" || args[0] == "totalChannelsCountChannelID" || args[0] == "totalRolesCountChannelID" || args[0] == "totalNewsChannelsCountChannelID" || args[0] == "totalVoiceChannelsCountChannelID" || args[0] == "totalTextChannelsCountChannelID"){
         if(channel.type != "voice"){
           embed.setDescription(`${cross} ${channel} is not a voice channel.`)
             .setColor(0xff4747);
@@ -302,6 +307,26 @@ async run (Discord, client, prefix, message, args, database, personFinder, messa
       else if(args[0] == "minecraftServerStatusChannel"){
         await database.set(`${args[0]}ID`, channelID);
         text = "minecraft server status";
+      }
+      else if(args[0] == "totalChannelsCountChannel"){
+        await database.set(`${args[0]}ID`, channelID);
+        text = "total channels count";
+      }
+      else if(args[0] == "totalRolesCountChannel"){
+        await database.set(`${args[0]}ID`, channelID);
+        text = "total roles count";
+      }
+      else if(args[0] == "totalTextChannelsCountChannel"){
+        await database.set(`${args[0]}ID`, channelID);
+        text = "total text channels count";
+      }
+      else if(args[0] == "totalVoiceChannelsCountChannel"){
+        await database.set(`${args[0]}ID`, channelID);
+        text = "total voice channels count";
+      }
+      else if(args[0] == "totalNewsChannelsCountChannel"){
+        await database.set(`${args[0]}ID`, channelID);
+        text = "total news channels count";
       }
       else{
         embed.setDescription(`${cross} Invalid sub-command.`)
