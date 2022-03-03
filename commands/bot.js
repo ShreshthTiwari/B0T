@@ -435,7 +435,7 @@ module.exports = {
           if(guild){
             database = databaseBuilder(Keyv, guild.id);
             let botUpdatesChannel, botUpdatesChannelID;
-            botUpdatesChannelID = await database.get("botUpdatesChannelID");
+            botUpdatesChannelID = await database.get("botUpdatesChannelID") || await database.get("botCommandsChannelID");
             if(botUpdatesChannelID){
               botUpdatesChannel = await guild.channels.cache.get(botUpdatesChannelID);
               if(botUpdatesChannel){
