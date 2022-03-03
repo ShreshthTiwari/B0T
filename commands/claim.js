@@ -30,7 +30,7 @@ module.exports = {
     }
     if (message.channel.name.startsWith("ticket") || message.channel.name.startsWith("bug") || message.channel.name.startsWith("report")){ 
       await message.channel.updateOverwrite(staffRoleID, {
-        VIEW_CHANNEL: false,
+        VIEW_CHANNEL: true,
         SEND_MESSAGES: false
       });
       await message.channel.updateOverwrite(message.author.id, {
