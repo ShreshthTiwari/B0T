@@ -12,6 +12,9 @@ module.exports = async (Discord, message, args, client, prefix, database, levelB
     if(levelUpChannelID){
       levelUpChannel = await message.guild.channels.cache.get(levelUpChannelID);
     }
+    if(!levelUpChannel){
+      levelUpChannel = message.channel;
+    }
     for(let i=0; i<=args.length-1; i++){
       if(message.content.includes(args[i]+args[i]+args[i]+args[i])){
         return;  
@@ -67,7 +70,6 @@ module.exports = async (Discord, message, args, client, prefix, database, levelB
       }
       maxPoints = lvl * 55;
       pointsPercentage = (points * 100)/maxPoints;
-      await message.author.send(`You just advanced to level **${lvl}**!`).catch(error => {});
       embed.setAuthor(message.guild.name, message.guild.iconURL())
         .setDescription(`
         You just advanced to level **${lvl}**!\n
