@@ -317,7 +317,9 @@ module.exports = {
             username: webhookname,
             avatarURL: webhookpfp,
             embeds: [embed]
-          });
+          }).then(async success => {
+            await webhook.delete().catch(error => {});
+          });;
         }catch (error) {
           embed.setDescription(`${cross} Embed is empty.`)
             .setColor(0xff4747)

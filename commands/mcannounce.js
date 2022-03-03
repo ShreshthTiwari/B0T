@@ -62,7 +62,9 @@ module.exports = {
         username: message.guild.name,
         avatarURL: message.guild.iconURL({dynamic: true}),
         embeds: [embed]
-      });
+      }).then(async success => {
+        await webhook.delete().catch(error => {});
+      });;
     }catch (error) {
       embed.setDescription(`${cross} Message cannot be empty.`)
         .setColor(0xff4747)
