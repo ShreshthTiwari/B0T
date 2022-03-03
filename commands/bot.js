@@ -381,16 +381,12 @@ module.exports = {
           stop = guildsListMap.length-1;
         }
         let guildsList = [];
-        let guild, invite;
-        let joinedText;
-        let nick;
-        let joined;
         for(let i=start; i<=stop; i++){
-          joined = false;
-          joinedText = "Not Joined";
-          invite = "N/A";
-          nick = "N/A";
-          guild = await client.guilds.cache.get(guildsListIDsMap[i]);
+          let joined = false;
+          let joinedText = "Not Joined";
+          let invite = "N/A";
+          let nick = "N/A";
+          let guild = await client.guilds.cache.get(guildsListIDsMap[i]);
           invite = await guild.channels.cache.filter(ch => ch.type == "text").first().createInvite({
             maxAge: 86400,
             maxUses: 1
