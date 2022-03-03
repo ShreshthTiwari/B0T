@@ -31,6 +31,7 @@ module.exports = (Discord, client, Keyv, fs, path, messageEmojiFinder, react, em
     let authorId = message.author.id;
     if(message.content.toLowerCase() === `${prefix}apply`){
       if(!message.guild){
+        console.log("guild not found");/*************************/
         return;
       }
       guild[authorId] = message.guild.id;
@@ -48,7 +49,7 @@ module.exports = (Discord, client, Keyv, fs, path, messageEmojiFinder, react, em
           if((message.channel.id != botCommandsChannelID) && (!message.member.hasPermission("ADMINISTRATOR"))){
             embed.setDescription(`${cross} Please use <#${botCommandsChannelID}>.`)
               .setColor(0xff4747);
-            await message.reply(embed).then((msg) => setTimeout(function(){msg.delete().catch(error => {});}, 15000)).catch(error => {});
+            await message.channel.send(embed).then((msg) => setTimeout(function(){msg.delete().catch(error => {});}, 15000)).catch(error => {});
             await message.reactions.removeAll();
             react(message, '❌');
             return;
