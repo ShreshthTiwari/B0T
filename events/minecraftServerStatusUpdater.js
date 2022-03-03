@@ -1,4 +1,4 @@
-module.exports = async(Discord, client, Keyv, util) => {
+module.exports = async(Discord, client, guild, database, util) => {
     let playingStatusChannelID = await database.get('playingStatusChannelID');
     if(playingStatusChannelID){
       let playingStatusChannel = guild.channels.cache.get(playingStatusChannelID);
