@@ -1,6 +1,6 @@
 module.exports = async (Discord, message, args, client, prefix, database, levelBarBuilder, emojiIDs) =>{
   let embed = new Discord.MessageEmbed()
-    .setColor(0x2f3136);
+  .setColor(0x2f3136);
   if(message.guild){
     if((message.author.bot) || (message.content.startsWith(prefix))){
       return;
@@ -71,12 +71,12 @@ module.exports = async (Discord, message, args, client, prefix, database, levelB
       maxPoints = lvl * 55;
       pointsPercentage = (points * 100)/maxPoints;
       embed.setAuthor(message.guild.name, message.guild.iconURL())
-        .setDescription(`
-        You just advanced to level **${lvl}**!\n
-        **LEVEL ${lvl}**\n
-        **${points.toFixed(3)}**  ${levelBarBuilder(client, pointsPercentage)}  **${maxPoints.toFixed(3)}**\n
-        ${coinEmoji} **${coins.toFixed(3)}** ${coinText}`)
-        .setThumbnail(message.author.avatarURL());
+      .setDescription(`
+      You just advanced to level **${lvl}**!\n
+      **LEVEL ${lvl}**\n
+      **${points.toFixed(3)}**  ${levelBarBuilder(client, pointsPercentage)}  **${maxPoints.toFixed(3)}**\n
+      ${coinEmoji} **${coins.toFixed(3)}** ${coinText}`)
+      .setThumbnail(message.author.avatarURL());
       await message.author.send(embed).catch(error => {});
       if(levelUpChannel){
         embed.setDescription(`
