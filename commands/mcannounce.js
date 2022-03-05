@@ -6,7 +6,7 @@ module.exports = {
     const tick = await client.emojis.cache.get(emojiIDs.tick);
     const cross = await client.emojis.cache.get(emojiIDs.cross);
     let embed = new Discord.MessageEmbed()
-      .setColor(0x98dbfa);
+    .setColor(0x98dbfa);
     if(!message.member.hasPermission("ADMINISTRATOR")){
       await message.reactions.removeAll();
       react(message, '❌');
@@ -15,7 +15,7 @@ module.exports = {
     let announcementChannelID = await database.get("minecraftAnnouncementChannelID");
     if(!announcementChannelID){
       embed.setDescription(`${cross} Minecraft announcement channel not set.`)
-        .setColor(0xff4747);
+      .setColor(0xff4747);
       await message.channel.send(embed).catch(error => {});
       await message.reactions.removeAll();
       react(message, '❌');
@@ -24,7 +24,7 @@ module.exports = {
     let announcementChannel = message.guild.channels.cache.get(announcementChannelID);
     if(!announcementChannel){
       embed.setDescription(`${cross} Minecraft announcement channel not present.`)
-        .setColor(0xff4747);
+      .setColor(0xff4747);
       await message.channel.send(embed).catch(error => {});
       await message.reactions.removeAll();
       react(message, '❌');
@@ -32,7 +32,7 @@ module.exports = {
     }
     if(!args[0]){
       embed.setDescription(`${cross} Message not provided.`)
-        .setColor(0xff4747);
+      .setColor(0xff4747);
       await message.channel.send(embed).catch(error => {});
       await message.reactions.removeAll();
       react(message, '❌');
@@ -45,7 +45,7 @@ module.exports = {
     let pingRole = message.guild.roles.cache.get(pingRoleID);
     let announcement = messageEmojiFinder(client, message, args);
     embed.setTitle("**Announcement**")
-      .setDescription(`${announcement}`);
+    .setDescription(`${announcement}`);
 
     let ws, w;
     ws = await announcementChannel.fetchWebhooks();
@@ -67,8 +67,8 @@ module.exports = {
       });;
     }catch (error) {
       embed.setDescription(`${cross} Message cannot be empty.`)
-        .setColor(0xff4747)
-        .setFooter(`${prefix}${helpText} help`);
+      .setColor(0xff4747)
+      .setFooter(`${prefix}${helpText} help`);
       await message.channel.send(embed);
       await message.reactions.removeAll();
       react(message, '❌');
@@ -79,8 +79,8 @@ module.exports = {
       await announcementChannel.send(`${pingRole}`).then((msg) => setTimeout(function(){msg.delete().catch(error => {});}, 500)).catch(error => {});  
     }
     embed = new Discord.MessageEmbed()
-      .setDescription(`${tick} Message announced.`)
-      .setColor(0x95fd91);
+    .setDescription(`${tick} Message announced.`)
+    .setColor(0x95fd91);
     await message.channel.send(embed).catch(error => {});
   }
 }

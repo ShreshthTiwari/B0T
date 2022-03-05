@@ -4,15 +4,15 @@ module.exports = {
 
   async run(Discord, client, prefix, message, args, database, personFinder, messageEmojiFinder, react, emojiIDs){
     let embed = new Discord.MessageEmbed()
-      .setColor(0x98dbfa);
+    .setColor(0x98dbfa);
     if(!message.member.hasPermission("ADMINISTRATOR")){
       await message.reactions.removeAll();
       react(message, '❌');
       return;
     }
     let membersmap = message.guild.members.cache
-      .sort((a, b) => b.position - a.position)
-      .map(r => r);
+    .sort((a, b) => b.position - a.position)
+    .map(r => r);
     let membersMap = [];
     let extraText = ".";
     let n;

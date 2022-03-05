@@ -12,7 +12,7 @@ module.exports = {
     const tick = await client.emojis.cache.get(emojiIDs.tick);
     const cross = await client.emojis.cache.get(emojiIDs.cross);
     let embed = new Discord.MessageEmbed()
-      .setColor(0x2f3136);
+    .setColor(0x2f3136);
     const memeChannelID = await database.get("memeChannelID");
     const botCommandsChannelID = await database.get("botCommandsChannelID");
     if(memesTopic){
@@ -20,7 +20,7 @@ module.exports = {
     }
     if(!memeChannelID){
       embed.setDescription(`${cross} Meme channel not set.`)
-        .setColor(0xff4747);
+      .setColor(0xff4747);
       await message.channel.send(embed).catch(error => {});
       await message.reactions.removeAll();
       react(message, '❌');
@@ -29,7 +29,7 @@ module.exports = {
     const memeChannel = message.guild.channels.cache.get(memeChannelID);
     if((!memeChannel) && (message.channel.id != botCommandsChannelID)){
       embed.setDescription(`${cross} Meme channel not set.`)
-        .setColor(0xff4747);
+      .setColor(0xff4747);
       await message.channel.send(embed).catch(error => {});
       await message.reactions.removeAll();
       react(message, '❌');

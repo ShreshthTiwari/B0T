@@ -17,7 +17,7 @@ module.exports = {
     ADD_REACTIONS: false
     }).catch(async error => {
     embed.setDescription(`${cross} Error locking the channel.`)
-        .setColor(0xff4747);
+    .setColor(0xff4747);
     await message.channel.send(embed).catch(error => {});
     await message.reactions.removeAll();
     react(message, '❌');
@@ -25,13 +25,13 @@ module.exports = {
     });
     if(message.channel.id != channel.id){
     embed.setDescription(`${tick} Locked ${channel}.`)
-        .setColor(0x95fd91);
+    .setColor(0x95fd91);
     await message.channel.send(embed).catch(error => {});
     embed.setDescription(`${tick} Channel locked.`);
     await channel.send(embed).catch(error => {});
     }else{
     embed.setDescription(`${tick} Channel locked.`)
-        .setColor(0x95fd91);
+    .setColor(0x95fd91);
     await channel.send(embed).catch(error => {});
     }
   }

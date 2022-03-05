@@ -6,7 +6,7 @@ module.exports = {
       const tick = await client.emojis.cache.get(emojiIDs.tick);
       const cross = await client.emojis.cache.get(emojiIDs.cross);
       let embed = new Discord.MessageEmbed()
-        .setColor(0x98dbfa);
+      .setColor(0x98dbfa);
       if(!message.member.hasPermission("ADMINISTRATOR")){
         await message.reactions.removeAll();
         react(message, '❌');
@@ -15,7 +15,7 @@ module.exports = {
       reciever = personFinder(message, args[0], "user");
       if(!reciever){
         embed.setDescription(`${cross} Wrong user.`)
-          .setColor(0xff4747);
+        .setColor(0xff4747);
         await message.channel.send(embed).catch(error => {});
         await message.reactions.removeAll();
         react(message, '❌');
@@ -23,7 +23,7 @@ module.exports = {
       }  
       if(reciever.id == client.user.id){
         embed.setDescription(`${cross} Really?`)
-          .setColor(0xff4747);
+        .setColor(0xff4747);
         await message.channel.send(embed).catch(error => {});
         await message.reactions.removeAll();
         react(message, '❌');
@@ -31,14 +31,14 @@ module.exports = {
       }
       let msg = messageEmojiFinder(client, message, args.slice(1));
       let msgembed = new Discord.MessageEmbed()
-        .setAuthor(message.guild.name, message.guild.iconURL())
-        .setDescription(msg);
+      .setAuthor(message.guild.name, message.guild.iconURL())
+      .setDescription(msg);
       embed.setDescription(`${tick} Messaged ${reciever}`)
-        .setColor(0x95fd91);
+      .setColor(0x95fd91);
       let embd = await message.channel.send(embed).catch(error => {});
       reciever.send(msgembed).catch( error =>{
         embed.setDescription(`${cross} Message not sent.`)
-          .setColor(0xff4747);
+        .setColor(0xff4747);
         embd.edit(embed).catch(error => {});
         message.reactions.removeAll();
         react(message, '❌');

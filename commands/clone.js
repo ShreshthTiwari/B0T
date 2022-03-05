@@ -10,7 +10,7 @@ module.exports = {
       channel = message.channel;
     }
     let embed = new Discord.MessageEmbed()
-      .setColor(0xff4747);
+    .setColor(0xff4747);
     if(!message.member.hasPermission("ADMINISTRATOR")){
       await message.reactions.removeAll();
       react(message, '❌');
@@ -22,8 +22,8 @@ module.exports = {
       return;
     });
     embed.setDescription(`${tick} Channel cloned. ${message.channel} => ${clonedChannel}`)
-      .setImage("https://i.ibb.co/4mRRszS/homer-simpson-guanchidoguan.gif")
-      .setColor(0x95fd91);
+    .setImage("https://i.ibb.co/4mRRszS/homer-simpson-guanchidoguan.gif")
+    .setColor(0x95fd91);
     await message.channel.send(embed).catch(error => {});
     let moderationLogsChannel, moderationLogsChannelID;
     moderationLogsChannelID = await database.get("moderationLogsChannelID");
@@ -31,14 +31,14 @@ module.exports = {
       moderationLogsChannel = await message.guild.channels.cache.get(moderationLogsChannelID);
       if(moderationLogsChannel){
         embed = new Discord.MessageEmbed()
-          .setTitle("Channel Cloned")
-          .setDescription(`**Parent Channel**- ${message.channel}.
-          **Parent Channel ID**- \`${message.channel.id}\`.
-          **Cloned Channel**- ${clonedChannel}.
-          **Cloned Channel ID**- \`${clonedChannel.id}\`.
-          **Cloned By**- ${message.author}.
-          **Cloner ID**- \`${message.author.id}\`.`)
-          .setColor(0x95fd91);
+        .setTitle("Channel Cloned")
+        .setDescription(`**Parent Channel**- ${message.channel}.
+        **Parent Channel ID**- \`${message.channel.id}\`.
+        **Cloned Channel**- ${clonedChannel}.
+        **Cloned Channel ID**- \`${clonedChannel.id}\`.
+        **Cloned By**- ${message.author}.
+        **Cloner ID**- \`${message.author.id}\`.`)
+        .setColor(0x95fd91);
         await moderationLogsChannel.send(embed).catch(error => {console.log(error)});
       }
     }

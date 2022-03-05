@@ -8,7 +8,7 @@ module.exports = {
         channel = message.channel;
       }
       let embed = new Discord.MessageEmbed()
-        .setColor(0xff4747);
+      .setColor(0xff4747);
       if(!message.member.hasPermission("ADMINISTRATOR")){
         await message.reactions.removeAll();
         react(message, '❌');
@@ -44,14 +44,14 @@ module.exports = {
                           moderationLogsChannel = await message.guild.channels.cache.get(moderationLogsChannelID);
                           if(moderationLogsChannel){
                             embed = new Discord.MessageEmbed()
-                              .setTitle("Channel Nuked")
-                              .setDescription(`**Nuked Channel Name**- \`${nukedChannelName}\`.
-                              **Nuked Channel ID**- \`${nukedChannelID}\`.
-                              **New Channel**- <#${newChannelID}>.
-                              **New Channel ID**- \`${newChannelID}\`.
-                              **Nuked By**- ${nuker}.
-                              **ID**- \`${nukerID}\`.`)
-                              .setColor(0x95fd91);
+                            .setTitle("Channel Nuked")
+                            .setDescription(`**Nuked Channel Name**- \`${nukedChannelName}\`.
+                            **Nuked Channel ID**- \`${nukedChannelID}\`.
+                            **New Channel**- <#${newChannelID}>.
+                            **New Channel ID**- \`${newChannelID}\`.
+                            **Nuked By**- ${nuker}.
+                            **ID**- \`${nukerID}\`.`)
+                            .setColor(0x95fd91);
                             await moderationLogsChannel.send(embed).catch(error => {console.log(error)});
                           }
                         }

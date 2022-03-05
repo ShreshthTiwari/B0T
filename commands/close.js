@@ -10,7 +10,7 @@ module.exports = {
     const tick = await client.emojis.cache.get(emojiIDs.tick);
     const cross = await client.emojis.cache.get(emojiIDs.cross);
     let embed = new Discord.MessageEmbed()
-      .setColor(0x98dbfa);
+    .setColor(0x98dbfa);
     if(!message.member.hasPermission("ADMINISTRATOR")){
       await message.reactions.removeAll();
       react(message, '❌');
@@ -75,18 +75,18 @@ module.exports = {
           }
         }else{
           embed.setAuthor(message.guild.name, message.guild.iconURL())
-            .setDescription(`Your ticket \`${message.channel.name}\` was closed.`);
+          .setDescription(`Your ticket \`${message.channel.name}\` was closed.`);
           await message.author.send(embed).catch(error => {/*DM OFF or blocked*/});
         }
       }
       embed = new Discord.MessageEmbed()
-        .setDescription(`${tick} Ticket closing...`)
-        .setColor(0x95fd91);
+      .setDescription(`${tick} Ticket closing...`)
+      .setColor(0x95fd91);
       await message.channel.send(embed).then((msg) => setTimeout(function(){msg.channel.delete().catch(error => {});}, 5000)).catch(error => {});
     }
     else{
       embed.setDescription(`${cross} Not a ticket channel.`)
-        .setColor(0xff4747);
+      .setColor(0xff4747);
       await message.channel.send(embed).catch(eror => {});
       await message.reactions.removeAll();
       react(message, '❌');

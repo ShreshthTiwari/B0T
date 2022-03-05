@@ -15,13 +15,13 @@ module.exports = {
       cmd = "create";
     }
     let embed = new Discord.MessageEmbed()
-      .setColor(0x98dbfa);
+    .setColor(0x98dbfa);
     const staffRoleID = await database.get("staffRoleID");
     const person = message.author.id;
     if(!staffRoleID){
       embed.setDescription(`${cross} Staff role is not set.`)
-        .setColor(0xff4747)
-        .setFooter(`${prefix}set help roles`);
+      .setColor(0xff4747)
+      .setFooter(`${prefix}set help roles`);
       await message.channel.send(embed).then((msg) => setTimeout(function(){msg.delete().catch(error => {});}, 10000)).catch(error => {});
       await message.delete().catch(error => {});
       return;
@@ -29,8 +29,8 @@ module.exports = {
       let staffRole = message.guild.roles.cache.get(staffRoleID);
       if(!staffRoleID){
         embed.setDescription(`${cross} Staff role is not set.`)
-          .setColor(0xff4747)
-          .setFooter(`${prefix}set help roles`);
+        .setColor(0xff4747)
+        .setFooter(`${prefix}set help roles`);
         await message.channel.send(embed).then((msg) => setTimeout(function(){msg.delete().catch(error => {});}, 10000)).catch(error => {});
         await message.delete().catch(error => {});
         return;
@@ -38,7 +38,7 @@ module.exports = {
     }
     if(!args[0]){
       embed.setDescription(`${cross} Kindly provide a reason.\nSyntax- -${cmd} \`<reason>\`.`)
-        .setColor(0xff4747);
+      .setColor(0xff4747);
       await message.channel.send(embed).then((msg) => setTimeout(function(){msg.delete().catch(error => {});}, 10000)).catch(error => {});
       await message.delete().catch(error => {});
       return;

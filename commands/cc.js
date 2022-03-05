@@ -9,7 +9,7 @@ module.exports = {
       helptext = "cc";
     }
     let embed = new Discord.MessageEmbed()
-      .setColor(0x98dbfa);
+    .setColor(0x98dbfa);
     if(!message.member.hasPermission("ADMINISTRATOR")){
       await message.reactions.removeAll();
       react(message, '❌');
@@ -31,7 +31,7 @@ module.exports = {
     else if(args[0].toLowerCase() == 'create' || args[0].toLowerCase() == 'new' || args[0].toLowerCase() == 'make'){
       if(!args[1]){
         embed.setDescription(`${cross} Please provide a word.`)
-          .setColor(0xff4747);
+        .setColor(0xff4747);
         await message.channel.send(embed).catch(error => {});
         await message.reactions.removeAll();
         react(message, '❌');
@@ -40,7 +40,7 @@ module.exports = {
       key = await database.get(`customCommand_${args[1]}`);
       if(key){
         embed.setDescription(`${cross} \`${prefix + args[1]}\` already present.`)
-          .setColor(0xff4747);
+        .setColor(0xff4747);
         await message.channel.send(embed).catch(error => {});
         await message.reactions.removeAll();
         react(message, '❌');
@@ -48,7 +48,7 @@ module.exports = {
       }
       if(!args[2]){
         embed.setDescription(`${cross} Please provide a message for \`${prefix + args[1]}\`.`)
-          .setColor(0xff4747);
+        .setColor(0xff4747);
         await message.channel.send(embed).catch(error => {});
         await message.reactions.removeAll();
         react(message, '❌');
@@ -63,7 +63,7 @@ module.exports = {
     else if(args[0].toLowerCase() == 'edit' || args[0].toLowerCase() == 'update'){
       if(!args[1]){
         embed.setDescription(`${cross} Please provide a custom command name.`)
-          .setColor(0xff4747);
+        .setColor(0xff4747);
         await message.channel.send(embed).catch(error => {});
         await message.reactions.removeAll();
         react(message, '❌');
@@ -72,7 +72,7 @@ module.exports = {
       let key = await database.get(`customCommand_${args[1]}`);
       if(!key){
         embed.setDescription(`${cross} \`${prefix + args[1]}\` not found.`)
-          .setColor(0xff4747);
+        .setColor(0xff4747);
         await message.channel.send(embed).catch(error => {});
         await message.reactions.removeAll();
         react(message, '❌');
@@ -80,7 +80,7 @@ module.exports = {
       }
       if(!args[2]){
         embed.setDescription(`${cross} Please provide a message for \`${prefix + args[1]}\`.`)
-          .setColor(0xff4747);
+        .setColor(0xff4747);
         await message.channel.send(embed).catch(error => {});
         await message.reactions.removeAll();
         react(message, '❌');
@@ -89,13 +89,13 @@ module.exports = {
       let msg = messageEmojiFinder(client, message, args.slice(2));
       await database.set(`customCommand_${args[1]}`, msg);
       embed.setDescription(`${tick} .\nCommand- \`${args[1]}\`\nResponse- \`${msg}\``)
-        .setColor(0x95fd91);
+      .setColor(0x95fd91);
       await message.channel.send(embed).catch(error => {});
     }
     else if(args[0].toLowerCase() == 'remove' || args[0].toLowerCase() == 'reset' || args[0].toLowerCase() == 'clear' || args[0].toLowerCase() == 'delete'){
       if(!args[1]){
         embed.setDescription(`${cross} Please provide a custom command name.`)
-          .setColor(0xff4747);
+        .setColor(0xff4747);
         await message.channel.send(embed).catch(error => {});
         await message.reactions.removeAll();
         react(message, '❌');
@@ -104,7 +104,7 @@ module.exports = {
       let key = await database.get(`customCommand_${args[1]}`);
       if(!key){
         embed.setDescription(`${cross} \`${prefix + args[1]}\` not found.`)
-          .setColor(0xff4747);
+        .setColor(0xff4747);
         await message.channel.send(embed).catch(error => {});
         await message.reactions.removeAll();
         react(message, '❌');
@@ -112,7 +112,7 @@ module.exports = {
       }
       await database.set(`customCommand_${args[1]}`, null);
       embed.setDescription(`${tick} \`${prefix + args[1]}\` removed.`)
-        .setColor(0x95fd91);
+      .setColor(0x95fd91);
       await message.channel.send(embed).catch(error => {});
     }
   }

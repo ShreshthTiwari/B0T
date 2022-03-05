@@ -7,7 +7,7 @@ module.exports = {
     const cross = await client.emojis.cache.get(emojiIDs.cross);
     const arrow = await client.emojis.cache.get(emojiIDs.arrow);
     let embed = new Discord.MessageEmbed()
-      .setColor(0x98dbfa);
+    .setColor(0x98dbfa);
     if(!message.member.hasPermission("ADMINISTRATOR")){
       await message.reactions.removeAll();
       react(message, '❌');

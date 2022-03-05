@@ -6,7 +6,7 @@ module.exports = {
     const tick = await client.emojis.cache.get(emojiIDs.tick);
     const cross = await client.emojis.cache.get(emojiIDs.cross);
     let embed = new Discord.MessageEmbed()
-      .setColor(0x98dbfa);
+    .setColor(0x98dbfa);
     const coinEmojiID =  await database.get('botCoinEmojiID');
     let coinEmoji = client.emojis.cache.get(coinEmojiID);
     let coinText = await database.get('botCoinName');
@@ -26,14 +26,14 @@ module.exports = {
       if(coins > 1)
         coinText = coinText + 's';
       embed.setAuthor(message.author.username)
-        .setDescription(`${coinEmoji} **${coins.toFixed(2)}** ${coinText}`)
-        .setThumbnail(message.author.displayAvatarURL());
+      .setDescription(`${coinEmoji} **${coins.toFixed(2)}** ${coinText}`)
+      .setThumbnail(message.author.displayAvatarURL());
       await message.channel.send(embed).catch(error => {});
     }else{
       person = personFinder(message, args[0], "user");
       if(!person){
         embed.setDescription(`${cross} Wrong user.`)
-          .setColor(0xff4747);
+        .setColor(0xff4747);
         await message.channel.send(embed).catch(error => {});
         await message.reactions.removeAll();
         react(message, '❌');
@@ -47,8 +47,8 @@ module.exports = {
       if(coins > 1)
         coinText = coinText + 's';
       embed.setAuthor(person.username, person.displayAvatarURL())
-        .setDescription(`${coinEmoji} **${coins.toFixed(3)}** ${coinText}`)
-        .setThumbnail(person.displayAvatarURL());
+      .setDescription(`${coinEmoji} **${coins.toFixed(3)}** ${coinText}`)
+      .setThumbnail(person.displayAvatarURL());
       await message.channel.send(embed).catch(error => {});
     }
   }

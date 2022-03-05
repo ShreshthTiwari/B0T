@@ -6,7 +6,7 @@ module.exports = {
     const tick = await client.emojis.cache.get(emojiIDs.tick);
     const cross = await client.emojis.cache.get(emojiIDs.cross);
     let embed = new Discord.MessageEmbed()
-      .setColor(0x98dbfa);
+    .setColor(0x98dbfa);
     if(!message.member.hasPermission("ADMINISTRATOR")){
       await message.reactions.removeAll();
       react(message, '❌');
@@ -22,7 +22,7 @@ module.exports = {
       let person = personFinder(message, args[0], "member");
       if(!person){
         embed.setDescription(`${cross} Wrong user.`)
-          .setColor(0xff4747);
+        .setColor(0xff4747);
         await message.channel.send(embed).catch(error => {});
         await message.reactions.removeAll();
         react(message, '❌');
@@ -38,12 +38,12 @@ module.exports = {
         CHANGE_NICKNAME: false
       }).catch(console.error);
       embed.setDescription(`${tick} ${person} removed.`)
-        .setColor(0x95fd91);
+      .setColor(0x95fd91);
       await message.channel.send(embed).catch(error => {});  
     }
     else{
       embed.setDescription(`${cross} Not a ticket channel.`)
-        .setColor(0xff4747);
+      .setColor(0xff4747);
       await message.channel.send(embed).catch(error => {});
       await message.reactions.removeAll();
       react(message, '❌');
