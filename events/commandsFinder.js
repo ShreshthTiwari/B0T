@@ -74,7 +74,7 @@ module.exports = async(Discord, client, prefix, message, args, database, personF
     return;
   }else{
     react(message, '✅').catch(err => {
-      //mf blocked the bot.
+      //Couldn't DM
     });
   }
   if(client.commands.has(command)){
