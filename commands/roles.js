@@ -16,8 +16,7 @@ module.exports = {
       if(args[0] && args[0].toLowerCase() == "help"){
         embed.setDescription(`**Roles Help**
         > ${arrow} ${prefix}roles help
-        > ${arrow} ${prefix}roles \`<user>\`
-        > ${arrow} ${prefix}roles \`<user>\` clear`)
+        > ${arrow} ${prefix}roles \`<user>\``)
         .setColor(0x2f3136);
         await message.channel.send(embed).catch(error => {});
       }
@@ -37,37 +36,29 @@ module.exports = {
           react(message, '❌');
           return;
         }
-        if(args[1] && args[1].toLowerCase() == "clear"){
-          if(!person.roles.cache.second()){
-            embed.setDescription(`${cross} ${person} already has no roles.`)
-            .setColor(0xff4747);
-            await message.channel.send(embed).catch(error => {});
-            await message.reactions.removeAll();
-            react(message, '❌');
-            return;
-          }
-          try{
-            let roles = await person.roles.cache.filter(role => role.id != person.guild.id);
-            await person.roles.remove(roles).then(async success => {
-              embed.setDescription(`${tick} Removed\n${roles}\nfrom ${person}.`)
-              .setColor(0x95fd91);
-              await message.channel.send(embed).catch(error => {});
-            })
-          }catch{
-            embed.setDescription(`${cross} Error removing roles.\nAre they higher than me?`)
-            .setColor(0xff4747);
-            await message.channel.send(embed).catch(error => {});
-            await message.reactions.removeAll();
-            react(message, '❌');
-            return;
-          }
+        let rolesMap = await person.roles.cache
+        .sort((a, b) => b.position - a.position)
+        .map(r => r);
+        let rolesArray = [];
+        for(let i=0; i<=rolesMap.length-1; i++){
+          rolesArray[i] = rolesMap[i];
+        }
+        let rolesList;
+        if(rolesArray.length > 50){
+          rolesArray.length = 50;
+          rolesList = rolesArray.join(" , ");
+          rolesList = rolesList + ` , +${rolesArray.length-50} roles.`
         }
         else{
-          embed.setDescription(`${person.roles.cache
-            .sort((a, b) => b.position - a.position)
-            .map(r => r)}`);
-          await message.channel.send(embed).catch(error => {});
+          rolesList = rolesArray.join(" , ");
+          rolesList = rolesList + ".";
         }
+        embed.setAuthor("", person.user.displayAvatarURL({dynamic: true}))
+        .setTitle(`${person.user.username}'s Roles List`)
+        .setThumbnail(person.user.displayAvatarURL({dynamic: true}))
+        .setDescription(`${rolesList}`)
+        .setColor(0x2f3136);
+        await message.channel.send(embed).catch(error => {});
       }
     }
   }        

@@ -41,6 +41,8 @@ module.exports = {
             > ㅤㅤㅤ➥[\`alias - userinfo\`]
             > ㅤ${arrow} ${prefix}join [\`Under Development\`]
             > ㅤ${arrow} ${prefix}meme
+            > ㅤ${arrow} ${prefix}role help
+            > ㅤ${arrow} ${prefix}roles help
             ㅤ➥**Bot**
             > ㅤ${arrow} ${prefix}bot help
             > ㅤ${arrow} ${prefix}ping
@@ -78,6 +80,8 @@ module.exports = {
             > ㅤ${arrow} ${prefix}join [\`Under Development\`]
             > ㅤ${arrow} ${prefix}meme
             > ㅤㅤㅤ➥[\`alias - memes\`]
+            > ㅤ${arrow} ${prefix}role help
+            > ㅤ${arrow} ${prefix}roles help
           `);
         }
         else if(args[0].toLowerCase() == "bot"){
