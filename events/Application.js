@@ -48,7 +48,7 @@ module.exports = (Discord, client, Keyv, fs, path, messageEmojiFinder, react, em
         if(botCommandsChannel){
           if((message.channel.id != botCommandsChannelID) && (!message.member.hasPermission("ADMINISTRATOR"))){
             embed.setDescription(`${cross} Please use <#${botCommandsChannelID}>.`)
-              .setColor(0xff4747);
+            .setColor(0xff4747);
             await message.channel.send(embed).then((msg) => setTimeout(function(){msg.delete().catch(error => {});}, 15000)).catch(error => {});
             await message.reactions.removeAll();
             react(message, '❌');
@@ -56,7 +56,7 @@ module.exports = (Discord, client, Keyv, fs, path, messageEmojiFinder, react, em
           }
         }else{
           embed.setDescription(`${cross} Bot commands channel not set.`)
-            .setColor(0xff4747);
+          .setColor(0xff4747);
           await message.channel.send(embed).catch(error => {});
           await message.reactions.removeAll();
           react(message, '❌');
@@ -69,7 +69,7 @@ module.exports = (Discord, client, Keyv, fs, path, messageEmojiFinder, react, em
       database.on('error', err => console.log('Connection Error', err));
       if(!applicationLogsChannelID){
         embed.setDescription(`${cross} Application logs channel not set.`)
-          .setColor(0xff4747);
+        .setColor(0xff4747);
         await message.channel.send(embed).catch(error => {});
         await message.reactions.removeAll();
         react(message, '❌');
@@ -78,7 +78,7 @@ module.exports = (Discord, client, Keyv, fs, path, messageEmojiFinder, react, em
         let applicationLogsChannel = message.guild.channels.cache.get(applicationLogsChannelID);
         if(!applicationLogsChannel){
           embed.setDescription(`${cross} Application logs channel not set.`)
-            .setColor(0xff4747);
+          .setColor(0xff4747);
           await message.channel.send(embed).catch(error => {});
           await message.reactions.removeAll();
           react(message, '❌');
@@ -87,7 +87,7 @@ module.exports = (Discord, client, Keyv, fs, path, messageEmojiFinder, react, em
       }
       if(!transcriptsChannelID){
         embed.setDescription(`${cross} Trasncripts channel not set.`)
-          .setColor(0xff4747);
+        .setColor(0xff4747);
         await message.channel.send(embed).catch(error => {});
         await message.reactions.removeAll();
         react(message, '❌');
@@ -96,7 +96,7 @@ module.exports = (Discord, client, Keyv, fs, path, messageEmojiFinder, react, em
         let transcriptsChannel = message.guild.channels.cache.get(transcriptsChannelID);
         if(!transcriptsChannel){
           embed.setDescription(`${cross} Trasncripts channel not set.`)
-            .setColor(0xff4747);
+          .setColor(0xff4747);
           await message.channel.send(embed).catch(error => {});
           await message.reactions.removeAll();
           react(message, '❌');
@@ -109,7 +109,7 @@ module.exports = (Discord, client, Keyv, fs, path, messageEmojiFinder, react, em
       }
       if(canApply.toLowerCase() == "false"){
         embed.setDescription(`${cross} Applications are closed.`)
-          .setColor(0xff4747);
+        .setColor(0xff4747);
         await message.channel.send(embed).catch(error => {});
         return;
       }
@@ -128,7 +128,7 @@ module.exports = (Discord, client, Keyv, fs, path, messageEmojiFinder, react, em
       questions[0] = await database.get(`appQuestion${1}`);
       if(!questions[0]){
         embed.setDescription(`${cross} Application questions not set.`)
-          .setColor(0xff4747);
+        .setColor(0xff4747);
         await message.author.send(embed).catch(error => {});
         return;
       }
@@ -142,7 +142,7 @@ module.exports = (Discord, client, Keyv, fs, path, messageEmojiFinder, react, em
       try{
         let findFile = fs.statSync(logFileLocation);
         embed.setDescription(`${cross} There is a pending application by you.`)
-          .setColor(0xff4747);
+        .setColor(0xff4747);
         await message.channel.send(embed).catch(error => {});
         return;
       }catch (error){
@@ -151,19 +151,19 @@ module.exports = (Discord, client, Keyv, fs, path, messageEmojiFinder, react, em
       if(!(authorId in userApplications)) {
         userApplications[authorId] = { "step" : 1}
         embed.setDescription(`${tick} Application started!\nPlease check your DM and continue filling the application.`)
-          .setColor(0x95fd91);
+        .setColor(0x95fd91);
         let msg = await message.channel.send(embed).catch(error => {});
         Guild = client.guilds.cache.get(guild[authorId]);
         embed.setAuthor("", Guild.iconURL())
-          .setTitle("~~>>>~~ __**STAFF APPLICATION**__ ~~<<<~~")
-          .setDescription(`Thank you for choosing to apply for ${Guild.name} staff, Please provide clear and honest answers. Good luck!\n
-            -${Guild.name} Staff\n
-            You can cancel the application at any time by typing \`cancel\` in the answer.\n\n
-            **Question 1**- \`${questions[1]}\``)
-            .setColor(0x2f3136);
+        .setTitle("~~>>>~~ __**STAFF APPLICATION**__ ~~<<<~~")
+        .setDescription(`Thank you for choosing to apply for ${Guild.name} staff, Please provide clear and honest answers. Good luck!\n
+        -${Guild.name} Staff\n
+        You can cancel the application at any time by typing \`cancel\` in the answer.\n\n
+        **Question 1**- \`${questions[1]}\``)
+        .setColor(0x2f3136);
         await message.author.send(embed).catch( async error =>{
           embed.setDescription(`${cross} Couldn't DM you.`)
-            .setColor(0xff4747);
+          .setColor(0xff4747);
           await msg.edit(embed).catch(error => {});
           return;
         });
@@ -175,14 +175,14 @@ module.exports = (Discord, client, Keyv, fs, path, messageEmojiFinder, react, em
           Guild = client.guilds.cache.get(guild[authorId]);
           if((!guild[authorId]) || (!database)){
             embed.setDescription(`${cross} Bug encountered.\nPlease report it.\n\`-bot reportBug <msg>\``)
-              .setColor(0xff4747);
+            .setColor(0xff4747);
             await message.author.send(embed).catch(error => {});
             return;  
           }
           let authorApplication = userApplications[authorId];
           if(message.content.toLowerCase() == "cancel"){
             embed.setDescription(`${cross} Application canceled.`)
-              .setColor(0xff4747);
+            .setColor(0xff4747);
             await message.author.send(embed).catch(error => {});
             delete userApplications[authorId];
             delete guild[authorId];
@@ -197,7 +197,7 @@ module.exports = (Discord, client, Keyv, fs, path, messageEmojiFinder, react, em
                   embed.setDescription(`${tick} All questions asnwered.\nType \`cancel\` to concel the application or any other value to continue.`);
                 }else{
                   embed.setDescription(`**Question ${authorApplication.step + 1}**- \`${questions[authorApplication.step + 1]}\``)
-                    .setFooter("Type 'cancel' to cancel the application.");                  
+                  .setFooter("Type 'cancel' to cancel the application.");                  
                   authorApplication.step ++;
                 }
                 await message.author.send(embed).catch(error => {});
@@ -209,7 +209,7 @@ module.exports = (Discord, client, Keyv, fs, path, messageEmojiFinder, react, em
                   embed.setDescription(`${tick} All questions asnwered.\nType \`cancel\` to concel the application or any other value to continue.`);
                 }else{
                   embed.setDescription(`**Question ${authorApplication.step + 1}**- \`${questions[authorApplication.step + 1]}\``)
-                    .setFooter("Type 'cancel' to cancel the application.");                  
+                  .setFooter("Type 'cancel' to cancel the application.");                  
                   authorApplication.step ++;
                 }
                 await message.author.send(embed).catch(error => {});
@@ -221,7 +221,7 @@ module.exports = (Discord, client, Keyv, fs, path, messageEmojiFinder, react, em
                   embed.setDescription(`${tick} All questions asnwered.\nType \`cancel\` to concel the application or any other value to continue.`);
                 }else{
                   embed.setDescription(`**Question ${authorApplication.step + 1}**- \`${questions[authorApplication.step + 1]}\``)
-                    .setFooter("Type 'cancel' to cancel the application.");                  
+                  .setFooter("Type 'cancel' to cancel the application.");                  
                   authorApplication.step ++;
                 }
                 await message.author.send(embed).catch(error => {});
@@ -233,7 +233,7 @@ module.exports = (Discord, client, Keyv, fs, path, messageEmojiFinder, react, em
                   embed.setDescription(`${tick} All questions asnwered.\nType \`cancel\` to concel the application or any other value to continue.`);
                 }else{
                   embed.setDescription(`**Question ${authorApplication.step + 1}**- \`${questions[authorApplication.step + 1]}\``)
-                    .setFooter("Type 'cancel' to cancel the application.");                  
+                  .setFooter("Type 'cancel' to cancel the application.");                  
                   authorApplication.step ++;
                 }
                 await message.author.send(embed).catch(error => {});
@@ -245,7 +245,7 @@ module.exports = (Discord, client, Keyv, fs, path, messageEmojiFinder, react, em
                   embed.setDescription(`${tick} All questions asnwered.\nType \`cancel\` to concel the application or any other value to continue.`);
                 }else{
                   embed.setDescription(`**Question ${authorApplication.step + 1}**- \`${questions[authorApplication.step + 1]}\``)
-                    .setFooter("Type 'cancel' to cancel the application.");                  
+                  .setFooter("Type 'cancel' to cancel the application.");                  
                   authorApplication.step ++;
                 }
                 await message.author.send(embed).catch(error => {});
@@ -257,7 +257,7 @@ module.exports = (Discord, client, Keyv, fs, path, messageEmojiFinder, react, em
                   embed.setDescription(`${tick} All questions asnwered.\nType \`cancel\` to concel the application or any other value to continue.`);
                 }else{
                   embed.setDescription(`**Question ${authorApplication.step + 1}**- \`${questions[authorApplication.step + 1]}\``)
-                    .setFooter("Type 'cancel' to cancel the application.");                  
+                  .setFooter("Type 'cancel' to cancel the application.");                  
                   authorApplication.step ++;
                 }
                 await message.author.send(embed).catch(error => {});
@@ -269,7 +269,7 @@ module.exports = (Discord, client, Keyv, fs, path, messageEmojiFinder, react, em
                   embed.setDescription(`${tick} All questions asnwered.\nType \`cancel\` to concel the application or any other value to continue.`);
                 }else{
                   embed.setDescription(`**Question ${authorApplication.step + 1}**- \`${questions[authorApplication.step + 1]}\``)
-                    .setFooter("Type 'cancel' to cancel the application.");                  
+                  .setFooter("Type 'cancel' to cancel the application.");                  
                   authorApplication.step ++;
                 }
                 await message.author.send(embed).catch(error => {});
@@ -281,7 +281,7 @@ module.exports = (Discord, client, Keyv, fs, path, messageEmojiFinder, react, em
                   embed.setDescription(`${tick} All questions asnwered.\nType \`cancel\` to concel the application or any other value to continue.`);
                 }else{
                   embed.setDescription(`**Question ${authorApplication.step + 1}**- \`${questions[authorApplication.step + 1]}\``)
-                    .setFooter("Type 'cancel' to cancel the application.");                  
+                  .setFooter("Type 'cancel' to cancel the application.");                  
                   authorApplication.step ++;
                 }
                 await message.author.send(embed).catch(error => {});
@@ -293,7 +293,7 @@ module.exports = (Discord, client, Keyv, fs, path, messageEmojiFinder, react, em
                   embed.setDescription(`${tick} All questions asnwered.\nType \`cancel\` to concel the application or any other value to continue.`);
                 }else{
                   embed.setDescription(`**Question ${authorApplication.step + 1}**- \`${questions[authorApplication.step + 1]}\``)
-                    .setFooter("Type 'cancel' to cancel the application.");                  
+                  .setFooter("Type 'cancel' to cancel the application.");                  
                   authorApplication.step ++;
                 }
                 await message.author.send(embed).catch(error => {});
@@ -305,7 +305,7 @@ module.exports = (Discord, client, Keyv, fs, path, messageEmojiFinder, react, em
                   embed.setDescription(`${tick} All questions asnwered.\nType \`cancel\` to concel the application or any other value to continue.`);
                 }else{
                   embed.setDescription(`**Question ${authorApplication.step + 1}**- \`${questions[authorApplication.step + 1]}\``)
-                    .setFooter("Type 'cancel' to cancel the application.");                  
+                  .setFooter("Type 'cancel' to cancel the application.");                  
                   authorApplication.step ++;
                 }
                 await message.author.send(embed).catch(error => {});
@@ -317,7 +317,7 @@ module.exports = (Discord, client, Keyv, fs, path, messageEmojiFinder, react, em
                   embed.setDescription(`${tick} All questions asnwered.\nType \`cancel\` to concel the application or any other value to continue.`);
                 }else{
                   embed.setDescription(`**Question ${authorApplication.step + 1}**- \`${questions[authorApplication.step + 1]}\``)
-                    .setFooter("Type 'cancel' to cancel the application.");                  
+                  .setFooter("Type 'cancel' to cancel the application.");                  
                   authorApplication.step ++;
                 }
                 await message.author.send(embed).catch(error => {});
@@ -329,7 +329,7 @@ module.exports = (Discord, client, Keyv, fs, path, messageEmojiFinder, react, em
                   embed.setDescription(`${tick} All questions asnwered.\nType \`cancel\` to concel the application or any other value to continue.`);
                 }else{
                   embed.setDescription(`**Question ${authorApplication.step + 1}**- \`${questions[authorApplication.step + 1]}\``)
-                    .setFooter("Type 'cancel' to cancel the application.");                  
+                  .setFooter("Type 'cancel' to cancel the application.");                  
                   authorApplication.step ++;
                 }
                 await message.author.send(embed).catch(error => {});
@@ -341,7 +341,7 @@ module.exports = (Discord, client, Keyv, fs, path, messageEmojiFinder, react, em
                   embed.setDescription(`${tick} All questions asnwered.\nType \`cancel\` to concel the application or any other value to continue.`);
                 }else{
                   embed.setDescription(`**Question ${authorApplication.step + 1}**- \`${questions[authorApplication.step + 1]}\``)
-                    .setFooter("Type 'cancel' to cancel the application.");                  
+                  .setFooter("Type 'cancel' to cancel the application.");                  
                   authorApplication.step ++;
                 }
                 await message.author.send(embed).catch(error => {});
@@ -353,7 +353,7 @@ module.exports = (Discord, client, Keyv, fs, path, messageEmojiFinder, react, em
                   embed.setDescription(`${tick} All questions asnwered.\nType \`cancel\` to concel the application or any other value to continue.`);
                 }else{
                   embed.setDescription(`**Question ${authorApplication.step + 1}**- \`${questions[authorApplication.step + 1]}\``)
-                    .setFooter("Type 'cancel' to cancel the application.");                  
+                  .setFooter("Type 'cancel' to cancel the application.");                  
                   authorApplication.step ++;
                 }
                 await message.author.send(embed).catch(error => {});
@@ -365,7 +365,7 @@ module.exports = (Discord, client, Keyv, fs, path, messageEmojiFinder, react, em
                   embed.setDescription(`${tick} All questions asnwered.\nType \`cancel\` to concel the application or any other value to continue.`);
                 }else{
                   embed.setDescription(`**Question ${authorApplication.step + 1}**- \`${questions[authorApplication.step + 1]}\``)
-                    .setFooter("Type 'cancel' to cancel the application.");                  
+                  .setFooter("Type 'cancel' to cancel the application.");                  
                   authorApplication.step ++;
                 }
                 await message.author.send(embed).catch(error => {});
@@ -377,108 +377,107 @@ module.exports = (Discord, client, Keyv, fs, path, messageEmojiFinder, react, em
                 await responce.react('✅').then(
                   responce.react('❌')
                 );
-                responce.awaitReactions((reaction, user) => user.id == message.author.id && (reaction.emoji.name == '✅' || reaction.emoji.name == '❌'),
-                  {max: 1, time: 240000 }).then(async collected => {
-                    if (collected.first().emoji.name === '✅') {
-                      let directoryLocation = path.join(__dirname, "..", "applications", `${Guild.id}`);
-                      await fs.mkdir(directoryLocation, { recursive: true }, (err) => {});
-                      let logchannel = client.channels.cache.get(applicationLogsChannelID);
-                      const logFileLocation = path.join(__dirname, "..", "applications", `${Guild.id}`, `${message.author.id}.txt`);
-                      try{
-                        let findFile = fs.statSync(logFileLocation);
-                        embed.setDescription(`${cross} There is a pending application by you.`)
-                          .setColor(0xff4747);
-                        message.channel.send(embed).catch(error => {});
-                        return;
-                      }catch (error){
-                        //This error is good. It means file is not present so we will continue creating the file.
-                      }
-                      try {
-                        fs.writeFile(logFileLocation,
-                        "==============================\n" +
-                        "NEW APPLICATION" +  
-                        "\n==============================\n" +
-                        "User- " + message.author.tag +
-                        "\nID- " + message.author.id +
-                        "\n==============================\n" +
-                        "Question 01- " + questions[1] + '\nAnswer 1- ' + authorApplication.answer1 + '\n\n' + 
-                        "Question 02- " + questions[2] + '\nAnswer 2- ' + authorApplication.answer2 + '\n\n' + 
-                        "Question 03- " + questions[3] + '\nAnswer 3- ' + authorApplication.answer3 + '\n\n' + 
-                        "Question 04- " + questions[4] + '\nAnswer 4- ' + authorApplication.answer4 + '\n\n' + 
-                        "Question 05- " + questions[5] + '\nAnswer 5- ' + authorApplication.answer5 + '\n\n' + 
-                        "Question 06- " + questions[6] + '\nAnswer 6- ' + authorApplication.answer6 + '\n\n' +
-                        "Question 07- " + questions[7] + '\nAnswer 7- ' + authorApplication.answer7 + '\n\n' + 
-                        "Question 08- " + questions[8] + '\nAnswer 8- ' + authorApplication.answer8 + '\n\n' + 
-                        "Question 09- " + questions[9] + '\nAnswer 9- ' + authorApplication.answer9 + '\n\n' + 
-                        "Question 10- " + questions[10] + '\nAnswer 10- ' + authorApplication.answer10 + '\n\n' + 
-                        "Question 11- " + questions[11] + '\nAnswer 11- ' + authorApplication.answer11 + '\n\n' +
-                        "Question 12- " + questions[12] + '\nAnswer 12- ' + authorApplication.answer12 + '\n\n' + 
-                        "Question 13- " + questions[13] + '\nAnswer 13- ' + authorApplication.answer13 + '\n\n' +
-                        "Question 14- " + questions[14] + '\nAnswer 14- ' + authorApplication.answer14 + '\n\n' + 
-                        "Question 15- " + questions[15] + '\nAnswer 15- ' + authorApplication.answer15 + '\n\n' + 
-                        "Question 16- " + questions[16] + '\nAnswer 16- ' + authorApplication.answer16 + '\n\n', { flag: 'wx' }, function (err) {
-                          if (err){
-                            embed.setDescription(`${cross} Error while storing your application.\nPlease report it to the bot dev.\n\`${prefix}bot reportBug <msg>\`.`)
-                            .setColor(0xff4747); 
-                            message.reply(embed).catch(error => {});
-                            success = false;
-                            return;
-                          }  
-                        });
-                      }catch(error){
-                        embed.setDescription(`${cross} Error while storing your application.\nPlease report it to the bot dev.\n\`${prefix}bot reportBug <msg>\`.`)
-                        .setColor(0xff4747); 
-                        message.reply(embed).catch(error => {});
-                        success = false;
-                        return;
-                      }
-                      if(success){
-                        logchannel.send({
-                          files: [{
-                            attachment: logFileLocation,
-                            name: `${message.author.id}.txt`
-                          }]
-                        }).catch(error => {});
-                        let transcriptsChannel = client.channels.cache.get(transcriptsChannelID);
-                        transcriptsChannel.send({
-                          files: [{
-                            attachment: logFileLocation,
-                            name: `${message.author.id}.txt`
-                          }]
-                        }).catch(error => {});
-                        let embed = new Discord.MessageEmbed()
-                          .setDescription(`${tick} **__THANK YOU__**.\n*Your answers have been successfully recorded*.`)
-                          .setThumbnail(message.author.displayAvatarURL())
-                          .setColor(0xFFFF00);
-                        message.author.send(embed).catch(error => {});
-                      }
-                      else{
-                        embed.setDescription(`${cross} Application canceled.`)
-                          .setColor(0xff4747);
-                        message.author.send(embed).catch(error => {});
-                        delete userApplications[authorId];
-                        delete guild[authorId];
-                        return;    
-                      }
-                      delete userApplications[authorId];
-                      delete guild[authorId];
-                    }else{
-                      embed.setDescription(`${cross} Application canceled.`)
-                        .setColor(0xff4747);
+                responce.awaitReactions((reaction, user) => user.id == message.author.id && (reaction.emoji.name == '✅' || reaction.emoji.name == '❌'),{max: 1, time: 240000 }).then(async collected => {
+                  if (collected.first().emoji.name === '✅') {
+                    let directoryLocation = path.join(__dirname, "..", "applications", `${Guild.id}`);
+                    await fs.mkdir(directoryLocation, { recursive: true }, (err) => {});
+                    let logchannel = client.channels.cache.get(applicationLogsChannelID);
+                    const logFileLocation = path.join(__dirname, "..", "applications", `${Guild.id}`, `${message.author.id}.txt`);
+                    try{
+                      let findFile = fs.statSync(logFileLocation);
+                      embed.setDescription(`${cross} There is a pending application by you.`)
+                      .setColor(0xff4747);
+                      message.channel.send(embed).catch(error => {});
+                      return;
+                    }catch (error){
+                      //This error is good. It means file is not present so we will continue creating the file.
+                    }
+                    try {
+                      fs.writeFile(logFileLocation,
+                      "==============================\n" +
+                      "NEW APPLICATION" +  
+                      "\n==============================\n" +
+                      "User- " + message.author.tag +
+                      "\nID- " + message.author.id +
+                      "\n==============================\n" +
+                      "Question 01- " + questions[1] + '\nAnswer 1- ' + authorApplication.answer1 + '\n\n' + 
+                      "Question 02- " + questions[2] + '\nAnswer 2- ' + authorApplication.answer2 + '\n\n' + 
+                      "Question 03- " + questions[3] + '\nAnswer 3- ' + authorApplication.answer3 + '\n\n' + 
+                      "Question 04- " + questions[4] + '\nAnswer 4- ' + authorApplication.answer4 + '\n\n' + 
+                      "Question 05- " + questions[5] + '\nAnswer 5- ' + authorApplication.answer5 + '\n\n' + 
+                      "Question 06- " + questions[6] + '\nAnswer 6- ' + authorApplication.answer6 + '\n\n' +
+                      "Question 07- " + questions[7] + '\nAnswer 7- ' + authorApplication.answer7 + '\n\n' + 
+                      "Question 08- " + questions[8] + '\nAnswer 8- ' + authorApplication.answer8 + '\n\n' + 
+                      "Question 09- " + questions[9] + '\nAnswer 9- ' + authorApplication.answer9 + '\n\n' + 
+                      "Question 10- " + questions[10] + '\nAnswer 10- ' + authorApplication.answer10 + '\n\n' + 
+                      "Question 11- " + questions[11] + '\nAnswer 11- ' + authorApplication.answer11 + '\n\n' +
+                      "Question 12- " + questions[12] + '\nAnswer 12- ' + authorApplication.answer12 + '\n\n' + 
+                      "Question 13- " + questions[13] + '\nAnswer 13- ' + authorApplication.answer13 + '\n\n' +
+                      "Question 14- " + questions[14] + '\nAnswer 14- ' + authorApplication.answer14 + '\n\n' + 
+                      "Question 15- " + questions[15] + '\nAnswer 15- ' + authorApplication.answer15 + '\n\n' + 
+                      "Question 16- " + questions[16] + '\nAnswer 16- ' + authorApplication.answer16 + '\n\n', { flag: 'wx' }, function (err) {
+                        if (err){
+                          embed.setDescription(`${cross} Error while storing your application.\nPlease report it to the bot dev.\n\`${prefix}bot reportBug <msg>\`.`)
+                          .setColor(0xff4747); 
+                          message.reply(embed).catch(error => {});
+                          success = false;
+                          return;
+                        }  
+                      });
+                    }catch(error){
+                      embed.setDescription(`${cross} Error while storing your application.\nPlease report it to the bot dev.\n\`${prefix}bot reportBug <msg>\`.`)
+                      .setColor(0xff4747); 
                       message.reply(embed).catch(error => {});
-                      delete userApplications[authorId];
-                      delete guild[authorId];
+                      success = false;
                       return;
                     }
-                  }).catch(() => {
-                    embed.setDescription(`${cross} No responce after 4 minutes, Application canceled.\nIf you feel it's a bug, please report it to the bot dev. \`${prefix}bot reportBug <message>\`.`)
+                    if(success){
+                      logchannel.send({
+                        files: [{
+                          attachment: logFileLocation,
+                          name: `${message.author.id}.txt`
+                        }]
+                      }).catch(error => {});
+                      let transcriptsChannel = client.channels.cache.get(transcriptsChannelID);
+                      transcriptsChannel.send({
+                        files: [{
+                          attachment: logFileLocation,
+                          name: `${message.author.id}.txt`
+                        }]
+                      }).catch(error => {});
+                      let embed = new Discord.MessageEmbed()
+                      .setDescription(`${tick} **__THANK YOU__**.\n*Your answers have been successfully recorded*.`)
+                      .setThumbnail(message.author.displayAvatarURL())
+                      .setColor(0xFFFF00);
+                      message.author.send(embed).catch(error => {});
+                    }
+                    else{
+                      embed.setDescription(`${cross} Application canceled.`)
                       .setColor(0xff4747);
+                      message.author.send(embed).catch(error => {});
+                      delete userApplications[authorId];
+                      delete guild[authorId];
+                      return;    
+                    }
+                    delete userApplications[authorId];
+                    delete guild[authorId];
+                  }else{
+                    embed.setDescription(`${cross} Application canceled.`)
+                    .setColor(0xff4747);
                     message.reply(embed).catch(error => {});
                     delete userApplications[authorId];
                     delete guild[authorId];
                     return;
-                  });
-                break;        
+                  }
+                }).catch(() => {
+                  embed.setDescription(`${cross} No responce after 4 minutes, Application canceled.\nIf you feel it's a bug, please report it to the bot dev. \`${prefix}bot reportBug <message>\`.`)
+                  .setColor(0xff4747);
+                  message.reply(embed).catch(error => {});
+                  delete userApplications[authorId];
+                  delete guild[authorId];
+                  return;
+                });
+              break;        
             }
           }
         }
@@ -487,7 +486,7 @@ module.exports = (Discord, client, Keyv, fs, path, messageEmojiFinder, react, em
             let t = await message.content.slice(1);
             let args = t.split(" ");
             embed = new Discord.MessageEmbed()
-              .setColor(0x2f3136);
+            .setColor(0x2f3136);
             for(let i=1; i<=args.length; i++){
               t = await t.replace("\n", " \n ").replace(":\n", ": \n").replace("\n:", "\n :").replace(":\n:", ": \n :");
             }
@@ -498,16 +497,16 @@ module.exports = (Discord, client, Keyv, fs, path, messageEmojiFinder, react, em
             }
             if(args[0].toLowerCase(0) == "help"){
               embed.setTitle("Bot DM Commands Help")
-                .setDescription(`
-                > ${arrow} -modmail \`<serverID>\` \`<msg>\`
-                > ${arrow} -banappeal \`<serverID>\` \`<msg>\``);
+              .setDescription(`
+              > ${arrow} -modmail \`<serverID>\` \`<msg>\`
+              > ${arrow} -banappeal \`<serverID>\` \`<msg>\``);
               await message.author.send(embed).catch(error => {});
             }
             else if(args[0].toLowerCase() == "modmail" || args[0].toLowerCase() == "banappeal"){
               if(!(args[1] && args[2])){
                 embed.setDescription(`${cross} Invalid syntax.`)
-                  .setColor(0xff4747)
-                  .setFooter("-help");
+                .setColor(0xff4747)
+                .setFooter("-help");
                 await message.channel.send(embed).catch(error => {});
                 return;
               }
@@ -515,8 +514,8 @@ module.exports = (Discord, client, Keyv, fs, path, messageEmojiFinder, react, em
               let guild = await client.guilds.cache.get(guildID);
               if(!guild){
                 embed.setDescription(`${cross} Invalid server ID.`)
-                  .setColor(0xff4747)
-                  .setFooter("-help");
+                .setColor(0xff4747)
+                .setFooter("-help");
                 await message.channel.send(embed).catch(error => {});
                 return;
               }
@@ -526,16 +525,16 @@ module.exports = (Discord, client, Keyv, fs, path, messageEmojiFinder, react, em
               let modmailChannelID = await database.get("modMailsChannelID");
               if(!modmailChannelID){
                 embed.setAuthor(guild.name, guild.iconURL())
-                  .setDescription(`${cross} Mod mails Channel not present.`)
-                  .setColor(0xff4747);
+                .setDescription(`${cross} Mod mails Channel not present.`)
+                .setColor(0xff4747);
                 await message.channel.send(embed).catch(error => {});
                 return;
               }
               let modmailChannel = await client.guilds.cache.get(guildID).channels.cache.get(modmailChannelID);
               if(!modmailChannel){
                 embed.setAuthor(guild.name, guild.iconURL())
-                  .setDescription(`${cross} Mod mails Channel not present.`)
-                  .setColor(0xff4747);
+                .setDescription(`${cross} Mod mails Channel not present.`)
+                .setColor(0xff4747);
                 await message.channel.send(embed).catch(error => {});
                 return;
               }
@@ -546,58 +545,58 @@ module.exports = (Discord, client, Keyv, fs, path, messageEmojiFinder, react, em
               }
               if(args[0].toLowerCase() == "modmail"){
                 embed.setAuthor(message.author.username, message.author.displayAvatarURL())
-                  .setThumbnail(message.author.displayAvatarURL())
-                  .setColor(0x2f3136)
-                  .setTitle("New Mail")
-                  .setDescription(`**ID**- \`${message.author.id}\`
-                  **Tag**- \`${message.author.tag}\`
-                  **Message**- 
-                  ${msg}
-                  \n-------
-                  Use \`msg\` or \`msge\` command to respond back.
-                  -------`);
+                .setThumbnail(message.author.displayAvatarURL())
+                .setColor(0x2f3136)
+                .setTitle("New Mail")
+                .setDescription(`**ID**- \`${message.author.id}\`
+                **Tag**- \`${message.author.tag}\`
+                **Message**- 
+                ${msg}
+                \n-------
+                Use \`msg\` or \`msge\` command to respond back.
+                -------`);
               }
               else if(args[0].toLowerCase() == "banappeal"){
                 let bans = await guild.fetchBans();
                 if(bans.size == 0){
                   embed.setAuthor(guild.name, guild.iconURL())
-                    .setDescription(`${cross} You are not banned.`)
-                    .setColor(0xff4747);
+                  .setDescription(`${cross} You are not banned.`)
+                  .setColor(0xff4747);
                   await message.channel.send(embed).catch(error => {});
                   return;
                 }
                 let bUser = bans.find(b => b.user.id == message.author.id)
                 if(!bUser){
                   embed.setAuthor(guild.name, guild.iconURL())
-                    .setDescription(`${cross} You are not banned.`)
-                    .setColor(0xff4747);
+                  .setDescription(`${cross} You are not banned.`)
+                  .setColor(0xff4747);
                   await message.channel.send(embed).catch(error => {});
                   return;
                 }
                 embed.setAuthor(message.author.username, message.author.displayAvatarURL())
-                  .setThumbnail(message.author.displayAvatarURL())
-                  .setColor(0x2f3136)
-                  .setTitle("Ban Appeal")
-                  .setDescription(`**ID**- \`${message.author.id}\`
-                  **Tag**- \`${message.author.tag}\`
-                  **Message**- 
-                  ${msg}
-                  \n-------
-                  Use \`msg\` or \`msge\` command to respond back.
-                  -------`);
+                .setThumbnail(message.author.displayAvatarURL())
+                .setColor(0x2f3136)
+                .setTitle("Ban Appeal")
+                .setDescription(`**ID**- \`${message.author.id}\`
+                **Tag**- \`${message.author.tag}\`
+                **Message**- 
+                ${msg}
+                \n-------
+                Use \`msg\` or \`msge\` command to respond back.
+                -------`);
               }
               await modmailChannel.send(embed).catch(async error => {
                 embed = new Discord.MessageEmbed()
-                  .setAuthor(guild.name, guild.iconURL())
-                  .setDescription(`${cross} Error sending the mail.`)
-                  .setColor(0xff4747);
+                .setAuthor(guild.name, guild.iconURL())
+                .setDescription(`${cross} Error sending the mail.`)
+                .setColor(0xff4747);
                 await message.channel.send(embed).catch(error => {});
                 return;
               });
               embed = new Discord.MessageEmbed()
-                .setAuthor(guild.name, guild.iconURL())
-                .setDescription(`${tick} Mail sent.`)
-                .setColor(0x95fd91);
+              .setAuthor(guild.name, guild.iconURL())
+              .setDescription(`${tick} Mail sent.`)
+              .setColor(0x95fd91);
               await message.channel.send(embed).catch(error => {});
             }
             else{
