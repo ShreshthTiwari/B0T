@@ -9,9 +9,9 @@ module.exports = async(Discord, client, prefix, message, args, database, personF
     return;
   }
   let embed = new Discord.MessageEmbed()
-    .setColor(0x2f3136)
-    .setAuthor(`B0T`, client.user.displayAvatarURL({dynamic: true}))
-    .setThumbnail(message.guild.iconURL());
+  .setColor(0x2f3136)
+  .setAuthor(`B0T`, client.user.displayAvatarURL({dynamic: true}))
+  .setThumbnail(message.guild.iconURL());
   if(content == 'gm') {
     embed.setDescription("Good Morning!");
     await message.channel.send(embed).catch(error => {});
@@ -58,12 +58,12 @@ module.exports = async(Discord, client, prefix, message, args, database, personF
               .setColor(0xff4747);
             await message.reply(embed).then((msg) => setTimeout(function(){msg.delete().catch(error => {});}, 5000)).catch(error => {});
             embed.setTitle(`You Were Pinged`)
-              .setDescription(`By- ${message.author.tag} | ${message.author.id}
-              Guild- ${message.guild} | ${message.guild.id}
-              Channel- ${message.channel.name} | ${message.channel.id}
-              Content- ${message.content}
-              **${message.channel}**`)
-              .setColor(0x2f3136);
+            .setDescription(`By- ${message.author.tag} | ${message.author.id}
+            Guild- ${message.guild} | ${message.guild.id}
+            Channel- ${message.channel.name} | ${message.channel.id}
+            Content- ${message.content}
+            **${message.channel}**`)
+            .setColor(0x2f3136);
             await p.send(embed).catch(error => {});
             await message.delete().catch(error => {/*Message not present*/});
             return;
@@ -80,9 +80,9 @@ module.exports = async(Discord, client, prefix, message, args, database, personF
         afkTime = ms(afkTime);
         let msg = await database.get(`${p.id} afkMessage`);
         embed = new Discord.MessageEmbed()
-          .setDescription(`${p} is currently AFK: ${msg}`)
-          .setColor(0xff4747)
-          .setFooter(`For ${afkTime}.`);
+        .setDescription(`${p} is currently AFK: ${msg}`)
+        .setColor(0xff4747)
+        .setFooter(`For ${afkTime}.`);
         await message.reply(embed).then((msg) => setTimeout(function(){msg.delete().catch(error => {});}, 5000)).catch(error => {});
       }
     }
@@ -91,8 +91,8 @@ module.exports = async(Discord, client, prefix, message, args, database, personF
   let lastDisplayName = await database.get(`${message.author.id} lastDisplayName`);
   if(afkStatus && afkStatus == "true" && message.content != `${prefix}afk`){
     embed = new Discord.MessageEmbed()
-      .setDescription("Successfully Removed your AFK status.")
-      .setColor(0x95fd91);
+    .setDescription("Successfully Removed your AFK status.")
+    .setColor(0x95fd91);
     await database.set(`${message.author.id} afkStatus`, "false");
     await message.reply(embed).catch(error => {});
     await message.member.setNickname(lastDisplayName).catch(error => {});
