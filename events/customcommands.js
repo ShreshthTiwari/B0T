@@ -1,7 +1,7 @@
 module.exports = async(Discord, client, message, args, database, messageEmojiFinder) =>{
   let embed = new Discord.MessageEmbed()
-    .setAuthor(message.guild.name, message.guild.iconURL())
-    .setColor(0x98dbfa);
+  .setAuthor(message.guild.name, message.guild.iconURL())
+  .setColor(0x98dbfa);
   if(args[0]){
     args[0] = args[0].toLowerCase();
   }
