@@ -15,11 +15,11 @@ const commandsFinder = require('../events/commandsFinder.js');
 
 module.exports = async (Discord, client, message, Keyv, databaseBuilder, react, prefix, checkPrefix, fs, path, emojiIDs, messageEmojiFinder) => {
   let embed = new Discord.MessageEmbed()
-    .setColor(0x98dbfa);
+  .setColor(0x98dbfa);
   if(message.guild){
     if(!message.guild.me.hasPermission("ADMINISTRATOR")){
       embed.setDescription("I don't have the **__`ADMINISTRATOR`__** permission.\nPlease invite me again with my default role.")
-        .setColor(0xff4747);
+      .setColor(0xff4747);
       await message.channel.send(embed).catch(error => {});
       await message.guild.leave().catch(error => {});
       return;
@@ -34,7 +34,7 @@ module.exports = async (Discord, client, message, Keyv, databaseBuilder, react, 
         chatLogsChannel = await message.guild.channels.cache.get(chatLogsChannelID);
         if(chatLogsChannel){
           embed = new Discord.MessageEmbed()
-            .setColor(0x98dbfa);
+          .setColor(0x98dbfa);
           let content = message.content;
           if(content.length > 100){
             content.length = 97;
@@ -42,14 +42,14 @@ module.exports = async (Discord, client, message, Keyv, databaseBuilder, react, 
           }
           embed = new Discord.MessageEmbed()
           .setTitle("New Message")
-            .setDescription(`**User**- ${message.author}.
-            **Name**- \`${message.author.tag}\`.
-            **ID**- \`${message.author.id}\`.
-            **Channel**- ${message.channel}.
-            **Message ID**- \`${message.id}\`.
-            **Content**-\n${content}
-            **[Jump To Message](${message.url})**`)
-            .setColor(0x95fd91);
+          .setDescription(`**User**- ${message.author}.
+          **Name**- \`${message.author.tag}\`.
+          **ID**- \`${message.author.id}\`.
+          **Channel**- ${message.channel}.
+          **Message ID**- \`${message.id}\`.
+          **Content**-\n${content}
+          **[Jump To Message](${message.url})**`)
+          .setColor(0x95fd91);
           await chatLogsChannel.send(embed).catch(error => {});
           embed = new Discord.MessageEmbed()
             .setColor(0x98dbfa);
