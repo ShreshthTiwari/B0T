@@ -32,7 +32,7 @@ module.exports = {
     }
     if(!(up || updown || down)){
       embed.setDescription(`${cross} Invalid suggestion emojis.`)
-        .setColor(0xff4747);
+      .setColor(0xff4747);
       await message.channel.send(embed).catch(error => {});
       await message.reactions.removeAll();
       react(message, '❌');
@@ -53,14 +53,14 @@ module.exports = {
       return;    
     }
     let suggestionEmbed = new Discord.MessageEmbed()
-      .setColor("RANDOM")
-      .setAuthor(`${message.author.username}`, message.guild.iconURL())
-      .setThumbnail(message.author.displayAvatarURL())
-      .setFooter(message.guild.name);
+    .setColor("RANDOM")
+    .setAuthor(`${message.author.username}`, message.guild.iconURL())
+    .setThumbnail(message.author.displayAvatarURL())
+    .setFooter(message.guild.name);
     if(message.guild){
       if(!args[0]){
         embed.setDescription(`${cross} Suggest something.`)
-          .setColor(0xff4747);
+        .setColor(0xff4747);
         await message.channel.send(embed).catch(error => {});
         await message.reactions.removeAll();
         react(message, '❌');
@@ -81,7 +81,7 @@ module.exports = {
       await database.set(`suggestion${n}_content`, suggestion);
       await database.set(`suggestion${n}_isEdited`, "false");
       embed.setDescription(`${tick} Suggestion posted in ${suggestionChannel}.`)
-        .setColor(0x95fd91);
+      .setColor(0x95fd91);
       await message.channel.send(embed).catch(error => {});
     }
   }

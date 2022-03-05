@@ -64,14 +64,14 @@ module.exports = {
         .setThumbnail(message.author.displayAvatarURL({dynamic:true}));
         await message.author.send(embed).catch(error => {});
         embed.setAuthor(message.author.username, message.author.displayAvatarURL({dynamic: true}))
-          .setDescription(`User- ${message.author}.
-          Name- ${message.author.tag}.
-          ID- ${message.author.id}.
-          Account Created- ${new Date(message.author.createdTimestamp).toLocaleDateString()}.
-          Date Joined- ${new Date(message.member.joinedTimestamp).toLocaleDateString()}.
-          Result- Not verified. \`[${days} ${daysText} old]\``)
-          .setColor(0xff4747)
-          .setThumbnail(message.author.displayAvatarURL({dynamic: true}));
+        .setDescription(`User- ${message.author}.
+        Name- ${message.author.tag}.
+        ID- ${message.author.id}.
+        Account Created- ${new Date(message.author.createdTimestamp).toLocaleDateString()}.
+        Date Joined- ${new Date(message.member.joinedTimestamp).toLocaleDateString()}.
+        Result- Not verified. \`[${days} ${daysText} old]\``)
+        .setColor(0xff4747)
+        .setThumbnail(message.author.displayAvatarURL({dynamic: true}));
         if(verificationLogsChannel){
           await verificationLogsChannel.send(embed).catch(error => {});
         }
@@ -137,14 +137,14 @@ module.exports = {
     message.author.send('', attachment).catch(error => {/*nothing DMS are off or blocked*/});
     if(verificationLogsChannel && verificationText != "Already Verified!"){
       embed.setAuthor(message.author.username, message.author.displayAvatarURL({dynamic: true}))
-        .setDescription(`User- ${message.author}.
-        Name- ${message.author.tag}.
-        ID- ${message.author.id}.
-        Account Created- ${new Date(message.author.createdTimestamp).toLocaleDateString()}.
-        Date Joined- ${new Date(message.member.joinedTimestamp).toLocaleDateString()}.
-        Result- Verified. \`[${days} ${daysText} old]\``)
-        .setColor(0x95fd91)
-        .setThumbnail(message.author.displayAvatarURL({dynamic: true}));
+      .setDescription(`User- ${message.author}.
+      Name- ${message.author.tag}.
+      ID- ${message.author.id}.
+      Account Created- ${new Date(message.author.createdTimestamp).toLocaleDateString()}.
+      Date Joined- ${new Date(message.member.joinedTimestamp).toLocaleDateString()}.
+      Result- Verified. \`[${days} ${daysText} old]\``)
+      .setColor(0x95fd91)
+      .setThumbnail(message.author.displayAvatarURL({dynamic: true}));
       await verificationLogsChannel.send(embed).catch(error => {});
     }
     await message.delete().catch(error => {});

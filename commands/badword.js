@@ -33,7 +33,7 @@ module.exports = {
         if(args[0].toLowerCase() == 'view' || args[0].toLowerCase() == 'list'){
           if(badwordsList.length <= 0){
             embed.setDescription(`${cross} Empty badwords list.`)
-              .setColor(0xff4747);
+            .setColor(0xff4747);
           }
           else{
             if(badwordsList.length > 900){
@@ -47,18 +47,18 @@ module.exports = {
         else if(args[0].toLowerCase() == 'clear'){
           if(badwordsList.length <= 0){
             embed.setDescription(`${cross} Badwords list already empty.`)
-              .setColor(0xff4747);
+            .setColor(0xff4747);
           }
           else{
             await database.set("badwordsList", null);
             embed.setDescription(`${tick} Badwords list cleared.`)
-              .setColor(0x95fd91);
+            .setColor(0x95fd91);
           }
           await message.channel.send(embed).catch(error => {});
         }
         else{
           embed.setDescription(`${cross} Please provide a word.`)
-            .setColor(0xff4747);
+          .setColor(0xff4747);
           await message.channel.send(embed).catch(error => {});
           await message.reactions.removeAll();
           react(message, '❌');
@@ -71,7 +71,7 @@ module.exports = {
           for(let i=0; i<=badwordsList.length-1; i++){
             if(args[1] == badwordsList[i]){
               embed.setDescription(`${cross} ${args[i]} already in badwords list.`)
-                .setColor(0xff4747);
+              .setColor(0xff4747);
               await message.channel.send(embed).catch(error => {});
               await message.reactions.removeAll();
               react(message, '❌');
@@ -81,7 +81,7 @@ module.exports = {
           badwordsList[badwordsList.length] = args[1];
           await database.set("badwordsList", badwordsList.join(" "));
           embed.setDescription(`${tick} ||${badwordsList[badwordsList.length-1]}|| added to badwords list.`)
-            .setColor(0x95fd91);
+          .setColor(0x95fd91);
           await message.channel.send(embed).catch(error => {});
         }
         else if(args[0].toLowerCase() == 'remove'){
@@ -95,7 +95,7 @@ module.exports = {
           }
           if(pos == -1){
             embed.setDescription(`${cross} ${args[1]} not in badwords list.`)
-              .setColor(0xff4747);
+            .setColor(0xff4747);
             await message.channel.send(embed).catch(error => {});
             await message.reactions.removeAll();
             react(message, '❌');
@@ -107,7 +107,7 @@ module.exports = {
           badwordsList.pop();
           await database.set("badwordsList", badwordsList.join(" "));
           embed.setDescription(`${tick} ||${word}|| removed from badwords list.`)
-            .setColor(0x95fd91);
+          .setColor(0x95fd91);
           await message.channel.send(embed).catch(error => {});
         }
       }

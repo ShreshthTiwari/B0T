@@ -14,7 +14,7 @@ module.exports = {
     if(message.channel.name.startsWith("ticket-") || message.channel.name.startsWith("bug-") || message.channel.name.startsWith("report-")){
       if(!args[0]){
         embed.setDescription(`${cross} Please provide a user.`)
-          .setColor(0xff4747);
+        .setColor(0xff4747);
         await message.channel.send(embed).catch(error => {});
         await message.reactions.removeAll();
         react(message, '❌');
@@ -23,7 +23,7 @@ module.exports = {
       let person = personFinder(message, args[0], "member");
       if(!person){
         embed.setDescription(`${cross} Wrong user.`)
-          .setColor(0xff4747);
+        .setColor(0xff4747);
         await message.channel.send(embed).catch(error => {});
         await message.reactions.removeAll();
         react(message, '❌');
@@ -44,7 +44,7 @@ module.exports = {
     }
     else{
       embed.setDescription(`${cross} Not a ticket channel.`)
-        .setColor(0xff4747);
+      .setColor(0xff4747);
       await message.channel.send(embed).catch(error => {});
       await message.reactions.removeAll();
       react(message, '❌');

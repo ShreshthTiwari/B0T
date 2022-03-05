@@ -14,7 +14,7 @@ module.exports = {
     let person = await message.guild.members.cache.get(args[0]) || message.mentions.members.first();
     if(!person){
       embed.setDescription(`${cross} Wrong user.`)
-        .setColor(0xff4747);
+      .setColor(0xff4747);
       await message.channel.send(embed).catch(error => {});
       await message.reactions.removeAll();
       react(message, '❌');
@@ -22,7 +22,7 @@ module.exports = {
     }
     if(person.hasPermission("ADMINISTRATOR")){
       embed.setDescription(`${cross} Can't ban them.`)
-        .setColor(0xff4747);
+      .setColor(0xff4747);
       await message.channel.send(embed).catch(error => {});
       await message.reactions.removeAll();
       react(message, '❌');
@@ -41,8 +41,8 @@ module.exports = {
       banReason = "Unspecified";
     }
     embed.setAuthor(message.guild.name, message.guild.iconURL())
-      .setDescription(`${cross} Banned from **${message.guild.name}**.\nReason- \`${banReason}\`\n\n-----\nYou can ban appeal using the command- \`-banappeal ${message.guild.id} <msg>\`\n-----`)
-      .setColor(0xff4747);
+    .setDescription(`${cross} Banned from **${message.guild.name}**.\nReason- \`${banReason}\`\n\n-----\nYou can ban appeal using the command- \`-banappeal ${message.guild.id} <msg>\`\n-----`)
+    .setColor(0xff4747);
     await person.send(embed).catch(error => {});
     let moderationLogsChannel, moderationLogsChannelID;
     moderationLogsChannelID = await database.get("moderationLogsChannelID");
@@ -50,11 +50,11 @@ module.exports = {
       moderationLogsChannel = await message.guild.channels.cache.get(moderationLogsChannelID);
       if(moderationLogsChannel){
         embed.setAuthor(person.user.username)
-          .setDescription(`Name- ${person.user.tag}.
-          ID- ${person.id}.
-          Banned By- ${message.author}.
-          Reason- ${banReason}.`)
-          .setColor(0x95fd91);
+        .setDescription(`Name- ${person.user.tag}.
+        ID- ${person.id}.
+        Banned By- ${message.author}.
+        Reason- ${banReason}.`)
+        .setColor(0x95fd91);
         await moderationLogsChannel.send(embed).catch(error => {});
       }
     }
@@ -64,7 +64,7 @@ module.exports = {
       await message.guild.members.cache.get(person.id).ban({days: banDays ,reason: banReason }).catch(error => {});
     }
     embed.setDescription(`${tick} Banned ~~**__${person}__**~~.\nID-${person.id}\nReason- \`${banReason}\`\nDuration- ${banDays} days.`)
-      .setColor(0x95fd91);
+    .setColor(0x95fd91);
     await message.channel.send(embed).catch(error => {});
   }
 }

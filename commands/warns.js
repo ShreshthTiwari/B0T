@@ -26,11 +26,11 @@ module.exports = {
       warnsText = warnsText + 's';
     if((!args[0]) || args[0].toLowerCase() == "help"){
       embed.setTitle("Warns Help")
-        .setDescription(`
-        > ${arrow} ${prefix}warns help
-        > ${arrow} ${prefix}warns \`<user>\`
-        > ${arrow} ${prefix}warns clear \`<user>\`
-        > ${arrow} ${prefix}warns set \`<user>\` \`<amount>\``);
+      .setDescription(`
+      > ${arrow} ${prefix}warns help
+      > ${arrow} ${prefix}warns \`<user>\`
+      > ${arrow} ${prefix}warns clear \`<user>\`
+      > ${arrow} ${prefix}warns set \`<user>\` \`<amount>\``);
       await message.channel.send(embed).catch(error => {});
     }
     else if(args[0].toLowerCase() == "clear"){
@@ -40,8 +40,8 @@ module.exports = {
       }
       await database.set(`${person.id}`, 0);
       embed.setTitle(`${person.username}'s warnings`)
-        .setDescription(`${tick} Cleared ${person}'s warnings.\nThey now have 0 warning.`)
-        .setColor(0x95fd91);
+      .setDescription(`${tick} Cleared ${person}'s warnings.\nThey now have 0 warning.`)
+      .setColor(0x95fd91);
       await message.channel.send(embed).catch(error => {});
       let moderationLogsChannel, moderationLogsChannelID;
       moderationLogsChannelID = await database.get("moderationLogsChannelID");
@@ -50,12 +50,12 @@ module.exports = {
         if(moderationLogsChannel){
           console.log("moderation Channel found");
           embed.setAuthor(person.username)
-            .setDescription(`User- ${person}.
-            Name- ${person.tag}.
-            ID- ${person.id}.
-            Warnings Updated By- ${message.author}.
-            Total Warnings- ${warnsCount} ${warnsText}.`)
-            .setColor(0x95fd91);
+          .setDescription(`User- ${person}.
+          Name- ${person.tag}.
+          ID- ${person.id}.
+          Warnings Updated By- ${message.author}.
+          Total Warnings- ${warnsCount} ${warnsText}.`)
+          .setColor(0x95fd91);
           await moderationLogsChannel.send(embed).catch(error => {});
         }
       }
@@ -70,16 +70,17 @@ module.exports = {
         warnsCount = 0;
         await database.set(`${person.id}`, warnsCount);
         embed.setTitle(`${person.username}'s warnings`)
-          .setDescription(`${tick} Cleared ${person}'s warnings.\nThey now have 0 ${warnsText}.`)
-          .setColor(0x95fd91);
+        .setDescription(`${tick} Cleared ${person}'s warnings.\nThey now have 0 ${warnsText}.`)
+        .setColor(0x95fd91);
       }else{
         warnsCount = args[2] * 1;
-        if(warnsCount > 1)
+        if(warnsCount > 1){
           warnsText = warnsText + 's';
+        }
         await database.set(`${person.id}`, warnsCount);
         embed.setTitle(`${person.username}'s warnings`)
-          .setDescription(`${tick} Updated ${person}'s warnings.\nThey now have ${warnsCount} ${warnsText}.`)
-            .setColor(0x95fd91);
+        .setDescription(`${tick} Updated ${person}'s warnings.\nThey now have ${warnsCount} ${warnsText}.`)
+        .setColor(0x95fd91);
       }
       await message.channel.send(embed).catch(error => {});
       let moderationLogsChannel, moderationLogsChannelID;
@@ -89,19 +90,19 @@ module.exports = {
         if(moderationLogsChannel){
           console.log("moderation Channel found");
           embed.setAuthor(person.username)
-            .setDescription(`User- ${person}.
-            Name- ${person.tag}.
-            ID- ${person.id}.
-            Warnings Updated By- ${message.author}.
-            Total Warnings- ${warnsCount} ${warnsText}.`)
-            .setColor(0x95fd91);
+          .setDescription(`User- ${person}.
+          Name- ${person.tag}.
+          ID- ${person.id}.
+          Warnings Updated By- ${message.author}.
+          Total Warnings- ${warnsCount} ${warnsText}.`)
+          .setColor(0x95fd91);
           await moderationLogsChannel.send(embed).catch(error => {});
         }
       }
     }
     else{
       embed.setTitle(`${person.username}'s warnings`)
-        .setDescription(`${warnsCount} ${warnsText}.`);
+      .setDescription(`${warnsCount} ${warnsText}.`);
       await message.channel.send(embed).catch(error => {});
     }
   }

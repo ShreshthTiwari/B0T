@@ -14,17 +14,17 @@ module.exports = {
       return;
     }
     if(!args[0]){
-        embed.setDescription(`${cross} Provide a user.`)
-          .setColor(0xff4747);
-        await message.channel.send(embed).catch(error => {});
-        await message.reactions.removeAll();
-        react(message, '❌');
-        return;
+      embed.setDescription(`${cross} Provide a user.`)
+      .setColor(0xff4747);
+      await message.channel.send(embed).catch(error => {});
+      await message.reactions.removeAll();
+      react(message, '❌');
+      return;
     }
     person = personFinder(message, args[0], "member");
     if(!person){
       embed.setDescription(`${cross} Wrong user.`)
-        .setColor(0xff4747);
+      .setColor(0xff4747);
       await message.channel.send(embed).catch(error => {});
       await message.reactions.removeAll();
       react(message, '❌');
@@ -33,7 +33,7 @@ module.exports = {
     let mutedRoleID = await database.get("mutedRoleID");
     if(!mutedRoleID){
       embed.setDescription(`${cross} Muted role not set.`)
-        .setColor(0xff4747);
+      .setColor(0xff4747);
       await message.channel.send(embed).catch(error => {});
       await message.reactions.removeAll();
       react(message, '❌');
@@ -42,7 +42,7 @@ module.exports = {
     let mutedRole = message.guild.roles.cache.get(mutedRoleID);
     if(!mutedRole){
       embed.setDescription(`${cross} Muted role not set.`)
-        .setColor(0xff4747);
+      .setColor(0xff4747);
       await message.channel.send(embed).catch(error => {});
       await message.reactions.removeAll();
       react(message, '❌');
@@ -51,11 +51,11 @@ module.exports = {
     if(person.roles.cache.has(mutedRoleID)){
       person.roles.remove(mutedRoleID);
       embed.setDescription(`${tick} Unmuted ${person}.`)
-        .setColor(0x95fd91);
+      .setColor(0x95fd91);
       await message.channel.send(embed).catch(error => {});
       embed.setAuthor(message.guild.name, message.guild.iconURL())
-        .setDescription(`${tick} Unmuted.`)
-        .setColor(0x95fd91);
+      .setDescription(`${tick} Unmuted.`)
+      .setColor(0x95fd91);
       await person.send(embed).catch(error => {});
       let moderationLogsChannel, moderationLogsChannelID;
       moderationLogsChannelID = await database.get("moderationLogsChannelID");
@@ -63,17 +63,17 @@ module.exports = {
         moderationLogsChannel = await message.guild.channels.cache.get(moderationLogsChannelID);
         if(moderationLogsChannel){
           embed.setAuthor(person.user.username)
-            .setDescription(`User- ${person}.
-            Name- ${person.user.tag}.
-            ID- ${person.id}.
-            Unmuted By- ${message.author}.`)
-            .setColor(0x95fd91);
+          .setDescription(`User- ${person}.
+          Name- ${person.user.tag}.
+          ID- ${person.id}.
+          Unmuted By- ${message.author}.`)
+          .setColor(0x95fd91);
           await moderationLogsChannel.send(embed).catch(error => {console.log(error)});
         }
       }
     }else{
       embed.setDescription(`${cross} ${person} not muted.`)
-        .setColor(0xff4747);
+      .setColor(0xff4747);
       await message.channel.send(embed).catch(error => {});
     }
     await message.delete().catch(error => {});

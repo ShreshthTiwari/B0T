@@ -6,7 +6,7 @@ module.exports = {
     const tick = await client.emojis.cache.get(emojiIDs.tick);
     const cross = await client.emojis.cache.get(emojiIDs.cross);
     let embed = new Discord.MessageEmbed()
-      .setColor(0x2f3136);
+    .setColor(0x2f3136);
     let afkStatus = await database.get(`${message.author.id} afkStatus`);
     let lastDisplayName = await database.get(`${message.author.id} lastDisplayName`);
     if(!afkStatus){
@@ -37,7 +37,7 @@ module.exports = {
       await database.set(`${message.author.id} afkSetTime`, date);
       await message.member.setNickname(`[AFK] ${message.member.displayName}`).catch(error => {});
       embed.setDescription(`${tick} AFK set- ${msg}`)
-        .setColor("GREEN");
+      .setColor("GREEN");
       await message.channel.send(embed).catch(error =>{});
     }      
   }

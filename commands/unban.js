@@ -14,7 +14,7 @@ module.exports = {
     }
     if(!args[0]){
       embed.setDescription(`${cross} Wrong user.`)
-        .setColor(0xff4747);
+      .setColor(0xff4747);
       await message.channel.send(embed).catch(error => {});
       await message.reactions.removeAll();
       react(message, '❌');
@@ -24,7 +24,7 @@ module.exports = {
     await message.guild.fetchBans().then(async bans=> {
       if(bans.size == 0){
         embed.setDescription(`${cross} Ban list is empty.`)
-          .setColor(0xff4747);
+        .setColor(0xff4747);
         await message.chanel.send(embed).catch(error => {});
         await message.reactions.removeAll();
         react(message, '❌');
@@ -33,7 +33,7 @@ module.exports = {
       let bUser = bans.find(b => b.user.id == userID)
       if(!bUser){
         embed.setDescription(`${cross} User is not banned.`)
-          .setColor(0xff4747);
+        .setColor(0xff4747);
         await message.channel.send(embed).catch(error => {});
         await message.reactions.removeAll();
         react(message, '❌');
@@ -41,7 +41,7 @@ module.exports = {
       }
       await message.guild.members.unban(bUser.user);
       embed.setDescription(`${tick} Unbanned __${userID}__.`)
-        .setColor(0x95fd91);
+      .setColor(0x95fd91);
       await message.channel.send(embed).catch(error => {});
       let moderationLogsChannel, moderationLogsChannelID;
       moderationLogsChannelID = await database.get("moderationLogsChannelID");
@@ -51,15 +51,15 @@ module.exports = {
           let person = await client.users.cache.get(userID);
           if(person){
             embed.setAuthor(person.username)
-              .setDescription(`Name- ${person.tag}.
-              ID- ${person.id}.
-              Unbanned By- ${message.author}.`)
-              .setColor(0x95fd91);
+            .setDescription(`Name- ${person.tag}.
+            ID- ${person.id}.
+            Unbanned By- ${message.author}.`)
+            .setColor(0x95fd91);
           }else{
             embed.setAuthor(person.username)
-              .setDescription(`ID- ${person.id}.
-              Unbanned By- ${message.author}.`)
-              .setColor(0x95fd91);
+            .setDescription(`ID- ${person.id}.
+            Unbanned By- ${message.author}.`)
+            .setColor(0x95fd91);
           }
           await moderationLogsChannel.send(embed).catch(error => {console.log(error)});
         }

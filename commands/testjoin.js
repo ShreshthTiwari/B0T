@@ -3,8 +3,6 @@ module.exports = {
   description : 'fake server join-leave message',
 
   async run(Discord, client, prefix, message, args, database, personFinder, messageEmojiFinder, react, emojiIDs){
-    let embed = new Discord.MessageEmbed()
-      .setColor(0x2f3136);
     if(!message.member.hasPermission("ADMINISTRATOR")){
       await message.reactions.removeAll();
       react(message, '❌');

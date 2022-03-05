@@ -18,7 +18,7 @@ module.exports = {
     let i, n=100;
     if(!args[0]){
       embed.setDescription(`${cross} Wrong user.`)
-        .setColor(0xff4747);
+      .setColor(0xff4747);
       await message.channel.send(embed).catch(error => {});
       await message.reactions.removeAll();
       react(message, '❌');
@@ -30,9 +30,9 @@ module.exports = {
       }
     }
     let person = personFinder(message, args[0], "member");
-      if(person === "not found"){
-        embed.setDescription(`${cross} Wrong user.`)
-          .setColor(0xff4747);
+    if(person === "not found"){
+      embed.setDescription(`${cross} Wrong user.`)
+      .setColor(0xff4747);
       await message.channel.send(embed).catch(error => {});
       await message.reactions.removeAll();
       react(message, '❌');
@@ -40,7 +40,7 @@ module.exports = {
     } 
     if(person.id == authorID){
       embed.setDescription("NOU")
-        .setColor(0xff4747);
+      .setColor(0xff4747);
       await message.channel.send(embed).then((m) => setTimeout(function(){m.delete().catch(error => {});}, 100)).catch(error => {});
       person = message.author;
     }

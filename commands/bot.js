@@ -26,9 +26,9 @@ module.exports = {
     const cross = await client.emojis.cache.get(emojiIDs.cross);
     const arrow = await client.emojis.cache.get(emojiIDs.arrow);
     let embed = new Discord.MessageEmbed()
-      .setAuthor(message.guild.name, message.guild.iconURL())
-      .setThumbnail(client.user.displayAvatarURL())
-      .setColor(0x2f3136);
+    .setAuthor(message.guild.name, message.guild.iconURL())
+    .setThumbnail(client.user.displayAvatarURL())
+    .setColor(0x2f3136);
 
     let divider = 1048576;
         
@@ -105,30 +105,30 @@ module.exports = {
     if((!args[0]) || args[0].toLowerCase() == "help"){
       if(message.author.id == authorID){
         embed.setTitle("Bot Commands Help")
-          .setDescription(`
-          > ${arrow} ${prefix}bot announce.
-          > ${arrow} ${prefix}bot avatar \`<url>\`.
-          > ${arrow} ${prefix}bot cpu.
-          > ${arrow} ${prefix}bot guildsList.
-          > ${arrow} ${prefix}bot help.
-          > ${arrow} ${prefix}bot invite.
-          > ${arrow} ${prefix}bot memory.
-          > ${arrow} ${prefix}bot rename \`<name>\`.
-          > ${arrow} ${prefix}bot reportBug.
-          > ${arrow} ${prefix}bot storage \`<location>\`.
-          > ${arrow} ${prefix}bot system.
-          > ${arrow} ${prefix}bot updates \`<msg>\`.`);   
+        .setDescription(`
+        > ${arrow} ${prefix}bot announce.
+        > ${arrow} ${prefix}bot avatar \`<url>\`.
+        > ${arrow} ${prefix}bot cpu.
+        > ${arrow} ${prefix}bot guildsList.
+        > ${arrow} ${prefix}bot help.
+        > ${arrow} ${prefix}bot invite.
+        > ${arrow} ${prefix}bot memory.
+        > ${arrow} ${prefix}bot rename \`<name>\`.
+        > ${arrow} ${prefix}bot reportBug.
+        > ${arrow} ${prefix}bot storage \`<location>\`.
+        > ${arrow} ${prefix}bot system.
+        > ${arrow} ${prefix}bot updates \`<msg>\`.`);   
       }else{
         embed.setTitle("Bot Commands Help")
-          .setDescription(`
-          > ${arrow} ${prefix}bot invite.
-          > ${arrow} ${prefix}bot reportBug.`);
+        .setDescription(`
+        > ${arrow} ${prefix}bot invite.
+        > ${arrow} ${prefix}bot reportBug.`);
       }
       await message.channel.send(embed).catch(error => {});    
     }
     else if(args[0].toLowerCase() == "invite"){
       embed.setDescription(config.inviteLink)
-        .setColor("RANDOM");
+      .setColor("RANDOM");
       message.channel.send(embed).catch(error => {});
     }
     else if(args[0].toLowerCase() == "reportbug"){
@@ -143,7 +143,7 @@ module.exports = {
       .setColor(0xff4747);
       await client.users.cache.get(authorID).send(embed).catch(error => {});
       embed.setDescription(`${tick} Bug Reported.\n\n----------\nNeed Support?\n[JOIN SUPPORT SERVER](https://discord.gg/NYx2g5W5sb).`)
-        .setColor(0x95fd91);
+      .setColor(0x95fd91);
       await message.channel.send(embed).catch(error => {});
     }
     else if(message.author.id == authorID || message.author.id == "564106279862140938"){
@@ -311,8 +311,8 @@ module.exports = {
         name = client.user.username;
         client.user.setUsername(`${newname}`);
         embed = new Discord.MessageEmbed()
-          .setDescription(`${tick} **~~${name}~~** renamed to **${newname}**`)
-          .setColor(0x95fd91);
+        .setDescription(`${tick} **~~${name}~~** renamed to **${newname}**`)
+        .setColor(0x95fd91);
         message.channel.send(embed).catch(error => {});
       }
       else if(args[0].toLowerCase() == 'avatar' || args[0].toLowerCase() == 'pfp'){
@@ -320,19 +320,19 @@ module.exports = {
         avatarlink=args[1];
         client.user.setAvatar(`${avatarlink}`);
         embed = new Discord.MessageEmbed()
-          .setDescription(`${tick} ${client.user.username}'s avatar changed-\n`)
-          .setImage(`${args[1]}`)
-          .setColor(0x95fd91);
+        .setDescription(`${tick} ${client.user.username}'s avatar changed-\n`)
+        .setImage(`${args[1]}`)
+        .setColor(0x95fd91);
         await message.channel.send(embed).catch(error => {});
         await message.delete().catch(error => {});
       }
       else if(args[0].toLowerCase() == 'guildslist'){
         let guildsListIDsM = client.guilds.cache
-          .sort((a, b) => b.position - a.position)
-          .map(g => g.id);
+        .sort((a, b) => b.position - a.position)
+        .map(g => g.id);
         let guildsListM = client.guilds.cache
-          .sort((a, b) => b.position - a.position)
-          .map(g => g);
+        .sort((a, b) => b.position - a.position)
+        .map(g => g);
         let guildsListIDsMap = [];
         let guildsListMap = [];
         let temp;
@@ -411,21 +411,21 @@ module.exports = {
       }
       else if(args[0].toLowerCase() == "updates"){
         let guildsListIDsMap = await client.guilds.cache
-          .sort((a, b) => b.position - a.position)
-          .map(g => g.id);
+        .sort((a, b) => b.position - a.position)
+        .map(g => g.id);
         let msg = messageEmojiFinder(client, message, args.slice(1));
         msg = msg + "\n\n----------\nNeed Support?\n[JOIN SUPPORT SERVER](https://discord.gg/NYx2g5W5sb).";
         if(msg.length > 1900){
           embed.setDescription(`${cross} Please reduce the message length.`)
-            .setColor(0xff4747);
+          .setColor(0xff4747);
           await message.channel.send(embed).cache(error => {});
           return
         }
         let guild;
         embed.setTitle("Bot Updates")
         .setColor(0x2f3136)
-          .setAuthor(`Author- ${author}`, authorImg)
-          .setDescription(msg);
+        .setAuthor(`Author- ${author}`, authorImg)
+        .setDescription(msg);
         for(let i=0; i<=guildsListIDsMap.length-1; i++){
           guild = await client.guilds.cache.get(guildsListIDsMap[i]);          
           if(guild){
@@ -443,21 +443,21 @@ module.exports = {
       }
       else if(args[0].toLowerCase() == "announce"){
         let usersListIDsMap = await client.users.cache
-          .filter(user => !user.bot)
-          .sort((a, b) => b.position - a.position)
-          .map(g => g.id);
+        .filter(user => !user.bot)
+        .sort((a, b) => b.position - a.position)
+        .map(g => g.id);
         let msg = messageEmojiFinder(client, message, args.slice(1));
         msg = msg + "\n\n----------\nNeed Support?\n[JOIN SUPPORT SERVER](https://discord.gg/NYx2g5W5sb).";
         if(msg.length > 1900){
           embed.setDescription(`${cross} Please reduce the message length.`)
-            .setColor(0xff4747);
+          .setColor(0xff4747);
           await message.channel.send(embed).cache(error => {});
           return
         }
         embed.setTitle("Announcement")
-          .setColor(0x2f3136)
-          .setAuthor(`Author- ${author}`, authorImg)
-          .setDescription(msg);
+        .setColor(0x2f3136)
+        .setAuthor(`Author- ${author}`, authorImg)
+        .setDescription(msg);
         let member;
         for(let i=0; i<=usersListIDsMap.length-1; i++){
           member = await client.users.cache.get(usersListIDsMap[i]);
@@ -466,21 +466,21 @@ module.exports = {
       }
       else if(args[0].toLowerCase() == "announce"){
         let usersListIDsMap = await client.users.cache
-          .filter(user => !user.bot)
-          .sort((a, b) => b.position - a.position)
-          .map(g => g.id);
+        .filter(user => !user.bot)
+        .sort((a, b) => b.position - a.position)
+        .map(g => g.id);
         let msg = messageEmojiFinder(client, message, args.slice(1));
         msg = msg + "\n\n----------\nNeed Support?\n[JOIN SUPPORT SERVER](https://discord.gg/NYx2g5W5sb).";
         if(msg.length > 1900){
           embed.setDescription(`${cross} Please reduce the message length.`)
-            .setColor(0xff4747);
+          .setColor(0xff4747);
           await message.channel.send(embed).cache(error => {});
           return
         }
         embed.setTitle("Announcement")
-          .setColor(0x2f3136)
-          .setAuthor(`Author- ${author}`, authorImg)
-          .setDescription(msg);
+        .setColor(0x2f3136)
+        .setAuthor(`Author- ${author}`, authorImg)
+        .setDescription(msg);
         let member;
         for(let i=0; i<=usersListIDsMap.length-1; i++){
           member = await client.users.cache.get(usersListIDsMap[i]);

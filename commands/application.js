@@ -9,7 +9,7 @@ module.exports = {
     const cross = await client.emojis.cache.get(emojiIDs.cross);
     const arrow = await client.emojis.cache.get(emojiIDs.arrow);
     let embed = new Discord.MessageEmbed()
-      .setColor(0x98dbfa);
+    .setColor(0x98dbfa);
     if(!message.member.hasPermission("ADMINISTRATOR")){
       await message.reactions.removeAll();
       react(message, '❌');
@@ -23,13 +23,13 @@ module.exports = {
       > ${arrow} ${prefix}application blacklist.
       > ${arrow} ${prefix}application blacklist add \`<userID>\`.
       > ${arrow} ${prefix}application blacklist remove \`<userID>\`.`)
-        .setColor(0x2f3136);
+      .setColor(0x2f3136);
       await message.channel.send(embed).catch(error => {});
     }else{
       if(args[0].toLowerCase() == "reject" || args[0].toLowerCase() == "accept" || args[0].toLowerCase() == "ignore"){
         if(!args[1]){
           embed.setDescription(`${cross} Please provide a user.`)
-            .setColor(0xff4747);
+          .setColor(0xff4747);
           await message.channel.send(embed).catch(error => {});
           await message.reactions.removeAll();
           react(message, '❌');
@@ -38,7 +38,7 @@ module.exports = {
         let applicant = personFinder(message, args[1], "user");
         if(!applicant){
           embed.setDescription(`${cross} Wrong user.`)
-            .setColor(0xff4747);
+          .setColor(0xff4747);
           await message.channel.send(embed).catch(error => {});
           await message.reactions.removeAll();
           react(message, '❌');
@@ -60,31 +60,31 @@ module.exports = {
           });
           if(args[0].toLowerCase() == "reject"){
             embed.setDescription(`${cross} Application rejected.\nReason- \`${reason}\``)
-              .setAuthor(message.guild.name, message.guild.iconURL())
-              .setColor(0xff4747);
+            .setAuthor(message.guild.name, message.guild.iconURL())
+            .setColor(0xff4747);
             await applicant.send(embed).catch(error => {});
             embed.setDescription(`${tick} Application by ${applicant.tag}[${applicant.id}] rejected.\nReason-${reason}`)
-              .setColor(0x95fd91);
+            .setColor(0x95fd91);
             await message.channel.send(embed).catch(error => {}); 
           }
           else if(args[0].toLowerCase() == "accept"){
             embed.setDescription(`${tick} Application accepted.🥳\nMessage from staff- \`${reason}\``)
-              .setAuthor(message.guild.name, message.guild.iconURL())
-              .setColor(0x95fd91)
+            .setAuthor(message.guild.name, message.guild.iconURL())
+            .setColor(0x95fd91)
             await applicant.send(embed).catch(error => {});
             embed.setDescription(`${tick} Application by ${applicant.tag}[${applicant.id}] accepted.`)
-              .setColor(0x95fd91);
+            .setColor(0x95fd91);
             await message.channel.send(embed).catch(error => {});
           }
           else if(args[0].toLowerCase() == "ignore"){
             embed.setDescription(`${tick} Application by ${applicant.tag}[${applicant.id}] ignored.\nReason-${reason}`)
-              .setColor(0x95fd91);
+            .setColor(0x95fd91);
             await message.channel.send(embed).catch(error => {});
           }
         }
         else{
           embed.setDescription(`${cross} No new application by that user.`)
-            .setColor(0xff4747);
+          .setColor(0xff4747);
           await message.channel.send(embed).catch(error => {});
         }
       }
@@ -99,7 +99,7 @@ module.exports = {
         if(!args[1]){
           blackList = blackListIDs.join("\n");
           embed.setDescription(`Blacklisted IDs- ${blackList}`)
-            .setColor("RANDOM");
+          .setColor("RANDOM");
           await message.channel.send(embed).catch(error => {});
         }
         else{
@@ -115,20 +115,20 @@ module.exports = {
                 blackList = blackListIDs.join(" ");
                 await database.set("applicationBlackList", blackList);
                 embed.setDescription(`${tick} Removed ${args[2]} from application blacklist.`)
-                  .setColor(0x95fd91);
+                .setColor(0x95fd91);
                 await message.channel.send(embed).catch(error => {});
                 return;
               }
             }
             embed.setDescription(`${cross} (${args[2]}) is not blacklisted.`)
-              .setColor(0xff4747);
+            .setColor(0xff4747);
             await message.channel.send(embed).catch(error => {});
           }
           else if(args[1].toLowerCase() == "add"){
             for(let i=0; i<=blackListIDs.length-1; i++){
               if(args[2] == blackListIDs[i]){
                 embed.setDescription(`${cross} (${args[2]}) already blacklisted.`)
-                  .setColor(0xff4747);
+                .setColor(0xff4747);
                 await message.channel.send(embed).catch(error => {});
                 await message.reactions.removeAll();
                 react(message, '❌');
@@ -139,7 +139,7 @@ module.exports = {
             blackList = blackListIDs.join(" ");
             await database.set("applicationBlackList", blackList);
             embed.setDescription(`${tick} (${args[2]}) added to application blacklist.`)
-              .setColor(0x95fd91);
+            .setColor(0x95fd91);
             await message.channel.send(embed).catch(error => {});
           }
           else{
