@@ -18,12 +18,12 @@ module.exports = async(Discord, client, message, args, database, prefix, emojiID
 	}
     if(message.member.hasPermission("ADMINISTRATOR")){
       let embed = new Discord.MessageEmbed()
-        .setAuthor(message.guild.name, message.guild.iconURL())
-        .setColor(0x95fd91);
+      .setAuthor(message.guild.name, message.guild.iconURL())
+      .setColor(0x95fd91);
       if(args[0] == `${prefix}setCount`){
         if((!args[1]) || (isNaN(args[1]))){
           embed.setDescription(`${cross} Provide a count number.`)
-            .setColor(0xff4747);
+          .setColor(0xff4747);
           await message.author.send(embed).catch(error => {});
         }
         else{  
@@ -74,7 +74,7 @@ module.exports = async(Discord, client, message, args, database, prefix, emojiID
         avatarURL: message.author.displayAvatarURL(),
       }).then(async success => {
         await webhook.delete().catch(error => {});
-      });;
+      });
     }catch (error) {
       console.log(`Webhook creation error in Guild- ${message.guild}, ${message.guild.id} Channel- ${message.channel.id}`);
     }
