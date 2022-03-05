@@ -59,9 +59,9 @@ module.exports = {
       }
     }
     if(isNaN(banDays)){
-      await message.guild.members.cache.get(person.id).ban({reason: banReason }).catch();
+      await message.guild.members.cache.get(person.id).ban({reason: banReason }).catch(error => {});
     }else{
-      await message.guild.members.cache.get(person.id).ban({days: banDays ,reason: banReason }).catch();
+      await message.guild.members.cache.get(person.id).ban({days: banDays ,reason: banReason }).catch(error => {});
     }
     embed.setDescription(`${tick} Banned ~~**__${person}__**~~.\nID-${person.id}\nReason- \`${banReason}\`\nDuration- ${banDays} days.`)
       .setColor(0x95fd91);
