@@ -1,6 +1,6 @@
 module.exports = async(Discord, Keyv, member, Canvas, path, database) =>{
   let embed = new Discord.MessageEmbed()
-    .setColor(0xff4747);
+  .setColor(0xff4747);
   let moderateNewUserNames = await database.get("moderateNewUserNames");
   if(!moderateNewUserNames){
     moderateNewUserNames = false;
@@ -34,12 +34,12 @@ module.exports = async(Discord, Keyv, member, Canvas, path, database) =>{
     let memberJoinLogsChannel = await member.guild.channels.cache.get(memberJoinLogsChannelID);
     if(memberJoinLogsChannel){
       embed = new Discord.MessageEmbed()
-        .setTitle("New Member Joined")
-        .setDescription(`**User**- ${member.user}.
-        **Name**- \`${member.user.tag}\`.
-        **ID**- \`${member.user.id}\`.`)
-        .setThumbnail(member.user.displayAvatarURL())
-        .setColor(0x95fd91);
+      .setTitle("New Member Joined")
+      .setDescription(`**User**- ${member.user}.
+      **Name**- \`${member.user.tag}\`.
+      **ID**- \`${member.user.id}\`.`)
+      .setThumbnail(member.user.displayAvatarURL())
+      .setColor(0x95fd91);
       await memberJoinLogsChannel.send(embed).catch(error => {});
     }
   }
