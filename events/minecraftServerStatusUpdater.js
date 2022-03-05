@@ -51,7 +51,8 @@ module.exports = async(Discord, client, guild, database, util) => {
             if(minecraftServerStatusChannel){
               embed = new Discord.MessageEmbed()
               .setAuthor(`${guild.name}`, guild.iconURL())
-              .addFields({
+              .addFields(
+                {
                   name: "> IP",
                   value: `\`\`\`\n${IP}\n\`\`\``
                 },
