@@ -40,8 +40,8 @@ module.exports = {
         react(message, '❌');
         return;
       }
-      if(message.member.roles.cache.has(role)){
-        if(args[1] == "add"){
+      if(args[0].toLowerCase() == "add"){
+        if(person.roles.cache.has(role)){
           embed.setDescription(`${cross} ${person} already has ${role}.`)
           .setColor(0xff4747);
           await message.channel.send(embed).catch(error => {});
@@ -49,18 +49,6 @@ module.exports = {
           react(message, '❌');
           return;
         }
-      }
-      else{
-        if(args[1] == "remove"){
-          embed.setDescription(`${cross} ${person} already missing ${role}.`)
-          .setColor(0xff4747);
-          await message.channel.send(embed).catch(error => {});
-          await message.reactions.removeAll();
-          react(message, '❌');
-          return;
-        }
-      }
-      if(args[1] == "add"){
         try{
           await person.roles.add(role).then(async success => {
             embed.setDescription(`${tick} Added ${role} to ${person}.`)
@@ -77,6 +65,14 @@ module.exports = {
         }
       }
       else{
+        if(person.roles.cache.has(role)){
+          embed.setDescription(`${cross} ${person} is already missing ${role}.`)
+          .setColor(0xff4747);
+          await message.channel.send(embed).catch(error => {});
+          await message.reactions.removeAll();
+          react(message, '❌');
+          return;
+        }
         try{
           await person.roles.remove(role).then(async success => {
             embed.setDescription(`${tick} Removed ${role} from ${person}.`)
