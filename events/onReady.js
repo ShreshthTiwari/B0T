@@ -3,7 +3,7 @@ const config = require("../config.json");
 
 module.exports = async (Discord, client, Keyv, util) =>{
   let embed = new Discord.MessageEmbed()
-    .setColor(0x2f3136);
+  .setColor(0x2f3136);
   let author = await client.users.cache.get(config.authorID).username;
   const guildsCount = await client.guilds.cache.size;
   const usersCount = await client.users.cache.size;
@@ -47,8 +47,8 @@ module.exports = async (Discord, client, Keyv, util) =>{
   
   //---------------------------MINECRAFT SERVER PLAYING STATUS UPDATER | STATS CHANNELS UPDATER-------------------------------
   const guildsMap = client.guilds.cache
-    .sort((guild1, guild2) => guild1.position - guild2.position)
-    .map(guild => guild.id);  
+  .sort((guild1, guild2) => guild1.position - guild2.position)
+  .map(guild => guild.id);  
   setInterval(async () => {
     for(let i=0; i<=guildsMap.length-1; i++){
       let guild = client.guilds.cache.get(guildsMap[i]);
