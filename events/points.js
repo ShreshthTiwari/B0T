@@ -2,7 +2,7 @@ module.exports = async (Discord, message, args, client, prefix, database, levelB
   let embed = new Discord.MessageEmbed()
   .setColor(0x2f3136);
   if(message.guild){
-    if((message.author.bot) || (message.content.startsWith(prefix))){
+    if((message.author.bot)){
       return;
     }
     let coins, bonusCoins, coinEmojiID, coinEmoji, coinText;

@@ -36,6 +36,7 @@ module.exports = {
             ㅤ➥**Fun**
             > ㅤ${arrow} ${prefix}afk \`<message>\`
             > ㅤ${arrow} ${prefix}avatar \`<user>\`
+            > ㅤㅤㅤ➥[\`alias - pfp\`]
             > ㅤ${arrow} ${prefix}coins \`<user>\`
             > ㅤ${arrow} ${prefix}info \`<user>\`
             > ㅤㅤㅤ➥[\`alias - userinfo\`]
@@ -49,8 +50,9 @@ module.exports = {
             ㅤ➥**Verification**
             > ㅤ${arrow} ${prefix}verify
             ㅤ➥**Server**
+            > ㅤ${arrow} ${prefix}advertise
+            > ㅤㅤㅤ➥[\`alias - ad\`]
             > ㅤ${arrow} ${prefix}apply
-            > ㅤㅤㅤ➥[\`alias - pfp\`]
             > ㅤ${arrow} ${prefix}create \`<reason>\`
             > ㅤㅤㅤ➥[\`alias - new, t, ticket\`]
             > ㅤ${arrow} ${prefix}status

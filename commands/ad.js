@@ -15,10 +15,13 @@ module.exports = {
     let advertisementEmbed = new Discord.MessageEmbed()
     .setColor(0x98dbfa);
 
+    const serversCount = await client.guilds.cache.size;
+
     for(let i=0; i<=coolDownList.length-1; i++){
-      if(coolDownList[i] == message.guild.id && message.author.id !== config.author){
+      if(coolDownList[i] == message.guild.id && message.author.id !== config.authorID){
         embed.setDescription(`${cross} This server was recently advertised.\nPlease wait for some time before advertising again.`)
-        .setColor(0xff4747);
+        .setColor(0xff4747)
+        .setImage("https://i.ibb.co/bQgz90v/empty-box.gif");
         await message.channel.send(embed).catch(error => {});
         await message.reactions.removeAll();
         react(message, '❌');
@@ -31,6 +34,18 @@ module.exports = {
     const thisServerAdvertisementImage = await database.get("serverAdvertisementImage");
     const thisServerAdvertisementThumbnail = await database.get("serverAdvertisementThumbnail");
     let thisServerInviteLink = await database.get("serverInviteLink");
+    let coins = await database.get(`${message.author.id} coins`);
+    let adFee = Math.floor(serversCount/5);
+
+    if(coins < adFee && message.author.id != config.authorID){
+      embed.setDescription(`${cross} You don't have enough coins to advertise your server.\nAdvertisement Fee: \`${adFee}\`.\nYour Balance: \`${coins}\`.`)
+      .setColor(0xff4747)
+      .setImage("https://i.ibb.co/cc59L4C/begger.webp");
+      await message.channel.send(embed).catch(error => {});
+      await message.reactions.removeAll();
+      react(message, '❌');
+      return;
+    }
 
     if(!thisServerDescription){
       embed.setDescription(`${cross} Set a server description first.`)
@@ -81,8 +96,6 @@ module.exports = {
     .setTitle("SERVER ADVERTISEMENT")
     .setDescription(thisServerDescription + `\n\n**[JOIN SERVER](${thisServerInviteLink})**`);
 
-    let AdsCount = 0;
-
     const guildsIDsMap = await client.guilds.cache
     .sort((guild1, guild2) => guild1.position - guild2.position)
     .map(guild => guild.id);  
@@ -100,16 +113,16 @@ module.exports = {
         let serverAdvertisementChannel = await client.guilds.cache.get(guildsIDsMap[i]).channels.cache.get(serverAdvertisementChannelID);
         if(serverAdvertisementChannel){
           await serverAdvertisementChannel.send(advertisementEmbed).catch(error => {});
-          AdsCount++;
         }
       }
     }
 
-    let serverText = "server";
-    if(AdsCount > 1){
-      serverText = serverText + 's';
+    if(message.author.id != config.authorID){
+      coins = coins - adFee;
+      await database.set(`${message.author.id} coins`, coins);
     }
-    embed.setDescription(`${tick} Server Advertised in \`${AdsCount}\` ${serverText}.`)
+
+    embed.setDescription(`${tick} Server Advertised in \`${serversCount}\` ${serversCount > 1 ? "servers" : "server"}.\nNow you can advertise again in \`4 hours\`.\nAdvertisement Fee: \`${adFee}\`.\nPocket Balance: \`${coins}\`.`)
     .setColor(0x95fd91);
     await message.channel.send(embed).catch(error => {});
 
