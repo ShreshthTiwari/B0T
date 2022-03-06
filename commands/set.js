@@ -30,11 +30,12 @@ module.exports = {
       }
       else if(args[1].toLowerCase() == "ad" || args[1].toLowerCase() == "advertisement"){
         embed.setDescription(`**Set Help Advertisement**
-        > ${arrow} ${prefix}set serverDescription \`<description>\`
         > ${arrow} ${prefix}set serverAdvertisementChannel \`<channel>\`
         > ${arrow} ${prefix}set serverAdvertisementColor \`<color>\`
         > ${arrow} ${prefix}set serverAdvertisementImage \`<imageURL>\`
-        > ${arrow} ${prefix}set serverAdvertisementThumbnail \`<imageURL>\``)
+        > ${arrow} ${prefix}set serverAdvertisementThumbnail \`<imageURL>\`
+        > ${arrow} ${prefix}set serverDescription \`<description>\`
+        > ${arrow} ${prefix}set serverInviteLink \`<inviteURL>\``)
       }
       else if(args[1].toLowerCase() == "appquestions" || args[1].toLowerCase() == "appquestions"){
         embed.setDescription(`**Set Help appQuestions**
@@ -597,7 +598,7 @@ module.exports = {
           }
         }
         else{
-          if(args[0] == "IP" || args[0] == "numericIP" || args[0] == "port" || args[0] == "canApply" || args[0] == "memberWelcomeImage" || args[0] == "memberDepartureImage" || args[0] == "botPrefix" || args[0] == "botCoinName" || args[0] == "memesTopic" || args[0] == "moderateNewUserNames" || args[0] == "memberJoinMessageColor" || args[0] == "memberLeaveMessageColor" || args[0] == "serverAdvertisementColor" || args[0] == "serverAdvertisementImage" || args[0] == "serverAdvertisementThumbnail"){
+          if(args[0] == "IP" || args[0] == "numericIP" || args[0] == "port" || args[0] == "canApply" || args[0] == "memberWelcomeImage" || args[0] == "memberDepartureImage" || args[0] == "botPrefix" || args[0] == "botCoinName" || args[0] == "memesTopic" || args[0] == "moderateNewUserNames" || args[0] == "memberJoinMessageColor" || args[0] == "memberLeaveMessageColor" || args[0] == "serverAdvertisementColor" || args[0] == "serverAdvertisementImage" || args[0] == "serverAdvertisementThumbnail" || args[0] == "serverInviteLink"){
             if((args[0] == "canApply" || args[0] == "moderateNewUserNames") && (!(args[1].toLowerCase() === "true" || args[1].toLowerCase() === "false"))){
               embed.setDescription(`${cross} It can only be \`true\` or \`false\`.`)
               .setColor(0xff4747);
@@ -626,7 +627,6 @@ module.exports = {
                 let msg = await message.channel.send(tembed);
                 await msg.delete();
                 embed.setImage(args[1]);
-                args[1] = " ";
               }catch{
                 embed.setDescription(`${cross} Image not loadable.`)
                 .setColor(0xff4747);

@@ -30,6 +30,8 @@ module.exports = {
     const thisServerAdvertisementColor = await database.get("serverAdvertisementColor");
     const thisServerAdvertisementImage = await database.get("serverAdvertisementImage");
     const thisServerAdvertisementThumbnail = await database.get("serverAdvertisementThumbnail");
+    let thisServerInviteLink = await database.get("serverInviteLink");
+
     if(!thisServerDescription){
       embed.setDescription(`${cross} Set a server description first.`)
       .setColor(0xff4747);
@@ -70,8 +72,14 @@ module.exports = {
       thisServerDescription.length = 1497;
       thisServerDescription = thisServerDescription + "...";
     }
+    if(!thisServerInviteLink){
+      thisServerInviteLink = await message.channel.createInvite({ maxAge: 0, maxUses: 0 });
+      await database.set("serverInviteLink", `${thisServerInviteLink}`);
+    }
+
     advertisementEmbed.setAuthor(message.guild.name, message.guild.iconURL())
-    .setDescription(thisServerDescription);
+    .setTitle("SERVER ADVERTISEMENT")
+    .setDescription(thisServerDescription + `\n\n**[JOIN SERVER](${thisServerInviteLink})**`);
 
     let AdsCount = 0;
 
@@ -101,7 +109,7 @@ module.exports = {
     if(AdsCount > 1){
       serverText = serverText + 's';
     }
-    embed.setDescription(`${tick} Advertised in \`${AdsCount}\` ${serverText}.`)
+    embed.setDescription(`${tick} Server Advertised in \`${AdsCount}\` ${serverText}.`)
     .setColor(0x95fd91);
     await message.channel.send(embed).catch(error => {});
 
