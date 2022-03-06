@@ -15,7 +15,7 @@ module.exports = {
     let advertisementEmbed = new Discord.MessageEmbed()
     .setColor(0x98dbfa);
 
-    const serversCount = await client.guilds.cache.size;
+    const serversCount = await client.guilds.cache.size - 1;
 
     for(let i=0; i<=coolDownList.length-1; i++){
       if(coolDownList[i] == message.guild.id && message.author.id !== config.authorID){
