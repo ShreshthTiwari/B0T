@@ -40,7 +40,7 @@ module.exports = {
     }
     let mutedRoleID = await database.get("mutedRoleID");
     if(!mutedRoleID){
-      embed.setDescription(`${cross} Muted role not set.`)
+      embed.setDescription(`${cross} Mute role not set.`)
       .setColor(0xff4747);
       await message.channel.send(embed).catch(error => {});
       await message.reactions.removeAll();
@@ -49,7 +49,7 @@ module.exports = {
     }
     let mutedRole = message.guild.roles.cache.get(mutedRoleID);
     if(!mutedRole){
-      embed.setDescription(`${cross} Muted role not set.`)
+      embed.setDescription(`${cross} Mute role not set.`)
       .setColor(0xff4747);
       await message.channel.send(embed).catch(error => {});
       await message.reactions.removeAll();
