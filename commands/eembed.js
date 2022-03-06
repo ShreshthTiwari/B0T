@@ -8,7 +8,7 @@ module.exports = {
     const arrow = await client.emojis.cache.get(emojiIDs.arrow);
     let isNull = false;
     let embed = new Discord.MessageEmbed()
-      .setColor(0x98dbfa);
+    .setColor(0x98dbfa);
     let tembed = new Discord.MessageEmbed();
     let value, worked = false;
     async function checkLink(value, link){
@@ -19,7 +19,7 @@ module.exports = {
       }catch{
         if(!isNull){
           embed.setDescription(`${cross} Image not loadable.`)
-            .setColor(0xff4747);
+          .setColor(0xff4747);
           await message.channel.send(embed).catch(error => {});
           await database.set(`eembed${value}`, null);
           await message.reactions.removeAll();

@@ -46,7 +46,7 @@ module.exports = async (Discord, client, Keyv, util) =>{
   }, 10000);
   
   //---------------------------MINECRAFT SERVER PLAYING STATUS UPDATER | STATS CHANNELS UPDATER-------------------------------
-  const guildsMap = client.guilds.cache
+  const guildsMap = await client.guilds.cache
   .sort((guild1, guild2) => guild1.position - guild2.position)
   .map(guild => guild.id);  
   setInterval(async () => {

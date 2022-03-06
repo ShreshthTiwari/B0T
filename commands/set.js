@@ -18,6 +18,7 @@ module.exports = {
     if((!args[0]) || args[0].toLowerCase() =='help'){
       if(!args[1]){
         embed.setDescription(`**Set Help**
+        ${arrow} ${prefix}set help advertisement
         ${arrow} ${prefix}set help appQuestions
         ${arrow} ${prefix}set help channels
         ${arrow} ${prefix}set help categories
@@ -26,6 +27,14 @@ module.exports = {
         ${arrow} ${prefix}set help misc
         ${arrow} ${prefix}set help roles
         ${arrow} ${prefix}set help stats`);
+      }
+      else if(args[1].toLowerCase() == "ad" || args[1].toLowerCase() == "advertisement"){
+        embed.setDescription(`**Set Help Advertisement**
+        > ${arrow} ${prefix}set serverDescription \`<description>\`
+        > ${arrow} ${prefix}set serverAdvertisementChannel \`<channel>\`
+        > ${arrow} ${prefix}set serverAdvertisementColor \`<color>\`
+        > ${arrow} ${prefix}set serverAdvertisementImage \`<imageURL>\`
+        > ${arrow} ${prefix}set serverAdvertisementThumbnail \`<imageURL>\``)
       }
       else if(args[1].toLowerCase() == "appquestions" || args[1].toLowerCase() == "appquestions"){
         embed.setDescription(`**Set Help appQuestions**
@@ -328,6 +337,10 @@ module.exports = {
           await database.set(`${args[0]}ID`, channelID);
           text = "total news channels count";
         }
+        else if(args[0] == "serverAdvertisementChannel"){
+          await database.set(`${args[0]}ID`, channelID);
+          text = "server advertisement";
+        }
         else{
           embed.setDescription(`${cross} Invalid sub-command.`)
           .setColor(0xff4747);
@@ -584,7 +597,7 @@ module.exports = {
           }
         }
         else{
-          if(args[0] == "IP" || args[0] == "numericIP" || args[0] == "port" || args[0] == "canApply" || args[0] == "memberWelcomeImage" || args[0] == "memberDepartureImage" || args[0] == "botPrefix" || args[0] == "botCoinName" || args[0] == "memesTopic" || args[0] == "moderateNewUserNames" || args[0] == "memberJoinMessageColor" || args[0] == "memberLeaveMessageColor"){
+          if(args[0] == "IP" || args[0] == "numericIP" || args[0] == "port" || args[0] == "canApply" || args[0] == "memberWelcomeImage" || args[0] == "memberDepartureImage" || args[0] == "botPrefix" || args[0] == "botCoinName" || args[0] == "memesTopic" || args[0] == "moderateNewUserNames" || args[0] == "memberJoinMessageColor" || args[0] == "memberLeaveMessageColor" || args[0] == "serverAdvertisementColor" || args[0] == "serverAdvertisementImage" || args[0] == "serverAdvertisementThumbnail"){
             if((args[0] == "canApply" || args[0] == "moderateNewUserNames") && (!(args[1].toLowerCase() === "true" || args[1].toLowerCase() === "false"))){
               embed.setDescription(`${cross} It can only be \`true\` or \`false\`.`)
               .setColor(0xff4747);
@@ -606,8 +619,40 @@ module.exports = {
                 args[1] = args.slice(1).join(" ");
               }
             }
+            else if(args[0] == "serverAdvertisementImage" || args[0] == "serverAdvertisementThumbnail"){
+              try{
+                let tembed = new Discord.MessageEmbed;
+                tembed.setThumbnail(args[1]);
+                let msg = await message.channel.send(tembed);
+                await msg.delete();
+                embed.setImage(args[1]);
+                args[1] = " ";
+              }catch{
+                embed.setDescription(`${cross} Image not loadable.`)
+                .setColor(0xff4747);
+                await message.channel.send(embed).catch(error => {});
+                await message.reactions.removeAll();
+                react(message, '❌');
+                return;
+              }
+            }
             await database.set(args[0], args[1]);
             embed.setDescription(`${tick} Set \`${args[0]}\` as \`${args[1]}\`.`)
+            .setColor(0x95fd91);
+            await message.channel.send(embed).catch(error => {});
+          }
+          else if(args[0] == "serverDescription"){
+            let serverDescription = messageEmojiFinder(client, message, args.slice(1));
+            if(message.content.length > 1800){
+              embed.setDescription(`${cross} Text limit of \`1500\` exceeded.\nYour text length- ${message.content.length}`)
+              .setColor(0xff4747);
+              await message.channel.send(embed).catch(error => {});
+              await message.reactions.removeAll();
+              react(message, '❌');
+              return;
+            }
+            await database.set(args[0], serverDescription);
+            embed.setDescription(`${tick} Set \`${args[0]}\` as-\n\n${serverDescription}.`)
             .setColor(0x95fd91);
             await message.channel.send(embed).catch(error => {});
           }
