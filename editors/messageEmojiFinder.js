@@ -1,6 +1,7 @@
 module.exports = (client, message, args) => {
   for(let i=0; i<= args.length-1; i++){
     if(args[i].startsWith(':') && args[i].endsWith(':')){
+      let text = args[i];
       let emojiName = args[i].slice(1, -1);
       let emoji;
       if(message.guild){
@@ -15,7 +16,7 @@ module.exports = (client, message, args) => {
           args[i] = `<:${emoji.name}:${emoji.id}>`;
         }    
       }else{
-        args[i] = ":" + emoji + ":";
+        args[i] = ":" + text + ":";
       }
     }
   }
