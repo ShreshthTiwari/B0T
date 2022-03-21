@@ -57,17 +57,17 @@ module.exports = async (Discord, client, message, Keyv, databaseBuilder, react, 
       }
     }
     //-----------------------------------------------------------------------------
-    prefix[message.guild.id][message.author.id] = "-";
+    prefix[message.guild.id] = "-";
     checkPrefix = await database.get("botPrefix");
     if(checkPrefix){
-      prefix[message.guild.id][message.author.id] = checkPrefix;
+      prefix[message.guild.id] = checkPrefix;
     }
 
     let args = message.content.split(/ +/);
     //==========Counting Section===================================================
-    counting(Discord, client, message, args, database, prefix[message.guild.id][message.author.id], emojiIDs);
+    counting(Discord, client, message, args, database, prefix[message.guild.id], emojiIDs);
     //==========Level/Points Section===============================================
-    points(Discord, message, args, client, prefix[message.guild.id][message.author.id], database, levelBarBuilder, emojiIDs);
+    points(Discord, message, args, client, prefix[message.guild.id], database, levelBarBuilder, emojiIDs);
     //==========Keeping the verification Channel Clean From Bots' Messages=========
     const verificationChannelID = await database.get("verificationChannelID");
     const ticketChannelID = await database.get('ticketChannelID');
@@ -78,10 +78,10 @@ module.exports = async (Discord, client, message, Keyv, databaseBuilder, react, 
       return;
     }
     //===============================================================================
-    autoResponder(Discord, client, prefix[message.guild.id][message.author.id], message, args, database, personFinder, messageEmojiFinder, message.content.toLowerCase(), emojiIDs);
+    autoResponder(Discord, client, prefix[message.guild.id], message, args, database, personFinder, messageEmojiFinder, message.content.toLowerCase(), emojiIDs);
     //===========Tickets Logging====================================================
-    if(message.content.startsWith(prefix[message.guild.id][message.author.id])){
-      let t = await message.content.slice(prefix[message.guild.id][message.author.id].length);
+    if(message.content.startsWith(prefix[message.guild.id])){
+      let t = await message.content.slice(prefix[message.guild.id].length);
       for(let i=1; i<=args.length; i++){
         t = await t.replace("\n", " \n ").replace(":\n", ": \n").replace("\n:", "\n :").replace(":\n:", ": \n :");
       }
@@ -89,7 +89,7 @@ module.exports = async (Discord, client, message, Keyv, databaseBuilder, react, 
       //==========Custom Commands====================================================
       customCommands(Discord, client, message, args, database, messageEmojiFinder);
       //==========Commands Finder====================================================
-      commandsFinder(Discord, client, prefix[message.guild.id][message.author.id], message, args, database, personFinder, messageEmojiFinder, verificationChannelID, react, emojiIDs);
+      commandsFinder(Discord, client, prefix[message.guild.id], message, args, database, personFinder, messageEmojiFinder, verificationChannelID, react, emojiIDs);
       //=============================================================================
     }
     else{

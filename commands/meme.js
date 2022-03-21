@@ -7,7 +7,7 @@ module.exports = {
   description : 'for memes xD',
   
   async run(Discord, client, prefix, message, args, database, personFinder, messageEmojiFinder, react, emojiIDs){
-    gMemeURL[message.guild.id][message.author.id] = url;
+    gMemeURL[message.guild.id] = url;
     let memesTopic = await database.get("memesTopic");
     const tick = await client.emojis.cache.get(emojiIDs.tick);
     const cross = await client.emojis.cache.get(emojiIDs.cross);
@@ -16,7 +16,7 @@ module.exports = {
     const memeChannelID = await database.get("memeChannelID");
     const botCommandsChannelID = await database.get("botCommandsChannelID");
     if(memesTopic){
-      gMemeURL[message.guild.id][message.author.id] = `https://www.reddit.com/r/${memesTopic}/hot/.json?limit=100`;
+      gMemeURL[message.guild.id] = `https://www.reddit.com/r/${memesTopic}/hot/.json?limit=100`;
     }
     if(!memeChannelID){
       embed.setDescription(`${cross} Meme channel not set.`)
