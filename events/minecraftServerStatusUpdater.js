@@ -5,9 +5,11 @@ module.exports = async(Discord, client, guild, database, util) => {
     if(playingStatusChannel){
       let IP = await database.get("IP");
       let numericIP = await database.get("numericIP");
-      let port = await database.get("port") * 1;
+      let port = await database.get("port");
 
       if(!port) port = 25565;
+
+      port *= 1;
 
       if(numericIP && port){
         if(!IP){

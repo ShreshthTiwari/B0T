@@ -42,7 +42,7 @@ module.exports = async(guild, database) => {
     }
   }
   if(totalRolesCountChannelID){
-    let totalRolesCountChannel = await database.get(totalRolesCountChannelID);
+    let totalRolesCountChannel = await guild.channels.cache.get(totalRolesCountChannelID);
     if(totalRolesCountChannel){
       await totalRolesCountChannel.setName(`Total Roles: ${guild.roles.cache.size}`).catch(error => {});
     }
