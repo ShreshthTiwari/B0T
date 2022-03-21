@@ -2,13 +2,13 @@ module.exports = async(Discord, Keyv, member, Canvas, path, database) =>{
   let embed = new Discord.MessageEmbed()
   .setColor(0xff4747);
   let moderateNewUserNames = [];
-  moderateNewUserNames[member.guild.id] = await database.get("moderateNewUserNames");
-  if(!moderateNewUserNames[member.guild.id]){
+  moderateNewUserNames[member.guild.id][member.id] = await database.get("moderateNewUserNames");
+  if(!moderateNewUserNames[member.guild.id][member.id]){
     moderateNewUserNames = false;
     await database.set("moderateNewUserNames", moderateNewUserNames);
   }
 
-  if(moderateNewUserNames[member.guild.id]){
+  if(moderateNewUserNames[member.guild.id][member.id]){
     const gDB = new Keyv('sqlite://./databases/database.sqlite', {
       table: `gDB`
     });
