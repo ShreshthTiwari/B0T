@@ -4,7 +4,7 @@ module.exports = async(Discord, Keyv, member, Canvas, path, database) =>{
   let moderateNewUserNames = [];
   moderateNewUserNames[member.guild.id] = await database.get("moderateNewUserNames");
   if(!moderateNewUserNames[member.guild.id]){
-    moderateNewUserNames = false;
+    moderateNewUserNames[member.guild.id] = false;
     await database.set("moderateNewUserNames", moderateNewUserNames);
   }
 

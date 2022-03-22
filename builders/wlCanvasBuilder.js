@@ -14,14 +14,20 @@ module.exports = async(Discord, member, Canvas, path, database, type) => {
     jl = "Joined";
     msg = await database.get("memberJoinMessage");
     msgColor = await database.get("memberJoinMessageColor"); 
-    embed.setColor("GREEN");
+    if(msgColor)
+      embed.setColor(msgColor)
+    else
+      embed.setColor("GREEN");
     wimg = await database.get("memberWelcomeImage");
   }else if(type == "Good Bye"){
     sendingChannelID = await database.get("memberDepartureChannelID");
     jl = "Left";
     msg = await database.get("memberLeaveMessage"); 
     msgColor = await database.get("memberLeaveMessageColor");
-    embed.setColor("RED");
+    if(msgColor)
+      embed.setColor(msgColor)
+    else
+      embed.setColor("RED");
     wimg = await database.get("memberDepartureImage");
   }else{
     return;
@@ -41,9 +47,7 @@ module.exports = async(Discord, member, Canvas, path, database, type) => {
   }else{
     return;
   }
-  if(!sendingChannel){
-    return;
-  }
+
   let background;
   if(wimg){
     try{
@@ -104,5 +108,4 @@ module.exports = async(Discord, member, Canvas, path, database, type) => {
 
   const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'welcome-image.png');
   await sendingChannel.send(embed).then(sendingChannel.send(' ', attachment)).catch(error => {});
-  return attachment;
 }
