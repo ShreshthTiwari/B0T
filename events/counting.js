@@ -11,11 +11,11 @@ module.exports = async(Discord, client, message, args, database, prefix, emojiID
       return;
     }
     if(message.author.bot){
-	  if((message.channel.id == countingChannel.id) && (message.author.id == client.user.id || (!message.content) || isNaN(message.content))){
-	    await message.delete().catch(error => {});
+	    if((message.channel.id == countingChannel.id) && (message.author.id == client.user.id || (!message.content) || isNaN(message.content))){
+	      await message.delete().catch(error => {});
+	    }
+	    return;
 	  }
-	  return;
-	}
     if(message.member.hasPermission("ADMINISTRATOR")){
       let embed = new Discord.MessageEmbed()
       .setAuthor(message.guild.name, message.guild.iconURL())
@@ -79,7 +79,7 @@ module.exports = async(Discord, client, message, args, database, prefix, emojiID
       console.log(`Webhook creation error in Guild- ${message.guild}, ${message.guild.id} Channel- ${message.channel.id}`);
     }
     let coins = await database.get(`${message.author.id} coins`) * 1;
-    if((checknum % 2 != 0) && (checknum % 3 != 0) && (checknum % 5 != 0) && (checknum % 2 != 0)){
+    if((checknum % 2 != 0) && (checknum % 3 != 0) && (checknum % 5 != 0)){
       coins += 20;
       await database.set(`${message.author.id} coins`, coins);
     }
