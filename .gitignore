@@ -3,3 +3,5 @@
 node_modules
 databases/database.sqlite
 package-lock.json
+databases/database.sqlite
+*.zip
