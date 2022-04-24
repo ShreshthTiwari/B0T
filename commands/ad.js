@@ -104,7 +104,7 @@ module.exports = {
         continue;
       }
       let db = new Keyv('sqlite://./databases/database.sqlite', {
-        table: `${guildsIDsMap[i]}`
+        table: `_${guildsIDsMap[i]}`
       });
       db.on('error', err => console.log('Connection Error', err));
 

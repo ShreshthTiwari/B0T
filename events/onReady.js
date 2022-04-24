@@ -54,7 +54,7 @@ module.exports = async (Discord, client, Keyv, util) =>{
       let guild = client.guilds.cache.get(guildsMap[i]);
       if(guild){
         let database = new Keyv('sqlite://./databases/database.sqlite', {
-          table: `${guild.id}`
+          table: `_${guild.id}`
         });
         database.on('error', err => console.log('Connection Error', err));
         //---------------MINECRAFT SERVER STATUS UPDATER-----------------------

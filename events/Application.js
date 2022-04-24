@@ -18,7 +18,7 @@ module.exports = (Discord, client, Keyv, fs, path, messageEmojiFinder, react, em
     const arrow = await client.emojis.cache.get(emojiIDs.arrow);
     if(message.guild){
       database = new Keyv('sqlite://./databases/database.sqlite', {
-        table: `${message.guild.id}`
+        table: `_${message.guild.id}`
       });
       let checkPrefix = await database.get("botPrefix");
       if(checkPrefix) prefix = checkPrefix;
@@ -40,7 +40,7 @@ module.exports = (Discord, client, Keyv, fs, path, messageEmojiFinder, react, em
       directoryLocation = path.join(__dirname, "..", "transcripts", `${message.guild.id}`);
       await fs.mkdir(directoryLocation, { recursive: true }, (err) => {});
       database = new Keyv('sqlite://./databases/database.sqlite', {
-        table: `${guild[authorId]}`
+        table: `_${guild[authorId]}`
       });
       botCommandsChannelID = await database.get("botCommandsChannelID");
       if(botCommandsChannelID){
@@ -520,7 +520,7 @@ module.exports = (Discord, client, Keyv, fs, path, messageEmojiFinder, react, em
                 return;
               }
               database = new Keyv('sqlite://./databases/database.sqlite', {
-                table: `${guildID}`
+                table: `_${guildID}`
               });
               let modmailChannelID = await database.get("modMailsChannelID");
               if(!modmailChannelID){

@@ -1,6 +1,6 @@
 module.exports = (Keyv, guildID) => {
   const database = new Keyv('sqlite://./databases/database.sqlite', {
-    table: `${guildID}`,
+    table: `_${guildID}`,
     serialize: JSON.stringify,
     deserialize: JSON.parse
   });
