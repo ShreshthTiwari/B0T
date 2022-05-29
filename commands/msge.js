@@ -1,6 +1,7 @@
 module.exports = {
     name : 'msge',
     description : 'to dm someone an embed',
+    alias: ["messagee", "messageembed"],
   
     async run(Discord, client, prefix, message, args, database, personFinder, messageEmojiFinder, react, emojiIDs){
       const tick = await client.emojis.cache.get(emojiIDs.tick);

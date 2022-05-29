@@ -1,6 +1,7 @@
 module.exports = {
   name: "suggest",
   description: "suggest something",
+  alias: ["suggestion"],
 
   async run (Discord, client, prefix, message, args, database, personFinder, messageEmojiFinder, react, emojiIDs, cmd){
     const tick = await client.emojis.cache.get(emojiIDs.tick);

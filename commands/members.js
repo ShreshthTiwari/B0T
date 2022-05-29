@@ -1,6 +1,7 @@
 module.exports = {
   name : 'members',
   description : 'member count of the server',
+  alias: [],
 
   async run(Discord, client, prefix, message, args, database, personFinder, messageEmojiFinder, react, emojiIDs){
     let embed = new Discord.MessageEmbed()

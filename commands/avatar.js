@@ -1,6 +1,7 @@
 module.exports = {
   name : 'avatar',
   description : 'to get avatar of a user',
+  alias: ["pfp"],
 
   async run(Discord, client, prefix, message, args, database, personFinder, messageEmojiFinder, react, emojiIDs){
     const tick = await client.emojis.cache.get(emojiIDs.tick);

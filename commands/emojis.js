@@ -1,6 +1,7 @@
 module.exports = {
   name : 'emojis',
   description : 'list of emojis bot has access to',
+  alias: ["emoji"],
 
   async run(Discord, client, prefix, message, args, database, personFinder, messageEmojiFinder, react, emojiIDs){
     let embed = new Discord.MessageEmbed()

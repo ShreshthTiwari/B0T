@@ -29,6 +29,12 @@ const commandFiles = readdirSync(join(__dirname, "commands")).filter(file => fil
 for(const file of commandFiles){
   const command = require(join(__dirname, "commands", `${file}`));
   client.commands.set(command.name,command);
+  
+  if(command.alias && command.alias.length > 0){
+    command.alias.forEach(alias => {
+      client.commands.set(alias, command);
+    })
+  }
 }
 
 client.on("error", console.error);

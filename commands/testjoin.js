@@ -1,6 +1,7 @@
 module.exports = {
   name : 'testjoin',
   description : 'fake server join-leave message',
+  alias: ["tjoin", "tj"],
 
   async run(Discord, client, prefix, message, args, database, personFinder, messageEmojiFinder, react, emojiIDs){
     if(!message.member.hasPermission("ADMINISTRATOR")){

@@ -1,6 +1,7 @@
 module.exports = {
   name : 'webhook',
   description : 'webhook messages',
+  alias: ["wh", "wb"],
   
   async run(Discord, client, prefix, message, args, database, personFinder, messageEmojiFinder, react, emojiIDs, helpText){
     const tick = await client.emojis.cache.get(emojiIDs.tick);

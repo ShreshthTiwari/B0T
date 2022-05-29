@@ -1,6 +1,7 @@
 module.exports = {
   name : 'clone',
   description : 'to clone a channel',
+  alias: [],
   
   async run(Discord, client, prefix, message, args, database, personFinder, messageEmojiFinder, react, emojiIDs){
     const tick = await client.emojis.cache.get(emojiIDs.tick);

@@ -3,6 +3,7 @@ const levelBarBuilder = require('../builders/levelBarBuilder.js');
 module.exports = {
   name : 'level',
   description : 'to check your level',
+  alias: ["lvl"],
 
   async run(Discord, client, prefix, message, args, database, personFinder, messageEmojiFinder, react, emojiIDs, helpText){
     const tick = await client.emojis.cache.get(emojiIDs.tick);

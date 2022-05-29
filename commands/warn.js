@@ -1,6 +1,7 @@
 module.exports = {
   name : 'warn',
   description : 'to warn someone',
+  alias: [],
 
   async run(Discord, client, prefix, message, args, database, personFinder, messageEmojiFinder, react, emojiIDs){
     const tick = await client.emojis.cache.get(emojiIDs.tick);

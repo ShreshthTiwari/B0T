@@ -3,6 +3,7 @@ const config = require("../config.json");
 module.exports = {
   name : 'ping',
   description : 'ping command',
+  alias: [],
 
   async run(Discord, client, prefix, message, args, database, personFinder, messageEmojiFinder, react, emojiIDs){
     let embed = new Discord.MessageEmbed()

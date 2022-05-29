@@ -1,6 +1,7 @@
 module.exports = {
     name : 'delete',
     description : 'to delete a channel',
+    alias: [],
   
     async run(Discord, client, prefix, message, args, database, personFinder, messageEmojiFinder, react, emojiIDs){
       let channel = message.mentions.channels.first();

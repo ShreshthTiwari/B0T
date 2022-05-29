@@ -18,6 +18,7 @@ function sleep(ms) {
 module.exports = {
   name : 'bot',
   description : 'for work on the bot',
+  alias: [],
 
   async run(Discord, client, prefix, message, args, database, personFinder, messageEmojiFinder, react, emojiIDs){
     let author = await client.users.cache.get(config.authorID).tag;

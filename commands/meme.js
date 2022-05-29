@@ -5,6 +5,7 @@ let lastImage;
 module.exports = {
   name : 'meme',
   description : 'for memes xD',
+  alias: ["memes"],
   
   async run(Discord, client, prefix, message, args, database, personFinder, messageEmojiFinder, react, emojiIDs){
     gMemeURL[message.guild.id] = url;

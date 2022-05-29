@@ -3,6 +3,7 @@ const ytdl = require('ytdl-core');
 module.exports = {
   name : 'join',
   description : 'make the bot join the VC channel ur in',
+  alias: [],
 
   async run(Discord, client, prefix, message, args, database, personFinder, messageEmojiFinder, react, emojiIDs){
     const tick = await client.emojis.cache.get(emojiIDs.tick);

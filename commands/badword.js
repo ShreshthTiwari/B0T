@@ -1,6 +1,7 @@
 module.exports = {
   name: "badword",
   description: "to add or remove badwords",
+  alias: ["badwords"],
 
   async run (Discord, client, prefix, message, args, database, personFinder, messageEmojiFinder, react, emojiIDs, helpText){
     if(!helpText){

@@ -1,6 +1,7 @@
 module.exports = {
   name : 'invite',
   description : 'discord invite link',
+  alias: [],
 
   async run(Discord, client, prefix, message, args, database, personFinder, messageEmojiFinder, react, emojiIDs){
     const cross = await client.emojis.cache.get(emojiIDs.cross);

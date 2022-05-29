@@ -3,6 +3,7 @@ const util = require('minecraft-server-util');
 module.exports = {
   name : 'status',
   description : 'status of MC server.',
+  alias: [],
 
   async run(Discord, client, prefix, message, args, database, personFinder, messageEmojiFinder, react, emojiIDs){
     const tick = await client.emojis.cache.get(emojiIDs.tick);

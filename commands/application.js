@@ -3,6 +3,7 @@ const fs = require("fs");
 module.exports = {
   name : 'application',
   description : 'to accept/reject an application',
+  alias: ["app"],
 
   async run(Discord, client, prefix, message, args, database, personFinder, messageEmojiFinder, react, emojiIDs){
     const tick = await client.emojis.cache.get(emojiIDs.tick);

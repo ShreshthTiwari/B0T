@@ -3,6 +3,7 @@ const defaultAppQuestions = require("../defaultAppQuestions.json");
 module.exports = {
   name: "set",
   description: "set values to variables",
+  alias: [],
 
   async run (Discord, client, prefix, message, args, database, personFinder, messageEmojiFinder, react, emojiIDs) {
     const tick = await client.emojis.cache.get(emojiIDs.tick);

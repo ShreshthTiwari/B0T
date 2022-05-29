@@ -1,6 +1,7 @@
 module.exports = {
   name: "swear",
   description: "to add or remove swears",
+  alias: ["swears"],
 
   async run (Discord, client, prefix, message, args, database, personFinder, messageEmojiFinder, react, emojiIDs, helpText) {
     if(!helpText){

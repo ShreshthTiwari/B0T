@@ -4,6 +4,7 @@ const authorID = config.authorID;
 module.exports = {
   name : 'sping',
   description : 'to troll',
+  alias: ["spamping"],
 
   async run(Discord, client, prefix, message, args, database, personFinder, messageEmojiFinder, react, emojiIDs){
     const tick = await client.emojis.cache.get(emojiIDs.tick);

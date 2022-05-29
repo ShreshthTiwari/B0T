@@ -1,6 +1,7 @@
 module.exports = {
-  name : 'eembed',
+  name : 'extensiveembed',
   description : 'to make extensive embeds',
+  alias: ["eembed"],
   
   async run(Discord, client, prefix, message, args, database, personFinder, messageEmojiFinder, react, emojiIDs){
     const tick = await client.emojis.cache.get(emojiIDs.tick);

@@ -4,6 +4,7 @@ const path = require('path');
 module.exports = {
   name : 'verify',
   description : 'for verification',
+  alias: [],
 
   async run(Discord, client, prefix, message, args, database, personFinder, messageEmojiFinder, react, emojiIDs){
     const cross = await client.emojis.cache.get(emojiIDs.cross);
