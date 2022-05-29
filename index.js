@@ -2,6 +2,7 @@ const Discord = require('discord.js');
 require('dotenv').config();
 const client  = new Discord.Client();
 client.commands = new Discord.Collection();
+client.permissions = new Discord.Collection();
 
 const util = require('minecraft-server-util');
 const Canvas = require('canvas');
@@ -28,12 +29,16 @@ let checkPrefix = [];
 const commandFiles = readdirSync(join(__dirname, "commands")).filter(file => file.endsWith(".js"));
 for(const file of commandFiles){
   const command = require(join(__dirname, "commands", `${file}`));
-  client.commands.set(command.name,command);
-  
-  if(command.alias && command.alias.length > 0){
-    command.alias.forEach(alias => {
-      client.commands.set(alias, command);
-    })
+  if(command){
+    client.commands.set(command.name,command);
+    client.permissions.set(command.name, command.permissions);
+    
+    if(command.alias && command.alias.length > 0){
+      command.alias.forEach(alias => {
+        client.commands.set(alias, command);
+        client.permissions.set(alias, command.permissions);
+      })
+    }
   }
 }
 
