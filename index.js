@@ -37,7 +37,7 @@ for(const file of commandFiles){
       command.alias.forEach(alias => {
         client.commands.set(alias, command);
         client.permissions.set(alias, command.permissions);
-      })
+      });
     }
   }
 }
