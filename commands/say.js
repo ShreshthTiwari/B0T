@@ -15,10 +15,11 @@ module.exports = {
     }
     let textChannel;
     textChannel = message.mentions.channels.first();
-    msg = messageEmojiFinder(client, message, args.slice(1));
-    if(!textChannel){
+    if(textChannel){
+      msg = await messageEmojiFinder(client, message, args.slice(1));
+    }else{
       textChannel = message.channel;
-      msg = messageEmojiFinder(client, message, args);
+      msg = await messageEmojiFinder(client, message, args);
     }
     if(!msg){
       embed.setDescription(`${cross} Message cannot be empty.`)
