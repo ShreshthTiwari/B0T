@@ -387,9 +387,9 @@ module.exports = {
           invite = await guild.channels.cache.filter(ch => ch.type == "text").first().createInvite({
             maxAge: 86400,
             maxUses: 1
-          }).catch(err => {invite = "`N/A`"});
+          }).catch(() => {invite = "N/A"});
           if(!invite){
-            invite = "`N/A`";
+            invite = "N/A";
           }
           joined = await guild.members.cache.has(authorID);
           if(joined){
