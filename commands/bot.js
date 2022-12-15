@@ -11,10 +11,6 @@ const authorID = config.authorID;
 const Keyv = require("keyv");
 const databaseBuilder = require("../builders/databaseBuilder.js");
 
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
-
 module.exports = {
   name : 'bot',
   description : 'for work on the bot',
